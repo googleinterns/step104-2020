@@ -71,6 +71,6 @@ public interface ReleaseDao {
    * @return Whether or not the SDKRelease was successfully modified.
    */
   /* TODO: P2 functionality
-  public boolean updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);
-} */
+  public boolean updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
+} 
 
