@@ -11,18 +11,18 @@ public class SDKRelease {
   private boolean majorVersionBump;
   private HashMap<String, String> changes;
 
-  public SDKRelease(String libraryName, String platform, String newVersion, String oldVersion, boolean majorVersionBump) {
+  public SDKRelease(String libraryName, String platform, String release, String newVersion, String oldVersion, boolean majorVersionBump,
+      HashMap<String, String> changes) {
     this.libraryName = libraryName;
     this.platform = platform;
+    this.release = release;
     this.newVersion = newVersion;
     this.oldVersion = oldVersion;
     this.majorVersionBump = majorVersionBump;
+    this.changes = changes;
   }
 
   // TODO: Add Getters and Setters
-  public void setRelease(Release release) {
-    // TODO: implement this function once getters and setters for variables in data package are set
-    return;
   }
 }
 
