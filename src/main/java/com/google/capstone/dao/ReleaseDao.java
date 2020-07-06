@@ -12,11 +12,11 @@ public interface ReleaseDao {
    * Retrieves a release object from a data source.
    *
    * @param platform The release objects operating platform (ie Android, iOS, etc,).
-   * @param releaseNum The release number of the release object (ie M74, M75, etc,).
+   * @param releaseName The release number of the release object (ie M74, M75, etc,).
    * @return A Release data object representing all the information about the release
    * from the data source.
    */
-  public Release getRelease(String platform, String releaseNum);
+  public Release getRelease(String platform, String releaseName);
   
   /**
    * Adds the given release object to a data source. Only admins should
