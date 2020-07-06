@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 public class Release {
   private String platform;
-  private String releaseNum;
+  private String releaseName;
   private HashMap<String, String> enrolledSDKs;
 
-  public Release(String platform, String releaseNum, HashMap<String, String> enrolledSDKs) {
+  public Release(String platform, String releaseName, HashMap<String, String> enrolledSDKs) {
     this.platform = platform;
-    this.releaseNum = releaseNum;
+    this.releaseName = releaseName;
     this.enrolledSDKs = enrolledSDKs;
   }
 
