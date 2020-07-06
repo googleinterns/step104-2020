@@ -23,6 +23,5 @@ public class SDKRelease {
   }
 
   // TODO: Add Getters and Setters
-  }
 }
 
