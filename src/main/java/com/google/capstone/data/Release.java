@@ -1,13 +1,13 @@
 package com.google.capstone.data;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Release {
   private String platform;
   private String releaseName;
-  private HashMap<String, String> enrolledSDKs;
+  private ArrayList<String> enrolledSDKs;
 
-  public Release(String platform, String releaseName, HashMap<String, String> enrolledSDKs) {
+  public Release(String platform, String releaseName, ArrayList<String> enrolledSDKs) {
     this.platform = platform;
     this.releaseName = releaseName;
     this.enrolledSDKs = enrolledSDKs;
