@@ -2,11 +2,20 @@ package com.google.capstone.dao;
 
 import com.google.capstone.data.Release;
 import com.google.capstone.data.SDKRelease;
+import com.google.capstone.data.Platform;
+import java.util.ArrayList;
 
 /**
- * An interface for retrieving and manipulating data about SDK releases. 
+ * An interface for retrieving and manipulating data about platforms and SDK releases. 
  */
-public interface ReleaseDao {
+public interface PlatformReleaseDao {
+
+  /**
+   * Retrieves a list of platform objects from a data source.
+   *
+   * @return A list of objects representing all the platforms.
+   */
+  public ArrayList<Platform> getPlatforms();
 
   /**
    * Retrieves a release object from a data source.
