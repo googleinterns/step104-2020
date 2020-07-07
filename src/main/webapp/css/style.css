@@ -12,8 +12,7 @@
     background-color:#2C384A !important;
     width: 300px; 
     height: 300px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43);
-   
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43); 
 }
 
 .col {
@@ -30,8 +29,7 @@
     margin-top: auto;
 }
 
-
- .card-header {
+.card-header {
     font-size:30px;
     white-space: nowrap;
     overflow: hidden;
@@ -46,16 +44,12 @@
   border-radius: 0;
 }
 
-
-
-/* Latest compiled and minified CSS included as External Resource*/
-
-/* Optional theme */
-
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
- body {
+ 
+body {
     margin-top:30px;
 }
+
 .stepwizard-step p {
     margin-top: 0px;
     color:#666;
