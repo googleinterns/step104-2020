@@ -1,4 +1,3 @@
-let globalCount = 0;
 function favouriteSDK() {
   const star = document.getElementById("star");
   if (star.classList.contains("favourite")) {

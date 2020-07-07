@@ -16,6 +16,18 @@
    
 }
 
+.sdk {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 500px; 
+    height: 50px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: white;
+    position: relative;
+    padding: 20px;
+}
+
+
 .col {
     padding: 0px 0px;
 }
@@ -48,9 +60,7 @@
 
 
 
-/* Latest compiled and minified CSS included as External Resource*/
-
-/* Optional theme */
+/* Wizard Section*/
 
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
  body {
@@ -100,3 +110,5 @@
     line-height: 1.428571429;
     border-radius: 15px;
 }
+
+/*Landing Page*/
