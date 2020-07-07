@@ -9,6 +9,8 @@ public class SDKRelease {
   private String newVersion;
   private String oldVersion;
   private boolean majorVersionBump;
+
+  /* This will contain optional information like links to CLs, ariane entries, etc., */
   private HashMap<String, String> additionalInfo;
 
   public SDKRelease(String libraryName, String platform, String release, String newVersion, String oldVersion, boolean majorVersionBump) {
