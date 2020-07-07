@@ -1,20 +1,24 @@
 package com.google.capstone.data;
 
-import java.util.LinkedHashMap;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Platform {
   private String name;
+  private long closestDeadline;
   
-  /* LinkedHashMap with the key being a release name and the value being a HashMap
-   * containing the name of the release manager, the code freeze date as a timestamp,
-   * the launch deadline as a timestamp and the launch date as a timestamp. It will be sorted
-   * in descending order (newest launch timestamp first). */
-  private LinkedHashMap<String, HashMap<String, Object>> releases;
+  private ArrayList<Release> releases;
 
-  public Platform(String platformName, LinkedHashMap<String, HashMap<String, Object>> releases) {
+  public Platform(String platformName) {
     this.name = platformName;
-    this.releases = releases;
+    this.releases = new ArrayList<Release>();
+  }
+
+  public void setClosestDeadline(long timestamp) {
+    this.closestDeadline = timestamp;
+  }
+
+  public void addRelease(Release release) {
+    releases.add(release);
   }
 
   // TODO: Add Getters and Setters

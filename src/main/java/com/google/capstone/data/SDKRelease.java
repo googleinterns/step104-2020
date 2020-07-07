@@ -9,17 +9,20 @@ public class SDKRelease {
   private String newVersion;
   private String oldVersion;
   private boolean majorVersionBump;
-  private HashMap<String, String> changes;
+  private HashMap<String, String> additionalInfo;
 
-  public SDKRelease(String libraryName, String platform, String release, String newVersion, String oldVersion, boolean majorVersionBump,
-      HashMap<String, String> changes) {
+  public SDKRelease(String libraryName, String platform, String release, String newVersion, String oldVersion, boolean majorVersionBump) {
     this.libraryName = libraryName;
     this.platform = platform;
     this.release = release;
     this.newVersion = newVersion;
     this.oldVersion = oldVersion;
     this.majorVersionBump = majorVersionBump;
-    this.changes = changes;
+    this.additionalInfo = new HashMap<String, String>();;
+  }
+
+  public void addAdditionalInfo(String name, String value) {
+    this.additionalInfo.put(name, value);
   }
 
   // TODO: Add Getters and Setters

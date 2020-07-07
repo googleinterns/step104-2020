@@ -1,7 +1,6 @@
 package com.google.capstone.data;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 
 public class SDK {
   private String libraryName;
@@ -9,15 +8,25 @@ public class SDK {
   private String externalName;
   private String fireEscapeName;
   private String owner;
-  private HashMap<String, SDKRelease> versionHistory;
+  private LinkedHashMap<String, SDKRelease> versionHistory;
   
-  public SDK(String libraryName, String libraryGroup, String externalName, String fireEscapeName, String owner, HashMap<String, SDKRelease> versionHistory) {
+  public SDK(String libraryName, String libraryGroup, String externalName) {
     this.libraryName = libraryName;
     this.libraryGroup = libraryGroup;
     this.externalName = externalName;
-    this.fireEscapeName = fireEscapeName;
+    this.versionHistory = new LinkedHashMap<String, SDKRelease>();
+  }
+
+  public void setOwner(String owner) {
     this.owner = owner;
-    this.versionHistory = versionHistory;
+  }
+
+  public void setFireEscapeName(String fireEscapeName) {
+    this.fireEscapeName = fireEscapeName;
+  }
+
+  public void addNewVersion(String newVersion, SDKRelease sdk) {
+    this.versionHistory.put(newVersion, sdk);
   }
 
   // TODO: Add Getters and Setters
