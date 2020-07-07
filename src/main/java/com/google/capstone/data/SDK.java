@@ -25,8 +25,8 @@ public class SDK {
     this.fireEscapeName = fireEscapeName;
   }
 
-  public void addNewVersion(String newVersion, SDKRelease sdk) {
-    this.versionHistory.put(newVersion, sdk);
+  public void addVersion(String version, SDKRelease sdkRelease) {
+    this.versionHistory.put(version, sdkRelease);
   }
 
   // TODO: Add Getters and Setters
