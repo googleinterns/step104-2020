@@ -111,4 +111,6 @@
     border-radius: 15px;
 }
 
-/*Landing Page*/
+.col-sm-5 {
+    background-color: #bdbdbd;
+}
