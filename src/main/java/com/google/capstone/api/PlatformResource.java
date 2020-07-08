@@ -18,6 +18,7 @@ import com.google.capstone.dao.SDKDao;
  * Root resource (exposed at "myresource" path)
  */
 @Path("platforms")
+@Produces(MediaType.APPLICATION_JSON)
 public class PlatformResource {
 
   //private static final PlatformReleaseDao PRDAO = new PlatformReleaseDaoDatastore();
@@ -30,7 +31,6 @@ public class PlatformResource {
    * @return String that will be returned as a text/plain response.
    */
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   //public List<Platform> getPlatforms() {
   public Response getPlatforms() {
     // TODO: implement this method
@@ -49,12 +49,12 @@ public class PlatformResource {
   }
 
   @Path("/{platform}/releases")
-  public ReleaseResource getReleaseResource() {
-    return new ReleaseResource();
+  public ReleaseResource getReleaseResource(@PathParam("platform") String platform) {
+    return new ReleaseResource(platform);
     }
 
-  @Path("/{release}/sdks")
-  public SDKResource getSdKResource() {
-    return new SDKResource();
+  @Path("/{platform}/sdks")
+  public SDKResource getSdKResource(@PathParam("platform") String platform) {
+    return new SDKResource(platform);
   }
 }
