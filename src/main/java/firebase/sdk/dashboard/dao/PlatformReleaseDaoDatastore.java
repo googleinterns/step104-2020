@@ -1,7 +1,7 @@
 package firebase.sdk.dashboard.dao;
 
 import firebase.sdk.dashboard.data.Release;
-import firebase.sdk.dashboard.data.SDKRelease;
+import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Platform;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -12,7 +12,8 @@ import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultList;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 /**
  * A class that interacts with Datastore to retreive and manipulate data regarding
@@ -23,40 +24,25 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
   private static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
   @Override
-  public ArrayList<Platform> getPlatforms() {
+  public List<Platform> getPlatforms() {
     //TODO: Implement this method.
-    return new ArrayList<Platform>();
+    return Arrays.asList();
   }
 
   @Override
-  public Release getRelease(String platform, String releaseName) {
-    //TODO: Implement this method
-/*    Query<Entity> query = Query.newEntityQueryBuilder()
-    .setKind("Release")
-    .setFilter(
-        CompositeFilter.and(PropertyFilter.eq("platform", platform), PropertyFilter.eq("releaseName", releaseName)))
-    .build().get();
-
-    QueryResults<Entity> releaseEntity = DATASTORE.run(query);*/
-    return null;
+  public List<Release> getPlatformReleases(Platform platform) {
+    // TODO: Implement this method
+    return Arrays.asList();
   }
   
-  public boolean addRelease(Release release) {
+  @Override
+  public boolean addRelease(Platform platform, Release release) {
     //TODO: Implement this method
     return true;
   }
 
-  public boolean deleteRelease(Release release) {
-    //TODO: Implement this method
-    return true;
-  }
-
-  public boolean enrollSDKInRelease(Release release, SDKRelease sdk) {
-    //TODO: Implement this method
-    return true;
-  }
-
-  public boolean unenrollSDKInRelease(Release release, SDKRelease sdk) {
+  @Override
+  public boolean deleteRelease(Platform platform, Release release) {
     //TODO: Implement this method
     return true;
   }

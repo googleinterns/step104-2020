@@ -1,7 +1,8 @@
 package firebase.sdk.dashboard.dao;
 
 import firebase.sdk.dashboard.data.SDK;
-import firebase.sdk.dashboard.data.SDKRelease;
+import firebase.sdk.dashboard.data.SDKReleaseMetadata;
+import firebase.sdk.dashboard.data.Release;
 
 /**
  * An interface for retrieving and manipulating data about SDKs.
@@ -28,7 +29,16 @@ public interface SDKDao {
    * @return An SDKRelease object containing all the information about the SDKRelease from
    * the data source.
    */
-  public SDKRelease getSDKRelease(String platform, String releaseName, String libraryName);
+  public SDKReleaseMetadata getSDKReleaseMetadata(String platform, String releaseName, String libraryName);
+
+  /**
+   * Adds the SDK from the data source.
+   *
+   * @param sdk The SDK being added.
+   * @return Whether or not the SDK object was successfully added to the
+   * data source.
+   */
+  public boolean addSDK(SDK sdk);
 
   /**
    * Removes the SDK from the data source.
@@ -38,4 +48,39 @@ public interface SDKDao {
    * data source.
    */
   public boolean deleteSDK(SDK sdk);
+
+  /**
+   * Enrolls the given SDKRelease object into the given Release by adding it
+   * to the Release objects enrolledSDKs HashMap and registers that
+   * enrollment by updating the data source with the new data.
+   *
+   * @param release The Release object that the sdk is being enrolled in.
+   * @param sdk The SDKReleaseMetadata object that is being enrolled.
+   * @return Whether or not the SDKRelease was successfully enrolled in the 
+   * Release.
+   */
+  public boolean enrollSDKInRelease(Release release, SDKReleaseMetadata sdk);
+
+  /**
+   * Unenrolls the given SDKReleaseMetadata object from the given Release object by 
+   * removing it from the Release objects enrolledSDKs HashMap and
+   * registers the unenrollment by updating the data source with the new data.
+   *
+   * @param release The Release obhect that the sdk is being unenrolled from.
+   * @param sdk The SDKReleaseMetadata object that is being unenrolled.
+   * @return Whether or not the SDKRelease was successfully unenrolled from the 
+   * Release.
+   */
+  public boolean unenrollSDKInRelease(Release release, SDKReleaseMetadata sdk);
+
+  /**
+   * Updates the given SDKRelease object and registers the changes in the data 
+   * source.
+   *
+   * @param oldSDKRelease The SDKRelease before the changes were made.
+   * @param newSDKRelease The SDKRelease after the changes were made.
+   * @return Whether or not the SDKRelease was successfully modified.
+   */
+  /* TODO: P2 functionality
+  public boolean updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
 }
