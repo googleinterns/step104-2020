@@ -34,8 +34,6 @@ public class PlatformResource {
   //public List<Platform> getPlatforms() {
   public Response getPlatforms() {
     // TODO: implement this method
-//    try {
-      //return prDao.getPlatforms();
       Date date = new Date();
       HashMap<String, Long> platforms = new HashMap<String, Long>();
       platforms.put("Android", date.getTime());
@@ -43,9 +41,6 @@ public class PlatformResource {
       platforms.put("Web", date.getTime());
       platforms.put("Games", date.getTime());
       return ResponseHandler.createJsonResponse(Status.OK, platforms);
- /*   } catch (Exception e) {
-      return e;
-    }*/
   }
 
   @Path("/{platform}/releases")

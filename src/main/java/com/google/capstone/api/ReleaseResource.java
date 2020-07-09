@@ -22,7 +22,7 @@ import com.google.capstone.data.SDKRelease;
 import com.google.capstone.data.Release;
 
 /**
- * Root resource (exposed at "myresource" path)
+ * Root resource (exposed at "platforms/{platform}/releases" path)
  */
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -53,13 +53,8 @@ public class ReleaseResource {
   @GET
   public Response getReleases() {
     // TODO: implement this method
-    //try {
-//      return prDao.getPlatformReleases();
     List<String> releases = Arrays.asList("M78", "M77", "M76", "M75", "M74", "M73");
     return ResponseHandler.createJsonResponse(Status.OK, releases);
-   /* } catch (Exception e) {
-      return e;
-    }*/
   }
 
   @POST
@@ -109,4 +104,5 @@ public class ReleaseResource {
     String message = String.format("Disenrolled %s from %s release", "firebase-common", "M78");
     return ResponseHandler.createJsonResponse(Status.OK, message);
   }
+
 }
