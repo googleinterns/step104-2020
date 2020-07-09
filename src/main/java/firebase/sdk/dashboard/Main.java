@@ -1,4 +1,4 @@
-package com.google.capstone;
+package firebase.sdk.dashboard;
 
 import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -7,6 +7,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class Main extends ResourceConfig {
 
     public Main() {
-        packages("com.google.capstone.api");
+        packages("firebase.sdk.dashboard.api");
     }
 }

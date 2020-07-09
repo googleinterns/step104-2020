@@ -1,4 +1,4 @@
-package com.google.capstone.api;
+package firebase.sdk.dashboard.api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

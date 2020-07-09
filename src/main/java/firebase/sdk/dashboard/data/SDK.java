@@ -1,4 +1,4 @@
-package com.google.capstone.data;
+package firebase.sdk.dashboard.data;
 
 import java.util.LinkedHashMap;
 
