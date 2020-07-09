@@ -1,39 +1,37 @@
 package firebase.sdk.dashboard.data;
 
-import java.util.ArrayList;
+import java.util.List;
+import com.google.auto.value.AutoValue;
 
-public class Release {
-  private String platform;
-  private String releaseName;
-  private String releaseManager;
-  private long launchDeadline;
-  private long codeFreezeDate;
-  private long launchDate;
-  private ArrayList<String> enrolledSDKs;
+@AutoValue
+public abstract class Release {
 
-  public Release(String platform, String releaseName, String releaseManager) {
-    this.platform = platform;
-    this.releaseName = releaseName;
-    this.releaseManager = releaseManager;
-    this.enrolledSDKs = new ArrayList<String>();
+  public static Builder newBuilder() {
+    return new AutoValue_SDK.Builder();
   }
 
-  public void addEnrolledSDK(String SDKName) {
-    this.enrolledSDKs.add(SDKName);
-  }
+  public abstract String platform();
+  public abstract String releaseName();
+  public abstract String releaseManager();
+  public abstract long launchDeadline();
+  public abstract long codeFreezeDate();
+  public abstract long launchDate();
 
-  public void setLaunchDeadline(long timestamp) {
-    this.launchDeadline = timestamp;
-  }
+  @AutoValue.Builder
+  public interface Builder {
+    Builder platform(String platform);
 
-  public void setCodeFreezeDate(long timestamp) {
-    this.codeFreezeDate = timestamp;
-  }
+    Builder releaseName(String releaseName);
 
-  public void setLaunchDate(long timestamp) {
-    this.launchDate = timestamp;
-  }
+    Builder releaseManager(String releaseManager);
+    
+    Builder launchDeadline(long launchDeadline);
 
-  // TODO: Add Getters and Setters
+    Builder codeFreezeDate(long codeFreezeDate);
+
+    Builder launchDate(long launchDate);
+
+    Release build();
+  }
 }
 
