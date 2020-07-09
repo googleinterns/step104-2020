@@ -7,7 +7,7 @@ import com.google.auto.value.AutoValue;
 public abstract class Release {
 
   public static Builder newBuilder() {
-    return new AutoValue_SDK.Builder();
+    return new AutoValue_Release.Builder();
   }
 
   public abstract String platform();
