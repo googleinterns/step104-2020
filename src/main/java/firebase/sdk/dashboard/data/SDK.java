@@ -1,34 +1,37 @@
 package firebase.sdk.dashboard.data;
 
-import java.util.LinkedHashMap;
+import java.util.List;
+import com.google.auto.value.AutoValue;
 
-public class SDK {
-  private String libraryName;
-  private String libraryGroup;
-  private String externalName;
-  private String fireEscapeName;
-  private String owner;
-  private LinkedHashMap<String, SDKRelease> versionHistory;
+@AutoValue
+public abstract class SDK {
+
+  public static Builder newBuilder() {
+    return new AutoValue_SDK.Builder();
+  }
+
+  public abstract String libraryName();
+  public abstract String libraryGroup();
+  public abstract String externalName();
+  public abstract String fireEscapeName();
+  public abstract String owner();
+  public abstract List<SDKRelease> versionHistory();
   
-  public SDK(String libraryName, String libraryGroup, String externalName) {
-    this.libraryName = libraryName;
-    this.libraryGroup = libraryGroup;
-    this.externalName = externalName;
-    this.versionHistory = new LinkedHashMap<String, SDKRelease>();
-  }
+  @AutoValue.Builder
+  public interface Builder {
+    Builder libraryName(String libraryName);
 
-  public void setOwner(String owner) {
-    this.owner = owner;
-  }
+    Builder libraryGroup(String libraryGroup);
+    
+    Builder externalName(String externalName);
 
-  public void setFireEscapeName(String fireEscapeName) {
-    this.fireEscapeName = fireEscapeName;
-  }
+    Builder fireEscapeName(String fireEscapeName);
 
-  public void addVersion(String version, SDKRelease sdkRelease) {
-    this.versionHistory.put(version, sdkRelease);
-  }
+    Builder owner(String owner);
+    
+    Builder versionHistory(List<SDKRelease> versionHistory);
 
-  // TODO: Add Getters and Setters
+    SDK build();
+  }
 }
 
