@@ -15,7 +15,7 @@ public abstract class SDK {
   public abstract String externalName();
   public abstract String fireEscapeName();
   public abstract String owner();
-  public abstract List<SDKRelease> versionHistory();
+  public abstract List<SDKReleaseMetadata> versionHistory();
   
   @AutoValue.Builder
   public interface Builder {
@@ -29,7 +29,7 @@ public abstract class SDK {
 
     Builder owner(String owner);
     
-    Builder versionHistory(List<SDKRelease> versionHistory);
+    Builder versionHistory(List<SDKReleaseMetadata> versionHistory);
 
     SDK build();
   }
