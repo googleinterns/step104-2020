@@ -1,0 +1,30 @@
+.favourite {
+  color: yellow;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color:#039BE5 !important;
+}
+
+.card {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 300px; 
+    height: 300px;
+   
+}
+
+.col {
+    padding: 0px 0px;
+}
+
+
+.card-body {
+   display: flex;
+   flex-direction: column;
+}
+
+.btn-group {
+    margin-top: auto;
+}
