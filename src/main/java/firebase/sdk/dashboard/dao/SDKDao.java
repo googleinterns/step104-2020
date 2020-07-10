@@ -4,6 +4,7 @@ import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Release;
 import firebase.sdk.dashboard.data.Platform;
+import java.util.List;
 
 /**
  * An interface for retrieving and manipulating data about SDKs.
@@ -19,6 +20,16 @@ public interface SDKDao {
    * data source.
    */
   public SDK getSDK(String platform, String libraryName);
+
+  /**
+   * Retrieves the names of all the sdks enrolled in the given release.
+   *
+   * @param platform The SDKRelease object's operating platform (ie Android, iOS, etc,).
+   * @param releaseName The name of the release the SDKRelease object is enrolled 
+   * in (ie M74, M75_hotfix, etc,).
+   * @return A list of the names of all the sdks enrolled in the requested release.
+   */
+  public List<String> getSDKsEnrolledInRelease(String platform, String releaseName);
 
   /**
    * Retrieves the SDKRelease object from a datasource.
