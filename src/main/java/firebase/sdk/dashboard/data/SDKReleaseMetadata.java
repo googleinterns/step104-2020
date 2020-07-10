@@ -24,13 +24,13 @@ public abstract class SDKReleaseMetadata {
     Builder libraryName(String libraryName);
 
     Builder platform(String platform);
-    
+
     Builder release(String release);
 
     Builder newVersion(String newVersion);
 
     Builder oldVersion(String oldVersion);
-    
+
     Builder additionalInfo(HashMap<String, String> additionalInfo);
 
     SDKReleaseMetadata build();

@@ -24,7 +24,7 @@ public abstract class Release {
     Builder releaseName(String releaseName);
 
     Builder releaseManager(String releaseManager);
-    
+
     Builder launchDeadline(long launchDeadline);
 
     Builder codeFreezeDate(long codeFreezeDate);

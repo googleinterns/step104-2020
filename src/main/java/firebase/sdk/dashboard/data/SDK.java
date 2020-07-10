@@ -16,19 +16,19 @@ public abstract class SDK {
   public abstract String fireEscapeName();
   public abstract String owner();
   public abstract List<SDKReleaseMetadata> versionHistory();
-  
+
   @AutoValue.Builder
   public interface Builder {
     Builder libraryName(String libraryName);
 
     Builder libraryGroup(String libraryGroup);
-    
+
     Builder externalName(String externalName);
 
     Builder fireEscapeName(String fireEscapeName);
 
     Builder owner(String owner);
-    
+
     Builder versionHistory(List<SDKReleaseMetadata> versionHistory);
 
     SDK build();

@@ -14,10 +14,10 @@ public abstract class User {
 
   @AutoValue.Builder
   public interface Builder {
-  Builder uid(String uid);
-  Builder email(String email);
+    Builder uid(String uid);
+    Builder email(String email);
 
-  User build();
+    User build();
   }
 }
-  
+
