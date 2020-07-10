@@ -2,6 +2,7 @@
 package firebase.sdk.dashboard.dao;
 
 import firebase.sdk.dashboard.data.User;
+import firebase.sdk.dashboard.data.SDK;
 import java.util.Map;
 
 /**
@@ -25,12 +26,22 @@ public interface UserDao {
   public void addUser(User user);
 
   /**
-   * Updates the user's settings and registers the change in the data source.
+   * Adds the given sdk to the users favorites. 
    *
-   * @param user The user object that contains the new settings.
+   * @param user The user making the request.
+   * @param sdk The sdk the user wants to add to their favorites.
    * @return Whether or not the transaction was successful.
    */
-  public boolean updateUserSettings(User user);
+  public boolean addSDKToFavorites(User user, SDK sdk);
+
+  /**
+   * Removes the given sdk to the users favorites. 
+   *
+   * @param user The user making the request.
+   * @param sdk The sdk the user wants to remove from their favorites.
+   * @return Whether or not the transaction was successful.
+   */
+  public boolean removeSDKFromFavorites(User user, SDK sdk);
 
   /**
    * Get the SDK names that the user marked as their favorite.
