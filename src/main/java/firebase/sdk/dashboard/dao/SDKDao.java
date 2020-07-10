@@ -1,7 +1,7 @@
-package com.google.capstone.dao;
+package firebase.sdk.dashboard.dao;
 
-import com.google.capstone.data.SDK;
-import com.google.capstone.data.SDKRelease;
+import firebase.sdk.dashboard.data.SDK;
+import firebase.sdk.dashboard.data.SDKRelease;
 
 /**
  * An interface for retrieving and manipulating data about SDKs.

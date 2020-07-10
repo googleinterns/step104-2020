@@ -1,4 +1,4 @@
-package com.google.capstone.api;
+package firebase.sdk.dashboard.api;
 
 import java.util.ArrayList;
 import javax.ws.rs.GET;
@@ -10,11 +10,11 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import com.google.capstone.dao.PlatformReleaseDao;
-import com.google.capstone.dao.PlatformReleaseDaoDatastore;
-import com.google.capstone.dao.SDKDao;
-import com.google.capstone.data.SDK;
-import com.google.capstone.data.SDKRelease;
+import firebase.sdk.dashboard.dao.PlatformReleaseDao;
+import firebase.sdk.dashboard.dao.PlatformReleaseDaoDatastore;
+import firebase.sdk.dashboard.dao.SDKDao;
+import firebase.sdk.dashboard.data.SDK;
+import firebase.sdk.dashboard.data.SDKRelease;
 
 /**
  * Root resource (exposed at "myresource" path)

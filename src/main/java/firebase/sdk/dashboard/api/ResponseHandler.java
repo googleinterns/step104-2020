@@ -1,4 +1,4 @@
-package com.google.capstone.api;
+package firebase.sdk.dashboard.api;
 
 import com.google.gson.Gson;
 import javax.ws.rs.core.Response;

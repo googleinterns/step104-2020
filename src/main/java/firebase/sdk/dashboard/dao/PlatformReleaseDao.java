@@ -1,8 +1,8 @@
-package com.google.capstone.dao;
+package firebase.sdk.dashboard.dao;
 
-import com.google.capstone.data.Release;
-import com.google.capstone.data.SDKRelease;
-import com.google.capstone.data.Platform;
+import firebase.sdk.dashboard.data.Release;
+import firebase.sdk.dashboard.data.SDKRelease;
+import firebase.sdk.dashboard.data.Platform;
 import java.util.ArrayList;
 
 /**

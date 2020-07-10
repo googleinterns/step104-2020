@@ -1,7 +1,7 @@
 // TODO: Not entirely sure how interacting with user data will be but created a boiler plate.
-package com.google.capstone.dao;
+package firebase.sdk.dashboard.dao;
 
-import com.google.capstone.data.User;
+import firebase.sdk.dashboard.data.User;
 
 /**
  * An interface for retrieving and manipulating data about Users.
