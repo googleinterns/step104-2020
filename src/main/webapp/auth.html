@@ -33,11 +33,9 @@
     var provider = new firebase.auth.GoogleAuthProvider();
 
     firebase.auth().signInWithRedirect(provider).then(function(result) {
-        console.log(result);
-        console.log("Success Google Account Linked");
+        console.log(result, "Success Google Account Linked");
     }).catch(function(error){
-        console.log(error);
-        console.log("failed to do");
+        console.log(error, "failed to sign-in");
     }) 
     }
  </script>
