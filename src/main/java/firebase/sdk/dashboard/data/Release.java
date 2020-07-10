@@ -13,6 +13,7 @@ public abstract class Release {
   public abstract String platform();
   public abstract String releaseName();
   public abstract String releaseManager();
+  public abstract String hotlistLink();
   public abstract long launchDeadline();
   public abstract long codeFreezeDate();
   public abstract long launchDate();
@@ -24,6 +25,8 @@ public abstract class Release {
     Builder releaseName(String releaseName);
 
     Builder releaseManager(String releaseManager);
+
+    Builder hotlistLink(String hotlistLink);
 
     Builder launchDeadline(long launchDeadline);
 
