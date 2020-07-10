@@ -34,11 +34,12 @@ public interface SDKDao {
   /**
    * Adds the SDK from the data source.
    *
+   * @param platform The platform the sdk is being added to.
    * @param sdk The SDK being added.
    * @return Whether or not the SDK object was successfully added to the
    * data source.
    */
-  public boolean addSDK(SDK sdk);
+  public boolean addSDK(Platform platform, SDK sdk);
 
   /**
    * Removes the SDK from the data source.
