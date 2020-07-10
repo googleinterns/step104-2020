@@ -7,6 +7,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import com.google.capstone.dao.PlatformReleaseDao;
 import com.google.capstone.dao.PlatformReleaseDaoDatastore;
 import com.google.capstone.dao.SDKDao;
@@ -27,14 +29,11 @@ public class UserResource {
    * @return String that will be returned as a text/plain response.
    */
   @GET
+  @Path("{uid}/sdks")
   @Produces(MediaType.APPLICATION_JSON)
-  public List<String> getUsers() {
+  public Response getUsers(@PathParam("uid") String uid) {
     // TODO: implement this method
-    //try {
-    List<String> users = Arrays.asList("Eriyeza", "Nnenna", "Timmothy");
-    return users;
-    /*} catch (Exception e) {
-      return e;
-    }*/
+    List<String> sdks = Arrays.asList("firebase-common", "firebase-common-ktx", "firebase-installations", "firebase-installations-interop");
+    return ResponseHandler.createJsonResponse(Status.OK, sdks);
   }
 }
