@@ -3,6 +3,7 @@ package firebase.sdk.dashboard.dao;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Release;
+import firebase.sdk.dashboard.data.Platform;
 
 /**
  * An interface for retrieving and manipulating data about SDKs.

@@ -2,6 +2,7 @@
 package firebase.sdk.dashboard.dao;
 
 import firebase.sdk.dashboard.data.User;
+import java.util.Map;
 
 /**
  * An interface for retrieving and manipulating data about Users.
@@ -30,4 +31,13 @@ public interface UserDao {
    * @return Whether or not the transaction was successful.
    */
   public boolean updateUserSettings(User user);
+
+  /**
+   * Get the SDK names that the user marked as their favorite.
+   *
+   * @param user The user requesting to see their favourites
+   * @return A map containing only strings with the keys being platforms
+   * and the values being the names of the sdks.
+   */
+  public Map<String, String> getUserFavorites(User user);
 }
