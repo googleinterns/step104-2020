@@ -11,6 +11,7 @@ function favouriteSDK() {
   }
 }
 
+
 function loadFiveEarlierVersions() {
   console.log("Showing 5 more versions.");
   const releaseList = document.getElementById("release-history");
@@ -75,3 +76,4 @@ function showOrHideNotes(version) {
 
     $('div.setup-panel div a.btn-success').trigger('click');
 });
+
