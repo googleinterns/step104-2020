@@ -21,17 +21,16 @@ import firebase.sdk.dashboard.dao.SDKDao;
 @Produces(MediaType.APPLICATION_JSON)
 public class PlatformResource {
 
-  //private static final PlatformReleaseDao PRDAO = new PlatformReleaseDaoDatastore();
-//  private static final SDKDao SDAO = new SDKDao();
-
   /**
-   * Method handling HTTP GET requests. The returned object will be sent
-   * to the client as "text/plain" media type.
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms", this endpoint returns a list
+   * of the names of all platforms along with the timestamp representing
+   * the closest deadline.
    *
-   * @return String that will be returned as a text/plain response.
+   * @return Response object containing astatus code and a HashMap contaning
+   * the names of all the supported platforms along with a timestamp as its value.
    */
   @GET
-  //public List<Platform> getPlatforms() {
   public Response getPlatforms() {
     // TODO: implement this method
       Date date = new Date();
@@ -43,11 +42,29 @@ public class PlatformResource {
       return ResponseHandler.createJsonResponse(Status.OK, platforms);
   }
 
+  /**
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms/{plstform}/releases", this endpoint returns
+   * a ReleaseResource object which handles the functionality of all endpoints
+   * starting with the endpoint path.
+   *
+   * @return A ReleaseResource that will handle all requests from this enpoint and
+   * onwards.
+   */
   @Path("/{platform}/releases")
   public ReleaseResource getReleaseResource(@PathParam("platform") String platform) {
     return new ReleaseResource(platform);
     }
 
+  /**
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms/{plstform}/sdks", this endpoint returns
+   * an SDKResource object which handles the functionality of all endpoints
+   * starting with the endpoint path.
+   *
+   * @return A SDKResource that will handle all requests from this enpoint and
+   * onwards.
+   */
   @Path("/{platform}/sdks")
   public SDKResource getSdKResource(@PathParam("platform") String platform) {
     return new SDKResource(platform);
