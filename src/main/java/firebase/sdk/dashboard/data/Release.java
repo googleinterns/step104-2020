@@ -13,7 +13,7 @@ public abstract class Release {
   public abstract String platform();
   public abstract String releaseName();
   public abstract String releaseManager();
-  public abstract String hotlistLink();
+  public abstract String buganizerHotlistLink();
   public abstract long launchDeadline();
   public abstract long codeFreezeDate();
   public abstract long launchDate();
@@ -26,7 +26,7 @@ public abstract class Release {
 
     Builder releaseManager(String releaseManager);
 
-    Builder hotlistLink(String hotlistLink);
+    Builder buganizerHotlistLink(String buganizerHotlistLink);
 
     Builder launchDeadline(long launchDeadline);
 
