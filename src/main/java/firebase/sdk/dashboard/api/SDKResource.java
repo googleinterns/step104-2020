@@ -10,50 +10,51 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import firebase.sdk.dashboard.dao.PlatformReleaseDao;
-import firebase.sdk.dashboard.dao.PlatformReleaseDaoDatastore;
 import firebase.sdk.dashboard.dao.SDKDao;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKRelease;
 
 /**
- * Root resource (exposed at "myresource" path)
+ * SDK resource (exposed at "v1/platforms/{platform}/sdks" path). 
+ * All returned objects will be sent to the client as "application/json" media type.
  */
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class SDKResource {
 
   private String platform;
-  private static final PlatformReleaseDao PRDAO = new PlatformReleaseDaoDatastore();
-//  private static final SDKDao SDAO = new SDKDao();
 
   public SDKResource(String platform) {
     this.platform = platform;
   }
 
   /**
-   * Method handling HTTP GET requests. The returned object will be sent
-   * to the client as "text/plain" media type.
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms/{platform}/sdks", this endpoint returns a list
+   * of the names of all the sdks enrolled in the given platform.
    *
-   * @return String that will be returned as a text/plain response.
+   * @return Response object containing a list of sdk names in JSON.
    */
   @GET
   public Response getSDKs() {
     // TODO: implement this method
-    //try {
-      ArrayList<String> sdks = new ArrayList<>();
-      sdks.add("firebase-common");
-      sdks.add("firebase-common-ktx");
-      sdks.add("firebase-ml");
-      sdks.add("firebase-database");
-      sdks.add("firebase-auth");
-      sdks.add("firebase-components");
-      return ResponseHandler.createJsonResponse(Status.OK, sdks);
-    /*} catch (Exception e) {
-      return e.toString();
-    }*/
+    ArrayList<String> sdks = new ArrayList<>();
+    sdks.add("firebase-common");
+    sdks.add("firebase-common-ktx");
+    sdks.add("firebase-ml");
+    sdks.add("firebase-database");
+    sdks.add("firebase-auth");
+    sdks.add("firebase-components");
+    return ResponseHandler.createJsonResponse(Status.OK, sdks);
   }
 
+  /**
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms/{platform}/sdks/{sdkName}", this endpoint returns 
+   * an SDK object, which includes the version history of the sdk, as a json object.
+   *
+   * @return Response object containing a status code and an SDK object in JSON.
+   */
   @GET
   @Path("/{sdkName}")
   public Response getSDK(@PathParam("sdkName") String sdkName) {
