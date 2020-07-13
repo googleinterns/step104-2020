@@ -29,9 +29,8 @@ import firebase.sdk.dashboard.data.Release;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ReleaseResource {
 
-  private static final PlatformReleaseDao PRDAO = new PlatformReleaseDaoDatastore();
-//  private static final SDKDao SDAO = new SDKDao();
   private String platform;
+  // TODO: Delete once actual implementation is done
   private ArrayList<String> sdks = new ArrayList<>();
 
   public ReleaseResource(String platform) {
@@ -82,6 +81,7 @@ public class ReleaseResource {
    */
   @POST
   public Response addRelease(Release release) {
+    // TODO: Implement this method.
     String message = String.format("Added %s release to the dashboard.", "M79"/*release.releaseName*/);
     return ResponseHandler.createJsonResponse(Status.OK, message);
   }
@@ -97,6 +97,7 @@ public class ReleaseResource {
   @DELETE
   @Path("{release}")
   public Response deleteRelease(@PathParam("release") String release) {
+    // TODO: Implement this method.
     String message = String.format("Deleting %s release from %s platform", release, platform);
     return ResponseHandler.createJsonResponse(Status.OK, message);
   }
