@@ -23,11 +23,11 @@ public abstract class Release {
    * for minor/major versions. */
   public abstract Instant launchCalDeadline();
 
-  /* codeFreezeDate is when they cut off a branch tp create a release candidate
+  /* codeFreezeTime is when they cut off a branch to create a release candidate
    * for enrolled SDKS which will later be tested by the SDK owners. Any code
    * that is merged into the master branch after the code freeze date is not
    * released ad part of that launch. */
-  public abstract Instant codeFreezeDate();
+  public abstract Instant codeFreezeTime();
 
   /* launchDate is when the SDKs in the release are publically released. */
   public abstract Instant launchDate();
@@ -44,7 +44,7 @@ public abstract class Release {
 
     Builder launchCalDeadline(Instant launchCalDeadline);
 
-    Builder codeFreezeDate(Instant codeFreezeDate);
+    Builder codeFreezeTime(Instant codeFreezeTime);
 
     Builder launchDate(Instant launchDate);
 
