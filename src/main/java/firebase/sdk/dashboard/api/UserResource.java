@@ -13,9 +13,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import firebase.sdk.dashboard.dao.PlatformReleaseDao;
-import firebase.sdk.dashboard.dao.PlatformReleaseDaoDatastore;
-import firebase.sdk.dashboard.dao.SDKDao;
 
 /**
  * Root resource (exposed at "myresource" path)

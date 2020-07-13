@@ -10,9 +10,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.MediaType;
-import firebase.sdk.dashboard.dao.PlatformReleaseDao;
-import firebase.sdk.dashboard.dao.PlatformReleaseDaoDatastore;
-import firebase.sdk.dashboard.dao.SDKDao;
 
 /**
  * Root resource (exposed at "myresource" path)

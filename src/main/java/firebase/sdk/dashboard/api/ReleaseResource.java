@@ -15,11 +15,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import firebase.sdk.dashboard.dao.PlatformReleaseDao;
-import firebase.sdk.dashboard.dao.PlatformReleaseDaoDatastore;
-import firebase.sdk.dashboard.dao.SDKDao;
 import firebase.sdk.dashboard.data.SDK;
-import firebase.sdk.dashboard.data.SDKRelease;
+import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Release;
 
 /**
@@ -129,7 +126,7 @@ public class ReleaseResource {
    */
   @POST
   @Path("{release}/sdks")
-  public Response enrollSDKinRelease(SDKRelease sdk) {
+  public Response enrollSDKinRelease(SDKReleaseMetadata sdk) {
     //TODO: enroll this sdk in the given release
     String message = String.format("Enrolled %s in %s", "firebase-common", "M78"/*sdk.libraryName, sdk.release*/);
     return ResponseHandler.createJsonResponse(Status.OK, message); 
@@ -148,7 +145,14 @@ public class ReleaseResource {
     // TODO: implement this method
     String newVersion = String.format("%d.%d.%d", 19, 2, 9 );
     String oldVersion = String.format("%d.%d.%d", 19, 2, 9 - 1);
-    SDKRelease version = new SDKRelease(sdkName, platform, release, newVersion, oldVersion, false);
+    SDKReleaseMetadata version = SDKReleaseMetadata.newBuilder()
+      .libraryName("firebase-common")
+      .platform( "platform")
+      .release( "M" + release)
+      .newVersion(newVersion)
+      .oldVersion(oldVersion)
+      .additionalInfo(new HashMap<String, String>())
+      .build();
     return ResponseHandler.createJsonResponse(Status.OK, version);
   }
   
