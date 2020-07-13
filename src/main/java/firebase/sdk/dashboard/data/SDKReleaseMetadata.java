@@ -11,9 +11,9 @@ public abstract class SDKReleaseMetadata {
   }
 
   public abstract String libraryName();
-  public abstract String platform();
-  public abstract String release();
-  public abstract String newVersion();
+  public abstract Platform platform();
+  public abstract String releaseName();
+  public abstract String releaseVersion();
   public abstract String oldVersion();
 
   /* This will contain optional information like links to CLs, ariane entries, etc. */
@@ -23,11 +23,11 @@ public abstract class SDKReleaseMetadata {
   public interface Builder {
     Builder libraryName(String libraryName);
 
-    Builder platform(String platform);
+    Builder platform(Platform platform);
 
-    Builder release(String release);
+    Builder releaseName(String releaseName);
 
-    Builder newVersion(String newVersion);
+    Builder releaseVersion(String releaseVersion);
 
     Builder oldVersion(String oldVersion);
 

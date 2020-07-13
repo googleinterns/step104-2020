@@ -1,6 +1,7 @@
 package firebase.sdk.dashboard.data;
 
 import com.google.auto.value.AutoValue;
+import java.time.Instant;
 
 @AutoValue
 public abstract class VersionMetadata {
@@ -10,10 +11,14 @@ public abstract class VersionMetadata {
   }
 
   public abstract String libraryName();
+
   public abstract String platform();
-  public abstract String release();
-  public abstract String newVersion();
-  public abstract long launchDate();
+
+  public abstract String releaseName();
+
+  public abstract String version();
+
+  public abstract Instant launchDate();
 
   @AutoValue.Builder
   public interface Builder {
@@ -21,11 +26,11 @@ public abstract class VersionMetadata {
 
     Builder platform(String platform);
 
-    Builder release(String release);
+    Builder releaseName(String releaseName);
 
-    Builder newVersion(String newVersion);
+    Builder version(String version);
 
-    Builder launchDate(long launchDate);
+    Builder launchDate(Instant launchDate);
 
     VersionMetadata build();
   }
