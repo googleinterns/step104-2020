@@ -57,7 +57,7 @@ public class ReleaseResource {
     List<String> releaseManagers = Arrays.asList("ashwinraghav@", "rlazo@", "davidmotson@", "vkrtachko@", "vguthal@");
     ArrayList<HashMap<String, Object>> releases = new ArrayList<HashMap<String, Object>>();
     Date date = new Date();
-    for (int i = 78; i > 0; i--) {
+    for (int i = 78; i > 72; i--) {
       HashMap<String, Object> release = new HashMap<String, Object>();
       release.put("releaseName", String.format("M%d", i));
       release.put("platform", "Android");

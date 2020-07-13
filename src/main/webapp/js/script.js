@@ -27,7 +27,7 @@ function loadFiveEarlierVersions() {
 
 function showOrHideNotes(version) {
   console.log("Showing or hiding the notes of " + version);
-  const versionNotes = document.getElementById(version).firstElementChild
+  const versionNotes = document.getElementById(version).firstElementChild;
   if (versionNotes.style.display === "none") {
     versionNotes.style.display = "block";
   } else {
@@ -76,4 +76,81 @@ function showOrHideNotes(version) {
 
     $('div.setup-panel div a.btn-success').trigger('click');
 });
+
+//Fetch data from API endpoint
+
+//fetch for landing page
+let doms = ["web", "android", "games", "ios"]
+
+async function getPlatforms() {
+    const response = await fetch('/v1/platforms');
+    const platforms = await response.json();
+  
+    count = 0;
+    for (let plat in platforms){
+       if (plat == doms[count]){
+        const divElement = document.getElementById(plat); 
+        const textNode = document.createTextNode(platforms[plat]); 
+        divElement.appendChild(textNode);
+       }
+       count+=1;
+    }
+}
+getPlatforms();
+
+//fetch release pages
+async function getReleases() {
+   const response = await fetch('/v1/platforms/android/releases');
+   const releases = await response.json();
+   
+    for (i = 0; i < releases.length; i++) {
+        let element = "#release-" + i;
+        let release = releases[i];
+
+        console.log(release);
+
+        const divElement = document.querySelector(element);
+        
+        let name = release["releaseName"];
+        const textNode0 = document.createTextNode(name); 
+        divElement.appendChild(textNode0);
+       
+        divElement.appendChild(document.createElement("HR"));
+
+        let deadline = release["launchDeadline"];
+        const textNode1 = document.createTextNode("Launch Deadline: " + getDate(deadline)); 
+        divElement.appendChild(textNode1);
+
+        divElement.appendChild(document.createElement("HR"));
+
+        // var para1 = document.createElement("p");
+        // var node1= document.createTextNode(getDate(deadline));
+        // para.appendChild(node1);
+        // divElement.appendChild(para1);
+
+        // divElement.appendChild(document.createTextNode(name));
+        // divElement.appendChild(document.createTextNode("\r\n"));
+
+        // let deadline = release["launchDeadline"];
+        // divElement.appendChild(document.createTextNode(deadline));
+
+        let coldfreeze = release["codeFreezeDate"];
+        const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(coldfreeze)); 
+        divElement.appendChild(textNode3);
+
+        divElement.appendChild(document.createElement("HR"));
+
+        let launch = release["launchDate"];
+        const textNode4 = document.createTextNode("Launch Date: " + getDate(launch)); 
+        divElement.appendChild(textNode4); 
+    }
+}
+
+function getDate(time) {
+    var date=new Date(time);
+    return date;
+}
+
+getReleases();
+
 

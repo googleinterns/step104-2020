@@ -35,11 +35,11 @@ public class PlatformResource {
   public Response getPlatforms() {
     // TODO: implement this method
       Date date = new Date();
-      HashMap<String, Long> platforms = new HashMap<String, Long>();
-      platforms.put("Android", date.getTime());
-      platforms.put("iOS", date.getTime());
-      platforms.put("Web", date.getTime());
-      platforms.put("Games", date.getTime());
+      HashMap<String, String> platforms = new HashMap<String, String>();
+      platforms.put("android", "ANDROID");
+      platforms.put("ios", "iOS");
+      platforms.put("web", "WEB");
+      platforms.put("games", "GAMES");
       return ResponseHandler.createJsonResponse(Status.OK, platforms);
   }
 
