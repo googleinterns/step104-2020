@@ -46,10 +46,11 @@ public class ReleaseResource {
   }
 
   /**
-   * Method handling HTTP GET requests. The returned object will be sent
-   * to the client as "text/plain" media type.
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms/{platform}/releases", this endpoint returns a list
+   * of Release objects representing all the sdks enrolled in the given platform.
    *
-   * @return String that will be returned as a text/plain response.
+   * @return Response object containing a list of Releease objects in JSON.
    */
   @GET
   public Response getReleases() {
@@ -71,12 +72,28 @@ public class ReleaseResource {
     return ResponseHandler.createJsonResponse(Status.OK, releases);
   }
 
+  /**
+   * Method handling HTTP POST requests.
+   * Exposed at "v1/platforms/{platform}/releases", this endpoint consumes a  
+   * Release object and adds it to the database. Only admins can do this.
+   *
+   * @return Response object containing a status code and a message to be 
+   * displayed to the client.
+   */
   @POST
-  public Response getReleases(Release release) {
+  public Response addRelease(Release release) {
     String message = String.format("Added %s release to the dashboard.", "M79"/*release.releaseName*/);
     return ResponseHandler.createJsonResponse(Status.OK, message);
   }
 
+  /**
+   * Method handling HTTP DELETE requests.
+   * Exposed at "v1/platforms/{platform}/releases/{release}", this endpoint
+   * deletes the given Release object from the database. Only admins can do this.
+   *
+   * @return Response object containing a status code and a message to be 
+   * displayed to the client.
+   */
   @DELETE
   @Path("{release}")
   public Response deleteRelease(@PathParam("release") String release) {
@@ -84,6 +101,14 @@ public class ReleaseResource {
     return ResponseHandler.createJsonResponse(Status.OK, message);
   }
 
+  /**
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms/{platform}/releases/{release}/sdks", this endpoint
+   * returns a list of the names of all skds enrolled in the given release.
+   *
+   * @return Response object containing a status code and a list of Strings representing
+   * the names of all the sdks enrolled in the given release.
+   */
   @GET
   @Path("{release}/sdks")
   public Response getReleaseSDKs(@PathParam("release") String release) {
@@ -93,6 +118,14 @@ public class ReleaseResource {
     return ResponseHandler.createJsonResponse(Status.OK, releaseSDKs);
   }
 
+  /**
+   * Method handling HTTP POST requests.
+   * Exposed at "v1/platforms/{platform}/releases/{release}/sdks", this endpoint 
+   * consumes an SDKRelease object and enrolls it in the given release in the database.
+   *
+   * @return Response object containing a status code and a message to be displayed to
+   * the client.
+   */
   @POST
   @Path("{release}/sdks")
   public Response enrollSDKinRelease(SDKRelease sdk) {
@@ -101,6 +134,13 @@ public class ReleaseResource {
     return ResponseHandler.createJsonResponse(Status.OK, message); 
   }
 
+  /**
+   * Method handling HTTP GET requests.
+   * Exposed at "v1/platforms/{platform}/releases/{release}/sdks/{sdkName}", this endpoint
+   * retrieves the SDKReleaseMetadata object for the given sdk and release.
+   *
+   * @return Response object containing a status code and an SDKReleaseMetadata object.
+   */
   @GET
   @Path("{release}/sdks/{sdkName}")
   public Response getReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
@@ -111,6 +151,13 @@ public class ReleaseResource {
     return ResponseHandler.createJsonResponse(Status.OK, version);
   }
   
+  /**
+   * Method handling HTTP DELETE requests.
+   * Exposed at "v1/platforms/{platform}/releases/{release}/sdks/{sdkName}", this endpoint
+   * disenrolls the given sdk from the release it is in and deletes it from the database.
+   *
+   * @return Response object containing a status code and a message.
+   */
   @DELETE
   @Path("{release}/sdks/{sdkName}")
   public Response deleteReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
