@@ -1,6 +1,7 @@
 package firebase.sdk.dashboard.data;
 
 import java.util.List;
+import java.time.Instant;
 import com.google.auto.value.AutoValue;
 
 @AutoValue
@@ -11,12 +12,25 @@ public abstract class Release {
   }
 
   public abstract String platform();
+
   public abstract String releaseName();
+
   public abstract String releaseManager();
+
   public abstract String buganizerHotlistLink();
-  public abstract long launchDeadline();
-  public abstract long codeFreezeDate();
-  public abstract long launchDate();
+
+  /* launchCalDeadline is the date by which an Ariane launch entry should be approved
+   * for minor/major versions. */
+  public abstract Instant launchCalDeadline();
+
+  /* codeFreezeDate is when they cut off a branch tp create a release candidate
+   * for enrolled SDKS which will later be tested by the SDK owners. Any code
+   * that is merged into the master branch after the code freeze date is not
+   * released ad part of that launch. */
+  public abstract Instant codeFreezeDate();
+
+  /* launchDate is when the SDKs in the release are publically released. */
+  public abstract Instant launchDate();
 
   @AutoValue.Builder
   public interface Builder {
@@ -28,11 +42,11 @@ public abstract class Release {
 
     Builder buganizerHotlistLink(String buganizerHotlistLink);
 
-    Builder launchDeadline(long launchDeadline);
+    Builder launchCalDeadline(Instant launchCalDeadline);
 
-    Builder codeFreezeDate(long codeFreezeDate);
+    Builder codeFreezeDate(Instant codeFreezeDate);
 
-    Builder launchDate(long launchDate);
+    Builder launchDate(Instant launchDate);
 
     Release build();
   }
