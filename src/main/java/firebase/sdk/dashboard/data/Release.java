@@ -11,7 +11,7 @@ public abstract class Release {
     return new AutoValue_Release.Builder();
   }
 
-  public abstract String platform();
+  public abstract Platform platform();
 
   public abstract String releaseName();
 
@@ -34,7 +34,7 @@ public abstract class Release {
 
   @AutoValue.Builder
   public interface Builder {
-    Builder platform(String platform);
+    Builder platform(Platform platform);
 
     Builder releaseName(String releaseName);
 

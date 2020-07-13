@@ -10,6 +10,8 @@ public abstract class SDK {
     return new AutoValue_SDK.Builder();
   }
 
+  public abstract Platform platform();
+
   public abstract String libraryName();
 
   /* SDKs in g3 are broken up into library groups, which are SDKs that must 
@@ -30,6 +32,8 @@ public abstract class SDK {
 
   @AutoValue.Builder
   public interface Builder {
+    Builder platform(Platform platform);
+
     Builder libraryName(String libraryName);
 
     Builder libraryGroup(String libraryGroup);
