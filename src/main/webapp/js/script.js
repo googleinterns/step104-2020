@@ -96,18 +96,16 @@ async function getPlatforms() {
        count+=1;
     }
 }
-getPlatforms();
 
 //fetch release pages
 async function getReleases() {
    const response = await fetch('/v1/platforms/android/releases');
    const releases = await response.json();
    
+    //Create text elements for each release detail
     for (i = 0; i < releases.length; i++) {
         let element = "#release-" + i;
         let release = releases[i];
-
-        console.log(release);
 
         const divElement = document.querySelector(element);
         
@@ -142,11 +140,12 @@ async function getSDKs() {
    
    const listSDKs = sdks["M78"];
 
+  //Create header for release
    const headerElement = document.querySelector("#header");
    const headerText = document.createTextNode("M78");
    headerElement.appendChild(headerText);
 
-
+   //Creating elements for all sdks
    console.log(listSDKs);
    for (i = 0; i < listSDKs.length; i++) {
         let element = "sdk" + i;
@@ -160,11 +159,11 @@ async function getSDKs() {
 }
 
 function getDate(time) {
-    var date=new Date(time);
+    var date = new Date(time);
     return date;
 }
 
-
+getPlatforms();
 getReleases();
 getSDKs();
 
