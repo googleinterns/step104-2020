@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Date;
+import java.time.Instant;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.DELETE;
@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response.Status;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Release;
+import firebase.sdk.dashboard.data.Platform;
 
 /**
  * Root resource (exposed at "platforms/{platform}/releases" path)
@@ -53,15 +54,15 @@ public class ReleaseResource {
     // TODO: implement this method
     List<String> releaseManagers = Arrays.asList("ashwinraghav@", "rlazo@", "davidmotson@", "vkrtachko@", "vguthal@");
     ArrayList<HashMap<String, Object>> releases = new ArrayList<HashMap<String, Object>>();
-    Date date = new Date();
     for (int i = 78; i > 0; i--) {
       HashMap<String, Object> release = new HashMap<String, Object>();
       release.put("releaseName", String.format("M%d", i));
       release.put("platform", "Android");
       release.put("releaseManager", releaseManagers.get(i % releaseManagers.size()));
-      release.put("launchDeadline", date.getTime());
-      release.put("codeFreezeDate", date.getTime());
-      release.put("launchDate", date.getTime());
+      release.put("launchCalDeadline", Instant.now());
+      release.put("codeFreezeTime", Instant.now());
+      release.put("launchDate", Instant.now());
+      release.put("buganizerHotlistLink", "b/12345678");
       releases.add(release);
     }
 
@@ -147,9 +148,9 @@ public class ReleaseResource {
     String oldVersion = String.format("%d.%d.%d", 19, 2, 9 - 1);
     SDKReleaseMetadata version = SDKReleaseMetadata.newBuilder()
       .libraryName("firebase-common")
-      .platform( "platform")
-      .release( "M" + release)
-      .newVersion(newVersion)
+      .platform(Platform.ANDROID)
+      .releaseName(release)
+      .releaseVersion(newVersion)
       .oldVersion(oldVersion)
       .additionalInfo(new HashMap<String, String>())
       .build();

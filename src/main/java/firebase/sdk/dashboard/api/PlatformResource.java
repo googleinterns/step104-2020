@@ -2,7 +2,7 @@ package firebase.sdk.dashboard.api;
 
 import java.util.List;
 import java.util.HashMap;
-import java.util.Date;
+import java.time.Instant;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -30,12 +30,11 @@ public class PlatformResource {
   @GET
   public Response getPlatforms() {
     // TODO: implement this method
-      Date date = new Date();
-      HashMap<String, Long> platforms = new HashMap<String, Long>();
-      platforms.put("Android", date.getTime());
-      platforms.put("iOS", date.getTime());
-      platforms.put("Web", date.getTime());
-      platforms.put("Games", date.getTime());
+      HashMap<String, Instant> platforms = new HashMap<String, Instant>();
+      platforms.put("Android", Instant.now());
+      platforms.put("iOS", Instant.now());
+      platforms.put("Web", Instant.now());
+      platforms.put("Games", Instant.now());
       return ResponseHandler.createJsonResponse(Status.OK, platforms);
   }
 

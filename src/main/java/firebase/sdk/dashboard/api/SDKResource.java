@@ -1,7 +1,7 @@
 package firebase.sdk.dashboard.api;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.time.Instant;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import firebase.sdk.dashboard.dao.SDKDao;
 import firebase.sdk.dashboard.data.SDK;
+import firebase.sdk.dashboard.data.Platform;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.VersionMetadata;
 
@@ -63,20 +64,20 @@ import firebase.sdk.dashboard.data.VersionMetadata;
       //TODO: Implement this method.
       ArrayList<VersionMetadata> versionHistory = new ArrayList<>();
       int release = 78;
-      Date date = new Date();
       for (int i = 0; i < 5; i++) {
         release -= i * 3;
         String newVersion = String.format("%d.%d.%d", 19, 2, 9 - i);
         VersionMetadata version = VersionMetadata.newBuilder()
           .libraryName("firebase-common")
-          .platform( "platform")
-          .release( "M" + Integer.toString(release))
-          .newVersion(newVersion)
-          .launchDate(date.getTime())
+          .platform(Platform.ANDROID)
+          .releaseName( "M" + Integer.toString(release))
+          .version(newVersion)
+          .launchDate(Instant.now())
           .build();
         versionHistory.add(version);
       }
       SDK sdk = SDK.newBuilder()
+        .platform(Platform.ANDROID)
         .libraryName(sdkName)
         .libraryGroup("firebase-common")
         .externalName("firebase-common")
