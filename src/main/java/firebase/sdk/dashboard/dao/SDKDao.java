@@ -19,7 +19,7 @@ public interface SDKDao {
    * @return An SDK object containg all the information about the SDK from the 
    * data source.
    */
-  public SDK getSDK(String platform, String libraryName);
+  public SDK getSDK(Platform platform, String libraryName);
 
   /**
    * Retrieves the names of all the sdks enrolled in the given release.
@@ -29,7 +29,7 @@ public interface SDKDao {
    * in (ie M74, M75_hotfix, etc,).
    * @return A list of the names of all the sdks enrolled in the requested release.
    */
-  public List<String> getSDKsEnrolledInRelease(String platform, String releaseName);
+  public List<String> getSDKsEnrolledInRelease(Platform platform, String releaseName);
 
   /**
    * Retrieves the SDKRelease object from a datasource.
@@ -41,7 +41,7 @@ public interface SDKDao {
    * @return An SDKRelease object containing all the information about the SDKRelease from
    * the data source.
    */
-  public SDKReleaseMetadata getSDKReleaseMetadata(String platform, String releaseName, String libraryName);
+  public SDKReleaseMetadata getSDKReleaseMetadata(Platform platform, String releaseName, String libraryName);
 
   /**
    * Adds the SDK from the data source.
@@ -51,7 +51,7 @@ public interface SDKDao {
    * @return Whether or not the SDK object was successfully added to the
    * data source.
    */
-  public boolean addSDK(Platform platform, SDK sdk);
+  public void addSDK(Platform platform, SDK sdk);
 
   /**
    * Removes the SDK from the data source.
@@ -60,31 +60,28 @@ public interface SDKDao {
    * @return Whether or not the SDK object was successfully removed from the
    * data source.
    */
-  public boolean deleteSDK(SDK sdk);
+  public void deleteSDK(SDK sdk);
 
   /**
-   * Enrolls the given SDKRelease object into the given Release by adding it
-   * to the Release objects enrolledSDKs HashMap and registers that
-   * enrollment by updating the data source with the new data.
+   * Creates a VersionMetadata object and adds it and the SDKReleaseMetada
+   * object to the data source.
    *
-   * @param release The Release object that the sdk is being enrolled in.
-   * @param sdk The SDKReleaseMetadata object that is being enrolled.
+   * @param sdk The SDKReleaseMetadata object that is being added.
    * @return Whether or not the SDKRelease was successfully enrolled in the 
    * Release.
    */
-  public boolean enrollSDKInRelease(Release release, SDKReleaseMetadata sdk);
+  public void addSDKRelease(SDKReleaseMetadata sdk);
 
   /**
-   * Unenrolls the given SDKReleaseMetadata object from the given Release object by 
-   * removing it from the Release objects enrolledSDKs HashMap and
-   * registers the unenrollment by updating the data source with the new data.
+   * Deletes the SDKReleaseMetadata and its corresponding VerionMetadata 
+   * from the datasource.
    *
-   * @param release The Release obhect that the sdk is being unenrolled from.
-   * @param sdk The SDKReleaseMetadata object that is being unenrolled.
+   * @param sdk The SDKReleaseMetadata object that is being deleted from the 
+   * data source.
    * @return Whether or not the SDKRelease was successfully unenrolled from the 
    * Release.
    */
-  public boolean unenrollSDKInRelease(Release release, SDKReleaseMetadata sdk);
+  public void deleteSDKRelease(SDKReleaseMetadata sdk);
 
   /**
    * Updates the given SDKRelease object and registers the changes in the data 
@@ -95,5 +92,5 @@ public interface SDKDao {
    * @return Whether or not the SDKRelease was successfully modified.
    */
   /* TODO: P2 functionality
-  public boolean updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
+  public void updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
 }
