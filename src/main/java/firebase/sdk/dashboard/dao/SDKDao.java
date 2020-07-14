@@ -51,7 +51,7 @@ public interface SDKDao {
    * @return Whether or not the SDK object was successfully added to the
    * data source.
    */
-  public boolean addSDK(Platform platform, SDK sdk);
+  public void addSDK(Platform platform, SDK sdk);
 
   /**
    * Removes the SDK from the data source.
@@ -60,7 +60,7 @@ public interface SDKDao {
    * @return Whether or not the SDK object was successfully removed from the
    * data source.
    */
-  public boolean deleteSDK(SDK sdk);
+  public void deleteSDK(SDK sdk);
 
   /**
    * Creates a VersionMetadata object and adds it and the SDKReleaseMetada
@@ -70,7 +70,7 @@ public interface SDKDao {
    * @return Whether or not the SDKRelease was successfully enrolled in the 
    * Release.
    */
-  public boolean addSDKRelease(SDKReleaseMetadata sdk);
+  public void addSDKRelease(SDKReleaseMetadata sdk);
 
   /**
    * Deletes the SDKReleaseMetadata and its corresponding VerionMetadata 
@@ -81,7 +81,7 @@ public interface SDKDao {
    * @return Whether or not the SDKRelease was successfully unenrolled from the 
    * Release.
    */
-  public boolean deleteSDKRelease(SDKReleaseMetadata sdk);
+  public void deleteSDKRelease(SDKReleaseMetadata sdk);
 
   /**
    * Updates the given SDKRelease object and registers the changes in the data 
@@ -92,5 +92,5 @@ public interface SDKDao {
    * @return Whether or not the SDKRelease was successfully modified.
    */
   /* TODO: P2 functionality
-  public boolean updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
+  public void updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
 }

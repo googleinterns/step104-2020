@@ -35,7 +35,7 @@ public interface PlatformReleaseDao {
    * @return Whether or not the release object was succesfully added to the 
    * data source.
    */
-  public boolean addRelease(Platform platform, Release release);
+  public void addRelease(Platform platform, Release release);
 
   /**
    * Removes the requested release object from a data source. Only admins should
@@ -46,6 +46,6 @@ public interface PlatformReleaseDao {
    * @return Whether or not the release object was succesfully removed from the data
    * source.
    */
-  public boolean deleteRelease(Platform platform, String releaseName);
+  public void deleteRelease(Platform platform, String releaseName);
 } 
 
