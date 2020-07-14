@@ -20,7 +20,8 @@ public abstract class SDKReleaseMetadata {
 
   public abstract String oldVersion();
 
-  /* This will contain optional information like links to CLs, ariane entries, etc. */
+  /* This will contain optional information like links to CLs, ariane entries, etc.
+   * Example: {"releaseNoteCL": "cl/318309324"} */
   public abstract HashMap<String, String> additionalInfo();
 
   @AutoValue.Builder
