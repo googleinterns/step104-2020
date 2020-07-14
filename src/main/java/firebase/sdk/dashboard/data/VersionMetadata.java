@@ -12,7 +12,7 @@ public abstract class VersionMetadata {
 
   public abstract String libraryName();
 
-  public abstract String platform();
+  public abstract Platform platform();
 
   public abstract String releaseName();
 
@@ -24,7 +24,7 @@ public abstract class VersionMetadata {
   public interface Builder {
     Builder libraryName(String libraryName);
 
-    Builder platform(String platform);
+    Builder platform(Platform platform);
 
     Builder releaseName(String releaseName);
 

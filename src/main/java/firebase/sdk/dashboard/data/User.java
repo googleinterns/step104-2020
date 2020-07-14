@@ -2,6 +2,7 @@ package firebase.sdk.dashboard.data;
 
 import com.google.auto.value.AutoValue;
 import java.util.List;
+import java.util.Map;
 
 @AutoValue
 public abstract class User {
@@ -14,7 +15,8 @@ public abstract class User {
 
   public abstract String email();
 
-  public abstract List<String> favoriteSDKs();
+  /* Example: {"Android": ["firebase-common", "firebase-common-ktx"]} */
+  public abstract Map<String, List<String>> favoriteSDKs();
 
   @AutoValue.Builder
   public interface Builder {
@@ -22,7 +24,7 @@ public abstract class User {
 
     Builder email(String email);
 
-    Builder favoriteSDKs(List<String> favoriteSDKs);
+    Builder favoriteSDKs(Map<String, List<String>> favoriteSDKs);
 
     User build();
   }

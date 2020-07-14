@@ -11,9 +11,13 @@ public abstract class SDKReleaseMetadata {
   }
 
   public abstract String libraryName();
+   
   public abstract Platform platform();
+   
   public abstract String releaseName();
+
   public abstract String releaseVersion();
+
   public abstract String oldVersion();
 
   /* This will contain optional information like links to CLs, ariane entries, etc. */
