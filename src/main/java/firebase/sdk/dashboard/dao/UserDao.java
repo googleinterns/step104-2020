@@ -2,6 +2,8 @@
 package firebase.sdk.dashboard.dao;
 
 import firebase.sdk.dashboard.data.User;
+import firebase.sdk.dashboard.data.SDK;
+import java.util.Map;
 
 /**
  * An interface for retrieving and manipulating data about Users.
@@ -24,10 +26,9 @@ public interface UserDao {
   public void addUser(User user);
 
   /**
-   * Updates the user's settings and registers the change in the data source.
+   * Registers the changes in the User object to the database.
    *
-   * @param user The user object that contains the new settings.
-   * @return Whether or not the transaction was successful.
+   * @param user The user being update in the data source.
    */
-  public boolean updateUserSettings(User user);
+  public void updateUser(User user);
 }

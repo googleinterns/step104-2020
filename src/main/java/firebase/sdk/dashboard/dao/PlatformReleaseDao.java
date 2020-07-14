@@ -1,9 +1,9 @@
 package firebase.sdk.dashboard.dao;
 
 import firebase.sdk.dashboard.data.Release;
-import firebase.sdk.dashboard.data.SDKRelease;
+import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Platform;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An interface for retrieving and manipulating data about platforms and SDK releases. 
@@ -15,71 +15,37 @@ public interface PlatformReleaseDao {
    *
    * @return A list of objects representing all the platforms.
    */
-  public ArrayList<Platform> getPlatforms();
+  public List<Platform> getPlatforms();
 
   /**
-   * Retrieves a release object from a data source.
+   * Retrieves a list of the releases for the given platform.
    *
-   * @param platform The release objects operating platform (ie Android, iOS, etc,).
-   * @param releaseName The release number of the release object (ie M74, M75, etc,).
-   * @return A Release data object representing all the information about the release
-   * from the data source.
+   * @param platform The platform the releases are a part of.
+   * @return A list of Release objects representing all the releases in that platform
+   * in descending order.
    */
-  public Release getRelease(String platform, String releaseName);
-  
+  public List<Release> getPlatformReleases(Platform platform);
+
   /**
-   * Adds the given release object to a data source. Only admins should
+   * Adds the given release object to given platform in a data source. Only admins should
    * be able to add release objects to data sources.
    * 
+   * @param platform The platform the release is being added to.
    * @param release The release object that is to be stored in the data source.
    * @return Whether or not the release object was succesfully added to the 
    * data source.
    */
-  public boolean addRelease(Release release);
+  public void addRelease(Platform platform, Release release);
 
   /**
    * Removes the requested release object from a data source. Only admins should
    * be able to delete release objects from data sources.
    *
-   * @param release The release object that is to be deleted from the data source.
+   * @param platform The platform the release is being removed from.
+   * @param releaseName The name of the release object that is to be deleted from the data source.
    * @return Whether or not the release object was succesfully removed from the data
    * source.
    */
-  public boolean deleteRelease(Release release);
-
-  /**
-   * Enrolls the given SDKRelease object into the given Release by adding it
-   * to the Release objects enrolledSDKs HashMap and registers that
-   * enrollment by updating the data source with the new data.
-   *
-   * @param release The Release object that the sdk is being enrolled in.
-   * @param sdk The SDKRelease object that is being enrolled.
-   * @return Whether or not the SDKRelease was successfully enrolled in the 
-   * Release.
-   */
-  public boolean enrollSDKInRelease(Release release, SDKRelease sdk);
-
-  /**
-   * Unenrolls the given SDKRelease object from the given Release object by 
-   * removing it from the Release objects enrolledSDKs HashMap and
-   * registers the unenrollment by updating the data source with the new data.
-   *
-   * @param release The Release obhect that the sdk is being unenrolled from.
-   * @param sdk The SDKRelease object that is being unenrolled.
-   * @return Whether or not the SDKRelease was successfully unenrolled from the 
-   * Release.
-   */
-  public boolean unenrollSDKInRelease(Release release, SDKRelease sdk);
-
-  /**
-   * Updates the given SDKRelease object and registers the changes in the data 
-   * source.
-   *
-   * @param oldSDKRelease The SDKRelease before the changes were made.
-   * @param newSDKRelease The SDKRelease after the changes were made.
-   * @return Whether or not the SDKRelease was successfully modified.
-   */
-  /* TODO: P2 functionality
-  public boolean updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
+  public void deleteRelease(Platform platform, String releaseName);
 } 
 

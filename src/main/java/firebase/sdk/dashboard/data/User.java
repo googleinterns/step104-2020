@@ -1,32 +1,32 @@
 package firebase.sdk.dashboard.data;
 
-import java.util.ArrayList;
+import com.google.auto.value.AutoValue;
+import java.util.List;
+import java.util.Map;
 
-public class User {
-  private long id;
-  private String email;
-  private ArrayList<SDK> favorites;
+@AutoValue
+public abstract class User {
 
-  private User(long id, String email, ArrayList<SDK> favorites) {
-    this.id = id;
-    this.email = email;
-    this.favorites = favorites;
+  public static Builder newBuilder() {
+    return new AutoValue_User.Builder();
   }
 
-  public void addSDKToFavorites(SDK sdk) {
-    if (favorites.contains(sdk)) {
-      return;
-    } else {
-      favorites.add(sdk);
-    }
-  }
+  public abstract String uid();
 
-  public void removeSDKFromFavorites(SDK sdk) {
-    if (favorites.contains(sdk)) {
-      favorites.remove(sdk);
-    }
-  }
+  public abstract String email();
 
-  // TODO: Add Getters and Setters
+  /* Example: {"Android": ["firebase-common", "firebase-common-ktx"]} */
+  public abstract Map<String, List<String>> favoriteSDKs();
+
+  @AutoValue.Builder
+  public interface Builder {
+    Builder uid(String uid);
+
+    Builder email(String email);
+
+    Builder favoriteSDKs(Map<String, List<String>> favoriteSDKs);
+
+    User build();
+  }
 }
-  
+
