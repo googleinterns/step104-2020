@@ -47,7 +47,8 @@ public class SDKResource {
       sdks.add("firebase-ml");
       sdks.add("firebase-database");
       sdks.add("firebase-auth");
-      sdks.add("firebase-components");
+      sdks.add("firebase-messaging");
+      
       return ResponseHandler.createJsonResponse(Status.OK, sdks);
     /*} catch (Exception e) {
       return e.toString();
@@ -60,7 +61,7 @@ public class SDKResource {
     SDK sdk = new SDK(sdkName, "firebase-common", "firebase-common");
     sdk.setOwner("ashwin@");
     int release = 78;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 17; i++) {
       release -= i * 3;
       String newVersion = String.format("%d.%d.%d", 19, 2, 9 - i);
       String oldVersion = String.format("%d.%d.%d", 19, 2, 9 - 1 - i);

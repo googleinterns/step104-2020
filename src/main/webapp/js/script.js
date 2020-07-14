@@ -123,17 +123,6 @@ async function getReleases() {
 
         divElement.appendChild(document.createElement("HR"));
 
-        // var para1 = document.createElement("p");
-        // var node1= document.createTextNode(getDate(deadline));
-        // para.appendChild(node1);
-        // divElement.appendChild(para1);
-
-        // divElement.appendChild(document.createTextNode(name));
-        // divElement.appendChild(document.createTextNode("\r\n"));
-
-        // let deadline = release["launchDeadline"];
-        // divElement.appendChild(document.createTextNode(deadline));
-
         let coldfreeze = release["codeFreezeDate"];
         const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(coldfreeze)); 
         divElement.appendChild(textNode3);
@@ -146,11 +135,38 @@ async function getReleases() {
     }
 }
 
+//fetch release pages
+async function getSDKs() {
+   const response = await fetch('v1/platforms/android/releases/M78/sdks');
+   const sdks = await response.json();
+   
+   const listSDKs = sdks["M78"];
+
+   const headerElement = document.querySelector("#header");
+   const headerText = document.createTextNode("M78");
+   headerElement.appendChild(headerText);
+
+
+   console.log(listSDKs);
+   for (i = 0; i < listSDKs.length; i++) {
+        let element = "sdk" + i;
+        console.log(element);
+        console.log(listSDKs[i]);
+        const divElement = document.getElementById(element);
+        const textNode = document.createTextNode(listSDKs[i]); 
+        divElement.appendChild(textNode);
+   }
+
+}
+
 function getDate(time) {
     var date=new Date(time);
     return date;
 }
 
+
 getReleases();
+getSDKs();
+
 
 

@@ -43,6 +43,18 @@ public class ReleaseResource {
     sdks.add("firebase-database");
     sdks.add("firebase-auth");
     sdks.add("firebase-components");
+    sdks.add("firebase-iid");
+    sdks.add("firebase-analytics");
+    sdks.add("measurement");
+    sdks.add("measurement_api");
+    sdks.add("tagmanager");
+    sdks.add("tagmanager-api");
+    sdks.add("firebase-ads");
+    sdks.add("phenotype");
+    sdks.add("functions");
+    sdks.add("transport-runtime");
+    sdks.add("crashlytics-gradle");
+    sdks.add("firebase-components"); 
   }
 
   /**
