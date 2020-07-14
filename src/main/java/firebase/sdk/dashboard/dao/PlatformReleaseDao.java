@@ -42,10 +42,10 @@ public interface PlatformReleaseDao {
    * be able to delete release objects from data sources.
    *
    * @param platform The platform the release is being removed from.
-   * @param release The release object that is to be deleted from the data source.
+   * @param releaseName The name of the release object that is to be deleted from the data source.
    * @return Whether or not the release object was succesfully removed from the data
    * source.
    */
-  public boolean deleteRelease(Platform platform, Release release);
+  public boolean deleteRelease(Platform platform, String releaseName);
 } 
 
