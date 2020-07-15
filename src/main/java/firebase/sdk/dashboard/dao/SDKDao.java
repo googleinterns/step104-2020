@@ -43,43 +43,39 @@ public interface SDKDao {
    */
   public SDKReleaseMetadata getSDKReleaseMetadata(Platform platform, String releaseName, String libraryName);
 
+  //TODO: Define exception
   /**
    * Adds the SDK from the data source.
    *
    * @param platform The platform the sdk is being added to.
    * @param sdk The SDK being added.
-   * @return Whether or not the SDK object was successfully added to the
-   * data source.
    */
   public void addSDK(Platform platform, SDK sdk);
 
+  //TODO: Define exception
   /**
    * Removes the SDK from the data source.
    *
    * @param sdk The SDK being removed.
-   * @return Whether or not the SDK object was successfully removed from the
-   * data source.
    */
   public void deleteSDK(SDK sdk);
 
+  //TODO: Define exception
   /**
    * Creates a VersionMetadata object and adds it and the SDKReleaseMetada
    * object to the data source.
    *
    * @param sdk The SDKReleaseMetadata object that is being added.
-   * @return Whether or not the SDKRelease was successfully enrolled in the 
-   * Release.
    */
   public void addSDKRelease(SDKReleaseMetadata sdk);
 
+  //TODO: Define exception
   /**
    * Deletes the SDKReleaseMetadata and its corresponding VerionMetadata 
    * from the datasource.
    *
    * @param sdk The SDKReleaseMetadata object that is being deleted from the 
    * data source.
-   * @return Whether or not the SDKRelease was successfully unenrolled from the 
-   * Release.
    */
   public void deleteSDKRelease(SDKReleaseMetadata sdk);
 
