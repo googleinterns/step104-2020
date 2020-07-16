@@ -57,13 +57,8 @@
   border-radius: 0;
 }
 
-<<<<<<< HEAD
-
 
 /* Wizard Section*/
-
-=======
->>>>>>> 92f0cb5aa5fd583db873f8396e8cc2a5f17fabf2
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
  
 body {
@@ -121,3 +116,8 @@ body {
     line-height: 1.428571429;
     border-radius: 15px;
 }
+
+.col-sm-5 {
+    background-color: #bdbdbd;
+}
+
