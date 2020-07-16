@@ -7,6 +7,7 @@
     background-color:#039BE5 !important;
 }
 
+<<<<<<< HEAD
 .sdk {
     text-align: center;
     background-color:#2C384A !important;
@@ -18,12 +19,24 @@
     padding: 20px;
     margin-right: auto;
     margin-left: auto;
+=======
+.card {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 300px; 
+    height: 300px;
+   
+>>>>>>> 0cf5c744565edc0a4c7b3a07109e0becedb6c37a
 }
 
 .col {
     padding: 0px 0px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0cf5c744565edc0a4c7b3a07109e0becedb6c37a
 .card-body {
    display: flex;
    flex-direction: column;
@@ -32,6 +45,7 @@
 .btn-group {
     margin-top: auto;
 }
+<<<<<<< HEAD
 
 
  .card-header {
@@ -284,3 +298,5 @@ h1 {
 }
 
 
+=======
+>>>>>>> 0cf5c744565edc0a4c7b3a07109e0becedb6c37a
