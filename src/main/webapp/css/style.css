@@ -7,15 +7,6 @@
     background-color:#039BE5 !important;
 }
 
-/*.card {
-    text-align: center;
-    background-color:#2C384A !important;
-    width: 300px; 
-    height: 300px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43);
-   
-}*/
-
 .sdk {
     text-align: center;
     background-color:#2C384A !important;
@@ -29,11 +20,9 @@
     margin-left: auto;
 }
 
-
 .col {
     padding: 0px 0px;
 }
-
 
 .card-body {
    display: flex;
@@ -43,7 +32,6 @@
 .btn-group {
     margin-top: auto;
 }
-
 
  .card-header {
     font-size:30px;
@@ -60,9 +48,7 @@
   border-radius: 0;
 }
 
-
-
-/* Wizard Section*/
+/* Wizard Section */
 
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
  body {
@@ -113,7 +99,7 @@
     border-radius: 15px;
 }
 
-/*Product Release*/
+/* Product Release */
 * {
   box-sizing: border-box;
 }
@@ -242,7 +228,7 @@ h1 {
     font-size: 50px;
 }
 
-/*Add Release*/
+/* Add Release */
 #sdklarge {
     text-align: left;
     background-color:rgb(122, 146, 182) !important;
