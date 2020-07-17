@@ -8,8 +8,8 @@ public enum Platform {
 
   private String label;
 
-  Platform(Sting enumName){
-    this.label;
+  Platform(String enumName){
+    this.label = enumName;
   }
 
   public String getName() {

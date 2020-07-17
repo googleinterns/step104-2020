@@ -18,7 +18,7 @@ import com.google.appengine.api.datastore.Query.SortDirection;
  */
 public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     
-    public static final dashboardDatastore = DatastoreServiceFactory.getDatastoreService();
+    public static final DatastoreService dashboardDatastore = DatastoreServiceFactory.getDatastoreService();
 
     public List<Platform> getPlatforms(){
         List<Platform> platforms = new ArrayList<>();
