@@ -5,13 +5,15 @@ import firebase.sdk.dashboard.data.Release;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Platform;
 import java.util.*;
+import java.io.IOException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-
+import com.google.appengine.api.datastore.FetchOptions;
+import com.google.appengine.api.datastore.QueryResultList;
 
 /**
  * A class for implementing the platform dao.
@@ -38,21 +40,21 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     public List<Release> getPlatformReleases(Platform platform) {
         List<Release> releases = new ArrayList<>();
 
-        Query<Entity> query = Query.newEntityQueryBuilder().setKind("Release").setFilter(PropertyFilter.eq("platform", platform)).build();
+        Query<Entity> query = Query.newEntityQueryBuilder().setKind("Release").setFilter(PropertyFilter.eq("platform", platform.getName())).build();
         QueryResults<Entity> releaseQuery = dashboardDatastore.run(query);
 
         for (Entity releaseEntity : releaseQuery.asIterable()) {
 
             /*get clarification*/
-            String name = resultEntity.getProperty("platform");
+            String name = (String) releaseEntity.getProperty("platform");
             Platform platform = Platform(name);
 
-            String releaseManager = releaseEntity.getProperty("releaseManager");
-            String releaseName = resultEntity.getProperty("releaseName");
-            String buganizerHotlistLink = resultEntity.getProperty("buganizerHotlistLink");
-            String launchDate = resultEntity.getProperty("launchDate");
-            String launchCalDeadline = resultEntity.getProperty("launchCalDeadline");
-            String codeFreezeTime = resultEntity.getProperty("codeFreezeTime");
+            String releaseManager = (String) releaseEntity.getProperty("releaseManager");
+            String releaseName = (String) releaseEntity.getProperty("releaseName");
+            String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
+            String launchDate = releaseEntity.getProperty("launchDate");
+            String launchCalDeadline = releaseEntity.getProperty("launchCalDeadline");
+            String codeFreezeTime = releaseEntity.getProperty("codeFreezeTime");
            
             Release release = Release.newBuilder()
                 .platform(platform)
@@ -64,7 +66,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
                 .launchDate(launchDate).build();
             releases.add(release);
         }
-        return release;
+        return releases;
     }
 
     public void addRelease(Platform platform, Release release){
@@ -73,8 +75,8 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
             .setKind("Release")
             .newKey(release.releaseName() + platform.getName());
         
-        Entity release = Entity.newBuilder(releaseKey)
-            .set("platform", platformString)
+        Entity relEntity = Entity.newBuilder(releaseKey)
+            .set("platform", platform.getName())
             .set("releaseName", release.releaseName())
             .set("releaseManager", release.releaseManager())
             .set("launchDate", release.launchDate())
@@ -83,7 +85,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
             .set("codeFreezeTime", release.codeFreezeTime())
             .build();
 
-        dashboardDatastore.put(release);
+        dashboardDatastore.put(relEntity);
     }
 
     public void deleteRelease(Platform platform, String releaseName){
