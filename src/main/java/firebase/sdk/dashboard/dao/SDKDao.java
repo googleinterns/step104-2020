@@ -87,6 +87,6 @@ public interface SDKDao {
    * @param newSDKRelease The SDKRelease after the changes were made.
    * @return Whether or not the SDKRelease was successfully modified.
    */
-  /* TODO: P2 functionality
-  public void updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
+  // TODO: P2 functionality
+  public void updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);
 }
