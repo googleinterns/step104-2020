@@ -27,7 +27,7 @@ public interface UserDao {
   /**
    * Registers the changes in the User object to the database.
    *
-   * @param user The user being update in the data source.
+   * @param user The user being updated in the data source.
    */
   public void updateUser(User user);
 }
