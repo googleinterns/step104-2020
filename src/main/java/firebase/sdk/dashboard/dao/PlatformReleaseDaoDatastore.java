@@ -25,7 +25,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
         
         Query<Entity> query = Query.newEntityQueryBuilder().setKind("Platform").build();
         
-        PreparedQuery results = dashboardDatastore.prepare(query);
+        QueryResults<Entity> results = dashboardDatastore.run(query);
 
         for (Entity result : results.asIterable()) {
             String name = result.getProperty("name");
@@ -38,8 +38,8 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     public List<Release> getPlatformReleases(Platform platform) {
         List<Release> releases = new ArrayList<>();
 
-        Query<Entity> query = Query.newEntityQueryBuilder().setKind("Release").setFilter(PropertyFilter.eq("platform", platform))build();
-        PreparedQuery releaseQuery = dashboardDatastore.prepare(query);
+        Query<Entity> query = Query.newEntityQueryBuilder().setKind("Release").setFilter(PropertyFilter.eq("platform", platform)).build();
+        QueryResults<Entity> releaseQuery = dashboardDatastore.run(query);
 
         for (Entity releaseEntity : releaseQuery.asIterable()) {
 
