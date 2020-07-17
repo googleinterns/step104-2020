@@ -4,16 +4,16 @@ public enum Platform {
   ANDROID("Android"),
   IOS("iOS"),
   WEB("Web"),
-  GAMES("Games")
+  GAMES("Games");
 
-  private String name;
+  private String label;
 
   Platform(Sting enumName){
-    this.name;
+    this.label;
   }
 
   public String getName() {
-      return name;
+    return label;
   }
 
 }

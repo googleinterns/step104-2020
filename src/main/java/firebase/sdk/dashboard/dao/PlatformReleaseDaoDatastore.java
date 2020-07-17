@@ -20,12 +20,6 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     
     public static final dashboardDatastore = DatastoreServiceFactory.getDatastoreService();
 
-    private Map<String, Platform> enumMapping = new HashMap<String, Platform>();
-    enumMapping.put("iOS", IOS);
-    enumMapping.put("Web", WEB);
-    enumMapping.put("Games", GAMES);
-    enumMapping.put("Android", ANDROID);
-
     public List<Platform> getPlatforms(){
         List<Platform> platforms = new ArrayList<>();
         
@@ -35,7 +29,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
         for (Entity result : results.asIterable()) {
             String name = result.getProperty("name");
-            Platform platform = enumMapping.get(name);
+            Platform platform = Platform(name);
             platforms.add(platform);
         }
         return platforms;  
@@ -49,18 +43,22 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
         for (Entity releaseEntity : releaseQuery.asIterable()) {
 
-            /* setproperty filter*/
+            /*get clarification*/
             String name = resultEntity.getProperty("platform");
-            Platform platform = enumMapping.get(name);
+            Platform platform = Platform(name);
 
+            String releaseManager = releaseEntity.getProperty("releaseManager");
             String releaseName = resultEntity.getProperty("releaseName");
+            String buganizerHotlistLink = resultEntity.getProperty("buganizerHotlistLink");
             String launchDate = resultEntity.getProperty("launchDate");
             String launchCalDeadline = resultEntity.getProperty("launchCalDeadline");
             String codeFreezeTime = resultEntity.getProperty("codeFreezeTime");
-            /*how to create a release o*/
-
+           
             Release release = Release.newBuilder()
+                .platform(platform)
                 .releaseName(releaseName)
+                .releaseManager(releaseManager)
+                .buganizerHotlistLink(buganizerHotlistLink)
                 .launchCalDeadline(launchCalDeadline)
                 .codeFreezeTime(codeFreezeTime)
                 .launchDate(launchDate).build();
@@ -70,18 +68,10 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     }
 
     public void addRelease(Platform platform, Release release){
-        String platformString;
-
-         for (String key : enumMapping.keySet()) {
-            Platform value = enumMapping.get(key);
-            if (value == release.platform()) {
-                platformString = key;
-            }
-        }
-
+        
         Key releaseKey = dashboardDatastore.newKeyFactory()
             .setKind("Release")
-            .newKey(release.releaseName() + platformString);
+            .newKey(release.releaseName() + platform.getName());
         
         Entity release = Entity.newBuilder(releaseKey)
             .set("platform", platformString)
@@ -97,17 +87,12 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     }
 
     public void deleteRelease(Platform platform, String releaseName){
-        String platformString;
-
-        for (String key : enumMapping.keySet()) {
-            Platform value = enumMapping.get(key);
-            if (value == release.platform()) {
-                platformString = key;
-            }
-        }
-        
+        String platformString = platform.getName();
         dashboardDatastore.delete(releaseName + platformString);
     }
+        
+        
+}
 
 
 
