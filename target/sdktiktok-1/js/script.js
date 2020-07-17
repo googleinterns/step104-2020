@@ -75,3 +75,4 @@ function showOrHideNotes(version) {
 
     $('div.setup-panel div a.btn-success').trigger('click');
 });
+
