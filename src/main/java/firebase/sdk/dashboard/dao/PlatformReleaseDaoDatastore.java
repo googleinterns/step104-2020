@@ -52,8 +52,8 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
             String releaseManager = (String) releaseEntity.getProperty("releaseManager");
             String releaseName = (String) releaseEntity.getProperty("releaseName");
             String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
-            String launchDate = releaseEntity.getProperty("launchDate");
-            String launchCalDeadline = releaseEntity.getProperty("launchCalDeadline");
+            Instant launchDate = releaseEntity.getProperty("launchDate");
+            Instat launchCalDeadline = releaseEntity.getProperty("launchCalDeadline");
             String codeFreezeTime = releaseEntity.getProperty("codeFreezeTime");
            
             Release release = Release.newBuilder()
