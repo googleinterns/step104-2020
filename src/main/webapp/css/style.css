@@ -56,9 +56,7 @@
   border-radius: 0;
 }
 
-
 /* Wizard Section */
-
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
 
  body {
@@ -120,7 +118,6 @@
 .col-sm-5 {
     background-color: #bdbdbd;
 }
-
 
 /* Product Release */
 * {
