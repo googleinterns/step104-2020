@@ -45,7 +45,24 @@ public class SDKDaoDatastore implements SDKDao {
     return sdk;
   }
 
-  public List<String> getSDKsEnrolledInRelease(Platform platform, String releaseName);
+  public List<String> getSDKsEnrolledInRelease(Platform platform, String releaseName) {
+    Query<Entity> query = Query.newEntityQueryBuilder().setKind("SDKReleaseMetadata")
+      .setFilter(CompositeFilter.and(
+            PropertyFilter.eq("platform", platform),
+            PropertyFilter.eq("releaseName", releaseName)))
+      .build();
+
+    PreparedQuery preparedQuery = DATASTORE.prepare(query);
+    QueryResultList<Entity> results = preparedQuery.asQueryResultList();
+
+    ArrayList<String> enrolledSDKs = new ArrayList<>();
+    for (Entity entity: results) {
+      String libraryName = (String) entity.getProperty("libraryName");
+      enrolledSDKs.add(libraryName);
+    }
+
+    return enrolledSDKs;
+  }
 
   public SDKReleaseMetadata getSDKReleaseMetadata(Platform platform, String releaseName, String libraryName) {
     Query<Entity> query = Query.newEntityQueryBuilder().setKind("SDKReleaseMetadata")
@@ -62,17 +79,16 @@ public class SDKDaoDatastore implements SDKDao {
     String releaseVersion = (String) entity.getProperty("releaseVersion");
     String oldVersion = (String) entity.getProperty("oldVersion");
     HashMap<String, String> additionalInfo = (HashMap<String, String>) entity.getProperty("additionalInfo");
-    sDKReleaseMetadata sdkReleaseMetadata = SDKReleaseMetadata.newuBuilder()
+    SDKReleaseMetadata sdkReleaseMetadata = SDKReleaseMetadata.newBuilder()
       .platform(platform)
       .libraryName(libraryName)
-      .libraryGroup(libraryGroup)
-      .externalName(externalName)
-      .fireEscapeName(fireEscapeName)
-      .owner(owner)
-      .versionHistory(versionHistory)
+      .releaseName(releaseName)
+      .releaseVersino(releaseVersino)
+      .oldVersion(oldVersion)
+      .additionalInfo(additionalInfo)
       .build();
 
-    return sdk;
+    return sdkReleaseMetadata;
   }
 
   //TODO: Define exception
@@ -88,6 +104,23 @@ public class SDKDaoDatastore implements SDKDao {
   //TODO: Define exception
   public void addSDKRelease(SDKReleaseMetadata sdk) {
     DATASTORE.put(createSDKReleaseMetadataEntity(sdk));
+  }
+
+  public void addSDKVersion(VersionMetadata version) {
+    Entity versionEntity = createVersionMetadataEmbeddedEntity(version);
+
+    Query<Entity> query = Query.newEntityQueryBuilder().setKind("SDK")
+      .setFilter(PropertyFilter.eq("__key__", version.platform() + "_" + libraryName))
+      .build();
+
+    PreparedQuery preparedQuery = DATASTORE.prepare(query);
+    QueryResultList<Entity> results = preparedQuery.asQueryResultList();
+
+    Entity entity = results.get(0);
+    ArrayList<EmbeddedEntity> versions = entity.getProperty("versions");
+    versions.add(0, versionEntity);
+    entity.setProperty("versionHistory", versions);
+    DATASTORE.put(entity);
   }
 
 
@@ -137,7 +170,7 @@ public class SDKDaoDatastore implements SDKDao {
 
   private Entity createSDKReleaseMetadataEntity(SDKReleaseMetadata sdkReleaseMetadata) {
     Key sdkReleaseMetadataKey = DATASTORE.newKeyFactory()
-      .addAncestors(PathElement.of("Platforms", sdkReleaseMetadata.platform()))
+      .addAncestors(PathElement.of("Platform", sdkReleaseMetadata.platform()), PathElement.of("SDK", sdkReleaseMetadata.libraryName()))
       .setKind("SDKReleaseMetadata")
       .newKey(sdkreleaseMetadata.platform() + "_" + sdkreleaseMetadata.libraryName() + "_" + sdkreleaseMetadata.releaseName());
     Entity sdkReleaseEntity = Entity.newBuilder(sdkReleaseMetadataKey)
