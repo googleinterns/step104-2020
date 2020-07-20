@@ -74,8 +74,7 @@ public class ReleaseResource {
    * Exposed at "v1/platforms/{platform}/releases", this endpoint consumes a  
    * Release object and adds it to the database. Only admins can do this.
    *
-   * @return Response object containing a status code and a message to be 
-   * displayed to the client.
+   * @return Response object containing a status code.
    */
   @POST
   public Response addRelease(Release release) {
@@ -89,8 +88,7 @@ public class ReleaseResource {
    * Exposed at "v1/platforms/{platform}/releases/{release}", this endpoint
    * deletes the given Release object from the database. Only admins can do this.
    *
-   * @return Response object containing a status code and a message to be 
-   * displayed to the client.
+   * @return Response object containing a status code.
    */
   @DELETE
   @Path("{release}")
@@ -105,8 +103,9 @@ public class ReleaseResource {
    * Exposed at "v1/platforms/{platform}/releases/{release}/sdks", this endpoint
    * returns a list of the names of all skds enrolled in the given release.
    *
-   * @return Response object containing a status code and a list of Strings representing
-   * the names of all the sdks enrolled in the given release.
+   * @return Response object containing a status code and a HashMap with the key being the
+   * release and the values being a list of strings representing the names of all the 
+   * sdks enrolled in the given release.
    */
   @GET
   @Path("{release}/sdks")
@@ -120,7 +119,7 @@ public class ReleaseResource {
   /**
    * Method handling HTTP POST requests.
    * Exposed at "v1/platforms/{platform}/releases/{release}/sdks", this endpoint 
-   * consumes an SDKRelease object and enrolls it in the given release in the database.
+   * consumes an SDKRelease object and enrolls it in the given release.
    *
    * @return Response object containing a status code and a message to be displayed to
    * the client.
@@ -160,7 +159,8 @@ public class ReleaseResource {
   /**
    * Method handling HTTP DELETE requests.
    * Exposed at "v1/platforms/{platform}/releases/{release}/sdks/{sdkName}", this endpoint
-   * disenrolls the given sdk from the release it is in and deletes it from the database.
+   * disenrolls the given sdk from the given release, if it is a part of it, and deletes the 
+   * entries from the database.
    *
    * @return Response object containing a status code and a message.
    */
