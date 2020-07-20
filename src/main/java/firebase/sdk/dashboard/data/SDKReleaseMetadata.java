@@ -3,6 +3,13 @@ package firebase.sdk.dashboard.data;
 import java.util.HashMap;
 import com.google.auto.value.AutoValue;
 
+/**
+ * This differs from VersionMetadata in the attributes it contains
+ * and when the API will return this data. This data will be displayed
+ * in the SDK Release page for a given release and represents the changes
+ * to that SDK for that release. It is contains some extra data such as the 
+ * additional info and what the previous version was but doesn't include 
+ * the launch date of the version.  */
 @AutoValue
 public abstract class SDKReleaseMetadata {
 
