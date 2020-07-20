@@ -22,9 +22,9 @@ public class PlatformResource {
    * Method handling HTTP GET requests.
    * Exposed at "v1/platforms", this endpoint returns a list
    * of the names of all platforms along with the timestamp representing
-   * the closest deadline.
+   * the closest release deadline.
    *
-   * @return Response object containing astatus code and a HashMap contaning
+   * @return Response object containing an HTTP status code and a HashMap contaning
    * the names of all the supported platforms along with a timestamp as its value.
    */
   @GET
@@ -40,7 +40,7 @@ public class PlatformResource {
 
   /**
    * Method handling HTTP GET requests.
-   * Exposed at "v1/platforms/{plstform}/releases", this endpoint returns
+   * Exposed at "v1/platforms/{platform}/releases", this endpoint returns
    * a ReleaseResource object which handles the functionality of all endpoints
    * starting with the endpoint path.
    *
