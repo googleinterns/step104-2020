@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.IOException;
+import java.time.Instant;
 
 
 /**
@@ -55,9 +56,9 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
             String releaseManager = (String) releaseEntity.getProperty("releaseManager");
             String releaseName = (String) releaseEntity.getProperty("releaseName");
             String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
-            Instant launchDate = releaseEntity.getProperty("launchDate");
-            Instat launchCalDeadline = releaseEntity.getProperty("launchCalDeadline");
-            String codeFreezeTime = releaseEntity.getProperty("codeFreezeTime");
+            Instant launchDate = (Instant) releaseEntity.getProperty("launchDate");
+            Instant launchCalDeadline = (Instant) releaseEntity.getProperty("launchCalDeadline");
+            Instant codeFreezeTime = (Instant) releaseEntity.getProperty("codeFreezeTime");
            
             Release release = Release.newBuilder()
                 .platform(platform)
