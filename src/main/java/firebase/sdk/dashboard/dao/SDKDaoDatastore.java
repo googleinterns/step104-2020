@@ -64,6 +64,25 @@ public class SDKDaoDatastore implements SDKDao {
     return sdk;
   }
 
+  public List<String> getSDKs(Platform givenPlatform) {
+    FilterPredicate platformPropertyFilter = makePropertyFilter("platform", givenPlatform);
+
+    Query query = new Query("SDK")
+      .setFilter(platformPropertyFilter);
+
+    PreparedQuery preparedQuery = DATASTORE.prepare(query);
+    FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
+    QueryResultIterable<Entity> results = preparedQuery.asQueryResultIterable();
+
+    ArrayList<String> sdksForPlatform = new ArrayList<>();
+    for (Entity entity: results) {
+      sdksForPlatform.add(
+          (String) entity.getProperty("libraryName"));
+    }
+
+    return sdksForPlatform;
+  }
+
   public List<String> getSDKsEnrolledInRelease(Platform platform, String releaseName) {
     FilterPredicate platformPropertyFilter = makePropertyFilter("platform", platform);
     FilterPredicate releasePropertyFilter = makePropertyFilter("releaseName", releaseName);
@@ -132,9 +151,9 @@ public class SDKDaoDatastore implements SDKDao {
     DATASTORE.put(createSDKReleaseMetadataEntity(sdk));
   }
 
-  public void addSDKVersion(VersionMetadata version) {
-    EmbeddedEntity versionEntity = createVersionMetadataEmbeddedEntity(version);
-    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", version.platform() + "_" + version.libraryName());
+  public void addSDKVersion(VersionMetadata sdkVersion) {
+    EmbeddedEntity versionEntity = createVersionMetadataEmbeddedEntity(sdkVersion);
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkVersion.platform() + "_" + sdkVersion.libraryName());
 
     Query query = new Query("SDK")
       .setFilter(keyPropertyFilter);
