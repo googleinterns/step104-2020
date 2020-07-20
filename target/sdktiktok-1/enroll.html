@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/jquery.bootstrapvalidator/0.5.1/css/bootstrapValidator.min.css"/>
       <script src="https://kit.fontawesome.com/4588e35b97.js" crossorigin="anonymous"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -50,14 +51,14 @@
             </div>
         </div>
         
-        <form role="form" align="center">
+        <form role="form" align="center" class="enrollForm">
             <div class="panel panel-primary setup-content" id="step-1">
                 <div class="panel-heading">
                     <h3 class="panel-title">SELECT SDK</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group input-lg" >
-                        <select name="sdks" class="custom-select mb-5" style="width:700px;font-size: 20px;" align="center">
+                        <select name="sdks" class="custom-select mb-5" style="width:700px;font-size:15px;" align="center">
                         <option selected>SDK</option>
                         <option value="firebase_common">Firebase Common</option>
                         <option value="firebase_messaging">Firebase Messaging</option>
@@ -78,8 +79,8 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label class="control-label">Current Version</label>
-                        <input maxlength="150" type="text" required="required" class="form-control" placeholder="Enter Current Version"/>
+                        <label class="control-label" style="font-size:15px;">Current Version</label>
+                        <input style="font-size:15px;" maxlength="150" type="text" required="required" class="form-control" placeholder="Enter Current Version" name="currentVersion"/>
                     </div>
                     <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
                 </div>
@@ -92,7 +93,7 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <label class="control-label">Version Being Released</label>
-                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Version being Released"/>
+                        <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Version being Released" name="versionReleased"/>
                     </div>
                     
                     <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
@@ -122,7 +123,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="h//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.bootstrapvalidator/0.5.1/js/bootstrapValidator.min.js"></script>
   </body>
 </html>
 

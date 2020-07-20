@@ -76,3 +76,57 @@ function showOrHideNotes(version) {
     $('div.setup-panel div a.btn-success').trigger('click');
 });
 
+// Enroll Form Validation
+
+$(document).ready(function(){
+    $(".enrollForm").bootstrapValidator({
+
+        message: "This value is not valid",
+        feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+
+
+        fields: {
+            currentVersion: {
+              message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The current version is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 6,
+                        message: 'The current version must be 6 characters long'
+                    },
+                    regexp: {
+                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d+)$/,
+                        message: 'The current version can only consist of a symantic version'
+                    }
+                }  
+            },
+
+            versionReleased: {
+              message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The current version is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 6,
+                        message: 'The current version must be 6 characters long'
+                    },
+                    regexp: {
+                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d+)$/,
+                        message: 'The current version can only consist of a symantic version'
+                    }
+                }  
+            },
+        }
+    });
+    
+
+});
