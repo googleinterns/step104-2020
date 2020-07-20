@@ -12,7 +12,7 @@ public enum Platform {
     this.label = enumName;
   }
 
-  public String getName() {
+  public String getLabel() {
     return label;
   }
 

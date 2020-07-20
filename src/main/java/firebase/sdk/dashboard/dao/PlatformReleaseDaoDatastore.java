@@ -1,11 +1,5 @@
 package firebase.sdk.dashboard.dao;
 
-
-import firebase.sdk.dashboard.data.Release;
-import firebase.sdk.dashboard.data.SDKReleaseMetadata;
-import firebase.sdk.dashboard.data.Platform;
-import java.util.*;
-import java.io.IOException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -14,24 +8,37 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultList;
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.KeyFactory.Builder;
+import firebase.sdk.dashboard.data.Release;
+import firebase.sdk.dashboard.data.SDKReleaseMetadata;
+import firebase.sdk.dashboard.data.Platform;
+import java.util.*;
+import java.io.IOException;
+
 
 /**
  * A class for implementing the platform dao.
  */
 public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
-    
-    public static final DatastoreService dashboardDatastore = DatastoreServiceFactory.getDatastoreService();
+
+    HashMap<String, Platform> enumMapping = new HashMap<>();
+    for(Platform plat : Platform.values()){
+        enumMapping.put(plat.getLabel(), plat);
+    }
+
+    DatastoreService dashboardDatastore = DatastoreServiceFactory.getDatastoreService();
 
     public List<Platform> getPlatforms(){
         List<Platform> platforms = new ArrayList<>();
         
         Query<Entity> query = Query.newEntityQueryBuilder().setKind("Platform").build();
-        
-        QueryResults<Entity> results = dashboardDatastore.run(query);
+        QueryResultList<Entity> results = dashboardDatastore.run(query);
 
         for (Entity result : results.asIterable()) {
             String name = result.getProperty("name");
-            Platform platform = Platform(name);
+            Platform platform = enumMapping.get(name);
             platforms.add(platform);
         }
         return platforms;  
@@ -40,15 +47,14 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     public List<Release> getPlatformReleases(Platform platform) {
         List<Release> releases = new ArrayList<>();
 
-        Query<Entity> query = Query.newEntityQueryBuilder().setKind("Release").setFilter(PropertyFilter.eq("platform", platform.getName())).build();
-        QueryResults<Entity> releaseQuery = dashboardDatastore.run(query);
+        Query<Entity> query = Query.newEntityQueryBuilder().setKind("Release").setFilter(PropertyFilter.eq("platform", platform.getLabel())).build();
+        QueryResultList<Entity> releaseQuery = dashboardDatastore.run(query);
 
         for (Entity releaseEntity : releaseQuery.asIterable()) {
 
             /*get clarification*/
             String name = (String) releaseEntity.getProperty("platform");
-            Platform platform = Platform(name);
-
+            Platform platform = enumMapping.get(name);
             String releaseManager = (String) releaseEntity.getProperty("releaseManager");
             String releaseName = (String) releaseEntity.getProperty("releaseName");
             String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
@@ -73,7 +79,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
         
         Key releaseKey = dashboardDatastore.newKeyFactory()
             .setKind("Release")
-            .newKey(release.releaseName() + platform.getName());
+            .newKey(release.releaseName() + platform.getLabel());
         
         Entity relEntity = Entity.newBuilder(releaseKey)
             .set("platform", platform.getName())
@@ -89,11 +95,9 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     }
 
     public void deleteRelease(Platform platform, String releaseName){
-        String platformString = platform.getName();
+        String platformString = platform.getLabel();
         dashboardDatastore.delete(releaseName + platformString);
-    }
-        
-        
+    }           
 }
 
 
