@@ -30,12 +30,12 @@ public class PlatformResource {
   @GET
   public Response getPlatforms() {
     // TODO: implement this method
-      HashMap<String, Instant> platforms = new HashMap<String, Instant>();
-      platforms.put("Android", Instant.now());
-      platforms.put("iOS", Instant.now());
-      platforms.put("Web", Instant.now());
-      platforms.put("Games", Instant.now());
-      return ResponseHandler.createJsonResponse(Status.OK, platforms);
+    HashMap<String, Instant> platforms = new HashMap<String, Instant>();
+    platforms.put("Android", Instant.now());
+    platforms.put("iOS", Instant.now());
+    platforms.put("Web", Instant.now());
+    platforms.put("Games", Instant.now());
+    return ResponseHandler.createJsonResponse(Status.OK, platforms);
   }
 
   /**
@@ -50,7 +50,7 @@ public class PlatformResource {
   @Path("/{platform}/releases")
   public ReleaseResource getReleaseResource(@PathParam("platform") String platform) {
     return new ReleaseResource(platform);
-    }
+  }
 
   /**
    * Method handling HTTP GET requests.
@@ -66,3 +66,4 @@ public class PlatformResource {
     return new SDKResource(platform);
   }
 }
+
