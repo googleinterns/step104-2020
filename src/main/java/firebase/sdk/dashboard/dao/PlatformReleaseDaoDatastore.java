@@ -15,6 +15,8 @@ import firebase.sdk.dashboard.data.Release;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Platform;
 import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.io.IOException;
 
 
@@ -22,11 +24,6 @@ import java.io.IOException;
  * A class for implementing the platform dao.
  */
 public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
-
-    HashMap<String, Platform> enumMapping = new HashMap<>();
-    for(Platform plat : Platform.values()){
-        enumMapping.put(plat.getLabel(), plat);
-    }
 
     DatastoreService dashboardDatastore = DatastoreServiceFactory.getDatastoreService();
 
@@ -38,7 +35,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
         for (Entity result : results.asIterable()) {
             String name = result.getProperty("name");
-            Platform platform = enumMapping.get(name);
+            Platform platform = Platform.get(name);
             platforms.add(platform);
         }
         return platforms;  
@@ -54,7 +51,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
             /*get clarification*/
             String name = (String) releaseEntity.getProperty("platform");
-            Platform platform = enumMapping.get(name);
+            Platform platform = Platform.get(name);
             String releaseManager = (String) releaseEntity.getProperty("releaseManager");
             String releaseName = (String) releaseEntity.getProperty("releaseName");
             String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
@@ -82,7 +79,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
             .newKey(release.releaseName() + platform.getLabel());
         
         Entity relEntity = Entity.newBuilder(releaseKey)
-            .set("platform", platform.getName())
+            .set("platform", platform.getLabel())
             .set("releaseName", release.releaseName())
             .set("releaseManager", release.releaseManager())
             .set("launchDate", release.launchDate())
