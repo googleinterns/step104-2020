@@ -44,7 +44,11 @@ public class SDKDaoDatastore implements SDKDao {
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
     Entity entity = preparedQuery.asSingleEntity();
 
-    Platform platform = Platform.fromInteger((Integer) entity.getProperty("platform"));
+    if (entity == null) {
+      return null;
+    }
+
+    Platform platform = Platform.fromInteger(((Number) entity.getProperty("platform")).intValue());
     String libraryName = (String) entity.getProperty("libraryName");
     String libraryGroup = (String) entity.getProperty("libraryGroup");
     String externalName = (String) entity.getProperty("externalName");
@@ -76,6 +80,10 @@ public class SDKDaoDatastore implements SDKDao {
     FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
     QueryResultIterable<Entity> results = preparedQuery.asQueryResultIterable();
 
+    if (results == null) {
+      return arrays.asList();
+    }
+
     ArrayList<String> sdksForPlatform = new ArrayList<>();
     for (Entity entity: results) {
       sdksForPlatform.add(
@@ -100,6 +108,10 @@ public class SDKDaoDatastore implements SDKDao {
     FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
     QueryResultIterable<Entity> results = preparedQuery.asQueryResultIterable(fetchOptions);
 
+    if (results == null) {
+      return arrays.asList();
+    }
+
     ArrayList<String> enrolledSDKs = new ArrayList<>();
     for (Entity entity: results) {
       String libraryName = (String) entity.getProperty("libraryName");
@@ -119,7 +131,11 @@ public class SDKDaoDatastore implements SDKDao {
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
     Entity entity = preparedQuery.asSingleEntity();
 
-    Platform platform = Platform.fromInteger((Integer) entity.getProperty("platform"));
+    if (entity == null) {
+      return null;
+    }
+
+    Platform platform = Platform.fromInteger(((Number) entity.getProperty("platform")).intValue());
     String libraryName = (String) entity.getProperty("libraryName");
     String releaseName = (String) entity.getProperty("releaseName");
     String releaseVersion = (String) entity.getProperty("releaseVersion");
@@ -164,6 +180,10 @@ public class SDKDaoDatastore implements SDKDao {
 
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
     Entity entity = preparedQuery.asSingleEntity();
+
+    if (entity == null) {
+      return null;
+    }
 
     ArrayList<EmbeddedEntity> versions = (ArrayList<EmbeddedEntity>) entity.getProperty("versions");
     versions.add(0, versionEntity);
@@ -245,9 +265,13 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   private List<VersionMetadata> getVersionHistoryFromProperty(List<EmbeddedEntity> property) {
+    if (property == null) {
+      return Arrays.asList();
+    }
+
     ArrayList<VersionMetadata> versionHistory = new ArrayList<>();
     for (EmbeddedEntity entity: property) {
-      Platform platform = Platform.fromInteger((Integer) entity.getProperty("platform"));
+      Platform platform = Platform.fromInteger(((Number) entity.getProperty("platform")).intValue());
       String libraryName = (String) entity.getProperty("libraryName");
       String releaseName = (String) entity.getProperty("releaseName");
       String version = (String) entity.getProperty("version");
