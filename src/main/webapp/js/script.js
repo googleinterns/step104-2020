@@ -11,7 +11,6 @@ function favouriteSDK() {
   }
 }
 
-
 function loadFiveEarlierVersions() {
   console.log("Showing 5 more versions.");
   const releaseList = document.getElementById("release-history");
@@ -79,7 +78,6 @@ function showOrHideNotes(version) {
 
 //Fetch data from API endpoint
 
-//fetch for landing page
 let doms = ["web", "android", "games", "ios"]
 
 async function getPlatforms() {
@@ -166,6 +164,5 @@ function getDate(time) {
 getPlatforms();
 getReleases();
 getSDKs();
-
 
 
