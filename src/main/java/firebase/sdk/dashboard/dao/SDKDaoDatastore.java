@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.time.Instant;
 import java.io.IOException;
 import com.google.appengine.api.datastore.DatastoreService;
@@ -81,7 +82,7 @@ public class SDKDaoDatastore implements SDKDao {
     QueryResultIterable<Entity> results = preparedQuery.asQueryResultIterable();
 
     if (results == null) {
-      return arrays.asList();
+      return Arrays.asList();
     }
 
     ArrayList<String> sdksForPlatform = new ArrayList<>();
@@ -109,7 +110,7 @@ public class SDKDaoDatastore implements SDKDao {
     QueryResultIterable<Entity> results = preparedQuery.asQueryResultIterable(fetchOptions);
 
     if (results == null) {
-      return arrays.asList();
+      return Arrays.asList();
     }
 
     ArrayList<String> enrolledSDKs = new ArrayList<>();
@@ -140,7 +141,8 @@ public class SDKDaoDatastore implements SDKDao {
     String releaseName = (String) entity.getProperty("releaseName");
     String releaseVersion = (String) entity.getProperty("releaseVersion");
     String oldVersion = (String) entity.getProperty("oldVersion");
-    HashMap<String, String> additionalInfo = (HashMap<String, String>) entity.getProperty("additionalInfo");
+    HashMap<String, String> additionalInfo = getAdditionalInfoFromProperty(
+        (EmbeddedEntity) entity.getProperty("additionalInfo"));
 
     SDKReleaseMetadata sdkReleaseMetadata = SDKReleaseMetadata.newBuilder()
       .platform(platform)
@@ -182,7 +184,7 @@ public class SDKDaoDatastore implements SDKDao {
     Entity entity = preparedQuery.asSingleEntity();
 
     if (entity == null) {
-      return null;
+      return;
     }
 
     ArrayList<EmbeddedEntity> versions = (ArrayList<EmbeddedEntity>) entity.getProperty("versions");
@@ -252,9 +254,17 @@ public class SDKDaoDatastore implements SDKDao {
     sdkReleaseEntity.setProperty("releaseName", sdkReleaseMetadata.releaseName());
     sdkReleaseEntity.setProperty("releaseVersion", sdkReleaseMetadata.releaseVersion());
     sdkReleaseEntity.setProperty("oldVersion", sdkReleaseMetadata.oldVersion());
-    sdkReleaseEntity.setProperty("additionalInfo", sdkReleaseMetadata.additionalInfo());
+    sdkReleaseEntity.setProperty("additionalInfo", createAdditionalInfoEmbeddedEntity(sdkReleaseMetadata.additionalInfo()));
 
     return sdkReleaseEntity;
+  }
+
+  private EmbeddedEntity createAdditionalInfoEmbeddedEntity(HashMap<String, String> additionalInfo) {
+    EmbeddedEntity entity = new EmbeddedEntity();
+    for (String key : additionalInfo.keySet()) { 
+        entity.setProperty(key, additionalInfo.get(key));
+    }
+    return entity;
   }
 
   private FilterPredicate makePropertyFilter(String property, Object value) {
@@ -289,5 +299,15 @@ public class SDKDaoDatastore implements SDKDao {
     }
 
     return versionHistory;
+  }
+
+  private HashMap<String, String> getAdditionalInfoFromProperty(EmbeddedEntity property) {
+    HashMap<String, String> additionalInfo = new HashMap<>();
+    
+    for (Map.Entry<String, Object> entry : property.getProperties().entrySet()) {
+      additionalInfo.put(entry.getKey(), (String) entry.getValue());
+    }
+
+    return additionalInfo;
   }
 }
