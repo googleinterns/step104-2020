@@ -66,7 +66,7 @@ public class UserResource {
    */
   @DELETE
   @Path("{uid}/sdks/{sdkName}")
-  public Response addSdkToUserFavorites(@PathParam("uid") String uid, @PathParam("sdkName") String sdkName) {
+  public Response deleteSdkToUserFavorites(@PathParam("uid") String uid, @PathParam("sdkName") String sdkName) {
     // TODO: implement this method
     favourites.remove(sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, null);

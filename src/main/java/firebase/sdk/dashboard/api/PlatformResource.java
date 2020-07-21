@@ -30,7 +30,6 @@ public class PlatformResource {
   @GET
   public Response getPlatforms() {
     // TODO: implement this method
-      Date date = new Date();
       HashMap<String, String> platforms = new HashMap<String, String>();
       platforms.put("android", "ANDROID");
       platforms.put("ios", "iOS");
