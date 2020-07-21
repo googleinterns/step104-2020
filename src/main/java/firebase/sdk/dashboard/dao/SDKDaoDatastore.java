@@ -34,7 +34,9 @@ public class SDKDaoDatastore implements SDKDao {
   private static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
   public SDK getSDK(Platform givenPlatform, String givenLibraryName) {
-    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", givenPlatform.toString() + "_" + givenLibraryName);
+    Key sdkKey = KeyFactory.createKey("SDK", givenPlatform.toString() + "_" + givenLibraryName);
+
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkKey);
 
     Query query = new Query("SDK")
       .setFilter(keyPropertyFilter);
@@ -108,7 +110,8 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   public SDKReleaseMetadata getSDKReleaseMetadata(Platform givenPlatform, String givenReleaseName, String givenLibraryName) {
-    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", givenPlatform.toString() + "_" + givenLibraryName + "_" + givenReleaseName);
+    Key sdkReleaseMetadataKey = KeyFactory.createKey("SDKReleaseMetadata", givenPlatform.toString() + "_" + givenLibraryName + "_" + givenReleaseName);
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkReleaseMetadataKey);
 
     Query query = new Query("SDKReleaseMetadata")
       .setFilter(keyPropertyFilter);
@@ -153,7 +156,8 @@ public class SDKDaoDatastore implements SDKDao {
 
   public void addSDKVersion(VersionMetadata sdkVersion) {
     EmbeddedEntity versionEntity = createVersionMetadataEmbeddedEntity(sdkVersion);
-    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkVersion.platform().toString() + "_" + sdkVersion.libraryName());
+    Key sdkKey = KeyFactory.createKey("SDK", sdkVersion.platform().toString() + "_" + sdkVersion.libraryName());
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkKey);
 
     Query query = new Query("SDK")
       .setFilter(keyPropertyFilter);
@@ -202,6 +206,8 @@ public class SDKDaoDatastore implements SDKDao {
     sdkEntity.setProperty("owner", sdk.owner());
     sdkEntity.setProperty("versionHistory", versionMetadatas);
 
+    // TODO: Remove later
+    System.out.println("Created SDK Entity.");
     return sdkEntity;
   }
 
