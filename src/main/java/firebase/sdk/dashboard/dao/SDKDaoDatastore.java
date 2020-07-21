@@ -208,22 +208,50 @@ public class SDKDaoDatastore implements SDKDao {
 
   //TODO: Define exception
   public void deleteSDKVersion(VersionMetadata sdkVersion) {
-    Key sdkVersionKey = KeyFactory.createKey("VersionMetadata", sdkVersion.platform().toString() + "_" + sdkVersion.libraryName() + "_" + sdkVersion.version());
-    DATASTORE.delete(sdkVersionKey);
+    Key sdkKey = KeyFactory.createKey("SDK", sdkVersion.platform().toString() + "_" + sdkVersion.libraryName());
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkKey);
+
+    Query query = new Query("SDK")
+      .setFilter(keyPropertyFilter);
+
+    PreparedQuery preparedQuery = DATASTORE.prepare(query);
+    Entity entity = preparedQuery.asSingleEntity();
+
+    if (entity == null) {
+      return;
+    }
+
+    ArrayList<EmbeddedEntity> versions = (ArrayList) entity.getProperty("versionHistory");
+
+    if (versions == null) {
+      return;
+    }
+
+    List<VersionMetadata> versionHistory = getVersionHistoryFromProperty(versions);
+    versionHistory.remove(sdkVersion);
+    
+    entity.setProperty("versionHistory", createEmbeddedEntityVersionList(versionHistory));
+    DATASTORE.put(entity);
+
   }
 
   /* TODO: P2 functionality
      public void updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
 
-  private Entity createSDKEntity(SDK sdk) {
-    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform().toString() + "_" + sdk.libraryName());
-
+  private List<EmbeddedEntity> createEmbeddedEntityVersionList(List<VersionMetadata> versionHistory) {
     ArrayList<EmbeddedEntity> versionMetadatas = new ArrayList<>();
-    List<VersionMetadata> versionHistory = sdk.versionHistory();
 
     for (int i = 0; i < versionHistory.size(); i++) {
       versionMetadatas.add(createVersionMetadataEmbeddedEntity(versionHistory.get(i)));
     }
+
+    return versionMetadatas;
+  }
+
+  private Entity createSDKEntity(SDK sdk) {
+    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform().toString() + "_" + sdk.libraryName());
+
+    List<EmbeddedEntity> versionMetadatas = createEmbeddedEntityVersionList(sdk.versionHistory());
 
     Entity sdkEntity = new Entity(sdkKey);
     sdkEntity.setProperty("platform", sdk.platform().getValue());
@@ -239,8 +267,6 @@ public class SDKDaoDatastore implements SDKDao {
 
   private EmbeddedEntity createVersionMetadataEmbeddedEntity(VersionMetadata version) {
     EmbeddedEntity metadata = new EmbeddedEntity();
-    Key versionKey = KeyFactory.createKey("VersionMetadata", version.platform().toString() + "_" + version.libraryName() + "_" + version.version());
-    metadata.setKey(versionKey);
     metadata.setProperty("platform", version.platform().getValue());
     metadata.setProperty("libraryName", version.libraryName());
     metadata.setProperty("releaseName", version.releaseName());
