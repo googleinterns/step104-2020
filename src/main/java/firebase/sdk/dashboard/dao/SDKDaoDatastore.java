@@ -187,9 +187,15 @@ public class SDKDaoDatastore implements SDKDao {
       return;
     }
 
-    ArrayList<EmbeddedEntity> versions = (ArrayList<EmbeddedEntity>) entity.getProperty("versions");
-    versions.add(0, versionEntity);
-    entity.setProperty("versionHistory", versions);
+    ArrayList<EmbeddedEntity> versions = (ArrayList) entity.getProperty("versionHistory");
+
+    if (versions == null) {
+      entity.setProperty("versionHistory", Arrays.asList(versionEntity));
+    } else {
+      versions.add(0, versionEntity);
+      entity.setProperty("versionHistory", versions);
+    }
+
     DATASTORE.put(entity);
   }
 
@@ -228,8 +234,6 @@ public class SDKDaoDatastore implements SDKDao {
     sdkEntity.setProperty("owner", sdk.owner());
     sdkEntity.setProperty("versionHistory", versionMetadatas);
 
-    // TODO: Remove later
-    System.out.println("Created SDK Entity.");
     return sdkEntity;
   }
 
@@ -241,7 +245,7 @@ public class SDKDaoDatastore implements SDKDao {
     metadata.setProperty("libraryName", version.libraryName());
     metadata.setProperty("releaseName", version.releaseName());
     metadata.setProperty("version", version.version());
-    metadata.setProperty("launchDate", version.launchDate());
+    metadata.setProperty("launchDate", version.launchDate().toEpochMilli());
     return metadata;
   }
 
@@ -285,7 +289,7 @@ public class SDKDaoDatastore implements SDKDao {
       String libraryName = (String) entity.getProperty("libraryName");
       String releaseName = (String) entity.getProperty("releaseName");
       String version = (String) entity.getProperty("version");
-      Instant launchDate = (Instant) entity.getProperty("launchDate");
+      Instant launchDate = Instant.ofEpochMilli((long) entity.getProperty("launchDate"));
 
       VersionMetadata versionMetadata = VersionMetadata.newBuilder()
         .platform(platform)
