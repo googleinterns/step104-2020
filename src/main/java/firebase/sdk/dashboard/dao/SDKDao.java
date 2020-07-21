@@ -57,10 +57,9 @@ public interface SDKDao {
   /**
    * Adds the SDK from the data source.
    *
-   * @param platform The platform the sdk is being added to.
    * @param sdk The SDK being added.
    */
-  public void addSDK(Platform platform, SDK sdk);
+  public void addSDK(SDK sdk);
 
   //TODO: Define exception
   /**

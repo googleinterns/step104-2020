@@ -136,7 +136,7 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   //TODO: Define exception
-  public void addSDK(Platform platform, SDK sdk) {
+  public void addSDK(SDK sdk) {
     DATASTORE.put(createSDKEntity(sdk));
   }
 
