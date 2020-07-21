@@ -34,7 +34,7 @@ public class SDKDaoDatastore implements SDKDao {
   private static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
   public SDK getSDK(Platform givenPlatform, String givenLibraryName) {
-    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", givenPlatform + "_" + givenLibraryName);
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", givenPlatform.toString() + "_" + givenLibraryName);
 
     Query query = new Query("SDK")
       .setFilter(keyPropertyFilter);
@@ -65,7 +65,7 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   public List<String> getSDKs(Platform givenPlatform) {
-    FilterPredicate platformPropertyFilter = makePropertyFilter("platform", givenPlatform);
+    FilterPredicate platformPropertyFilter = makePropertyFilter("platform", givenPlatform.getValue());
 
     Query query = new Query("SDK")
       .setFilter(platformPropertyFilter);
@@ -84,7 +84,7 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   public List<String> getSDKsEnrolledInRelease(Platform platform, String releaseName) {
-    FilterPredicate platformPropertyFilter = makePropertyFilter("platform", platform);
+    FilterPredicate platformPropertyFilter = makePropertyFilter("platform", platform.getValue());
     FilterPredicate releasePropertyFilter = makePropertyFilter("releaseName", releaseName);
     CompositeFilter compositeFilter = new CompositeFilter(
         CompositeFilterOperator.AND, Arrays.asList(
@@ -108,7 +108,7 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   public SDKReleaseMetadata getSDKReleaseMetadata(Platform givenPlatform, String givenReleaseName, String givenLibraryName) {
-    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", givenPlatform + "_" + givenLibraryName + "_" + givenReleaseName);
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", givenPlatform.toString() + "_" + givenLibraryName + "_" + givenReleaseName);
 
     Query query = new Query("SDKReleaseMetadata")
       .setFilter(keyPropertyFilter);
@@ -142,7 +142,7 @@ public class SDKDaoDatastore implements SDKDao {
 
   //TODO: Define exception
   public void deleteSDK(SDK sdk) {
-    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform() + "_" + sdk.libraryName());
+    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform().toString() + "_" + sdk.libraryName());
     DATASTORE.delete(sdkKey);
   }
 
@@ -153,7 +153,7 @@ public class SDKDaoDatastore implements SDKDao {
 
   public void addSDKVersion(VersionMetadata sdkVersion) {
     EmbeddedEntity versionEntity = createVersionMetadataEmbeddedEntity(sdkVersion);
-    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkVersion.platform() + "_" + sdkVersion.libraryName());
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkVersion.platform().toString() + "_" + sdkVersion.libraryName());
 
     Query query = new Query("SDK")
       .setFilter(keyPropertyFilter);
@@ -170,13 +170,13 @@ public class SDKDaoDatastore implements SDKDao {
 
   //TODO: Define exception
   public void deleteSDKRelease(SDKReleaseMetadata sdk) {
-    Key sdkReleaseMetadataKey = KeyFactory.createKey("SDKReleaseMetadata", sdk.platform() + "_" + sdk.libraryName() + "_" + sdk.releaseName());
+    Key sdkReleaseMetadataKey = KeyFactory.createKey("SDKReleaseMetadata", sdk.platform().toString() + "_" + sdk.libraryName() + "_" + sdk.releaseName());
     DATASTORE.delete(sdkReleaseMetadataKey);
   }
 
   //TODO: Define exception
   public void deleteSDKVersion(VersionMetadata sdkVersion) {
-    Key sdkVersionKey = KeyFactory.createKey("VersionMetadata", sdkVersion.platform() + "_" + sdkVersion.libraryName() + "_" + sdkVersion.version());
+    Key sdkVersionKey = KeyFactory.createKey("VersionMetadata", sdkVersion.platform().toString() + "_" + sdkVersion.libraryName() + "_" + sdkVersion.version());
     DATASTORE.delete(sdkVersionKey);
   }
 
@@ -184,7 +184,7 @@ public class SDKDaoDatastore implements SDKDao {
      public void updateSDKEnrolledInRelease(SDKRelease oldSDKRelease, SDKRelease newSDKRelease);*/
 
   private Entity createSDKEntity(SDK sdk) {
-    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform() + "_" + sdk.libraryName());
+    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform().toString() + "_" + sdk.libraryName());
 
     ArrayList<EmbeddedEntity> versionMetadatas = new ArrayList<>();
     List<VersionMetadata> versionHistory = sdk.versionHistory();
@@ -207,7 +207,7 @@ public class SDKDaoDatastore implements SDKDao {
 
   private EmbeddedEntity createVersionMetadataEmbeddedEntity(VersionMetadata version) {
     EmbeddedEntity metadata = new EmbeddedEntity();
-    Key versionKey = KeyFactory.createKey("VersionMetadata", version.platform() + "_" + version.libraryName() + "_" + version.version());
+    Key versionKey = KeyFactory.createKey("VersionMetadata", version.platform().toString() + "_" + version.libraryName() + "_" + version.version());
     metadata.setKey(versionKey);
     metadata.setProperty("platform", version.platform().getValue());
     metadata.setProperty("libraryName", version.libraryName());
@@ -218,7 +218,7 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   private Entity createSDKReleaseMetadataEntity(SDKReleaseMetadata sdkReleaseMetadata) {
-    Key sdkReleaseMetadataKey = KeyFactory.createKey("SDKReleaseMetadata", sdkReleaseMetadata.platform() + "_" + sdkReleaseMetadata.libraryName() + "_" + sdkReleaseMetadata.releaseName());
+    Key sdkReleaseMetadataKey = KeyFactory.createKey("SDKReleaseMetadata", sdkReleaseMetadata.platform().toString() + "_" + sdkReleaseMetadata.libraryName() + "_" + sdkReleaseMetadata.releaseName());
 
     Entity sdkReleaseEntity = new Entity(sdkReleaseMetadataKey);
     sdkReleaseEntity.setProperty("platform", sdkReleaseMetadata.platform().getValue());
