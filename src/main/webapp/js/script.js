@@ -76,7 +76,7 @@ function showOrHideNotes(version) {
     $('div.setup-panel div a.btn-success').trigger('click');
 });
 
-// Enroll Form Validation
+// Enroll Form Validation using bootstrapValidator Framework
 
 $(document).ready(function(){
     $(".enrollForm").bootstrapValidator({
@@ -88,7 +88,7 @@ $(document).ready(function(){
                 validating: 'glyphicon glyphicon-refresh'
             },
 
-
+        // Validation of fields form
         fields: {
             currentVersion: {
               message: 'The username is not valid',
@@ -101,6 +101,7 @@ $(document).ready(function(){
                         max: 6,
                         message: 'The current version must be 6 characters long'
                     },
+                    //Regular Expression to format the semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d\.)?(\*|\d)$/,
                         message: 'The current version can only consist of a symantic version'
@@ -119,6 +120,7 @@ $(document).ready(function(){
                         max: 6,
                         message: 'The current version must be 6 characters long'
                     },
+                    //Regular Expression to format the semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d\.)?(\*|\d)$/,
                         message: 'The current version can only consist of a symantic version'
