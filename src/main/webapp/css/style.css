@@ -7,7 +7,6 @@
     background-color:#039BE5 !important;
 }
 
-<<<<<<< HEAD
 .sdk {
     text-align: center;
     background-color:#2C384A !important;
@@ -19,24 +18,20 @@
     padding: 20px;
     margin-right: auto;
     margin-left: auto;
-=======
+}
+
 .card {
     text-align: center;
     background-color:#2C384A !important;
     width: 300px; 
     height: 300px;
    
->>>>>>> 0cf5c744565edc0a4c7b3a07109e0becedb6c37a
 }
 
 .col {
     padding: 0px 0px;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0cf5c744565edc0a4c7b3a07109e0becedb6c37a
 .card-body {
    display: flex;
    flex-direction: column;
@@ -45,7 +40,6 @@
 .btn-group {
     margin-top: auto;
 }
-<<<<<<< HEAD
 
 
  .card-header {
@@ -64,7 +58,9 @@
 }
 
 /* Wizard Section */
+
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
+
  body {
     margin-top:30px;
 }
@@ -160,17 +156,17 @@
 }
 
 #box {
-  float: right;
-  color: white;
-  border-radius: 25px;
-  background: rgb(5, 27, 48);
-  padding: 20px;
-  padding-top: 175px; 
-  width: 500px;
-  height: 450px;  
-  text-align: center;
-  margin-right: auto;
-  margin-left: auto;
+    float: right;
+    color: white;
+    border-radius: 25px;
+    background: rgb(5, 27, 48);
+    padding: 20px;
+    padding-top: 175px; 
+    width: 500px;
+    height: 450px;  
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 #sdk {
@@ -296,7 +292,3 @@ h1 {
   padding: 14px 40px;
   transition-duration: 0.4s;
 }
-
-
-=======
->>>>>>> 0cf5c744565edc0a4c7b3a07109e0becedb6c37a

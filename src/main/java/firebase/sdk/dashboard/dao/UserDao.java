@@ -15,8 +15,7 @@ public interface UserDao {
    * @param id The unique id that identifies the user.
    * @return A User object containg data that represents the user and their favorite sdks.
    */
-  public User getUser(String id);
-
+  
   /**
    * Adds a User to the data source.
    *
@@ -30,4 +29,7 @@ public interface UserDao {
    * @param user The user being update in the data source.
    */
   public void updateUser(User user);
+
+
+  
 }
