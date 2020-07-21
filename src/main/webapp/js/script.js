@@ -102,7 +102,7 @@ $(document).ready(function(){
                         message: 'The current version must be 6 characters long'
                     },
                     regexp: {
-                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d+)$/,
+                        regexp: /^(\d+\.)?(\d\.)?(\*|\d)$/,
                         message: 'The current version can only consist of a symantic version'
                     }
                 }  
@@ -120,13 +120,12 @@ $(document).ready(function(){
                         message: 'The current version must be 6 characters long'
                     },
                     regexp: {
-                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d+)$/,
+                        regexp: /^(\d+\.)?(\d\.)?(\*|\d)$/,
                         message: 'The current version can only consist of a symantic version'
                     }
                 }  
             },
         }
     });
-    
 
 });
