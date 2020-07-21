@@ -8,7 +8,7 @@ public enum Platform {
   GAMES(4);
 
   private int value;
-  private final Platform[] platformValues = Platform.values();
+  private static final Platform[] platformValues = Platform.values();
 
   private Platform(int value) {
     this.value = value;
