@@ -18,7 +18,7 @@ public enum Platform {
     return value;
   }
 
-  public Platform fromInteger(int x) {
+  public static Platform fromInteger(int x) {
     return platformValues[x];
   }
 }
