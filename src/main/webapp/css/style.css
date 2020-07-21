@@ -127,3 +127,12 @@ body {
   right: 0;
   margin: auto;  
 }
+
+.panel-body {
+    font-size: 15px;
+}
+
+.custom-select {
+    width:700px;
+    font-size:15px;
+}
