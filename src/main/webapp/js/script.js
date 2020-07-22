@@ -165,4 +165,3 @@ function getDate(time) {
 getPlatforms();
 getReleases();
 getSDKs();
-
