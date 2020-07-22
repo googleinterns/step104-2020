@@ -149,6 +149,7 @@ public class ReleaseResource {
       .libraryName("firebase-common")
       .platform(Platform.ANDROID)
       .releaseName(release)
+      .verifier("Ashwin Ganesh")
       .releaseVersion(newVersion)
       .oldVersion(oldVersion)
       .additionalInfo(new HashMap<String, String>())
