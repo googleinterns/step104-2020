@@ -114,19 +114,19 @@ async function getReleases() {
         divElement.appendChild(document.createElement("HR"));
 
         let deadline = release["launchDeadline"];
-        const textNode1 = document.createTextNode("Launch Deadline: " + getDate(deadline)); 
+        const textNode1 = document.createTextNode("Launch Deadline: " + getDate(1595424871)); 
         divElement.appendChild(textNode1);
 
         divElement.appendChild(document.createElement("HR"));
 
         let coldfreeze = release["codeFreezeDate"];
-        const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(coldfreeze)); 
+        const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(1595424871)); 
         divElement.appendChild(textNode3);
 
         divElement.appendChild(document.createElement("HR"));
 
         let launch = release["launchDate"];
-        const textNode4 = document.createTextNode("Launch Date: " + getDate(launch)); 
+        const textNode4 = document.createTextNode("Launch Date: " + getDate(Date.now())); 
         divElement.appendChild(textNode4); 
     }
 }
