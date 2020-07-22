@@ -23,6 +23,8 @@ public abstract class SDKReleaseMetadata {
    
   public abstract String releaseName();
 
+  public abstract String verifier();
+
   public abstract String releaseVersion();
 
   public abstract String oldVersion();
@@ -38,6 +40,8 @@ public abstract class SDKReleaseMetadata {
     Builder platform(Platform platform);
 
     Builder releaseName(String releaseName);
+
+    Builder verifier(String verifier);
 
     Builder releaseVersion(String releaseVersion);
 
