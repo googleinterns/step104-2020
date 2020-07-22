@@ -11,7 +11,6 @@ function favouriteSDK() {
   }
 }
 
-
 function loadFiveEarlierVersions() {
   console.log("Showing 5 more versions.");
   const releaseList = document.getElementById("release-history");
@@ -166,6 +165,4 @@ function getDate(time) {
 getPlatforms();
 getReleases();
 getSDKs();
-
-
 
