@@ -76,6 +76,7 @@ public class ReleaseResource {
    *
    * @return Response object containing a status code.
    */
+  // TODO: Check membership in Firebase core team for allowing only admin access.
   @POST
   public Response addRelease(Release release) {
     // TODO: Implement this method.
