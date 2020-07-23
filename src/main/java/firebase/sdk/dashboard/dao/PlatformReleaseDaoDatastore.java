@@ -84,7 +84,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
     // Add release to the Datastore
     public void addRelease(Platform platform, Release release){
-        Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + platform.getLabel());
+        Key releaseKey = KeyFactory.createKey("Release", platform.getLabel() + "_" + release.releaseName());
 
         // Create a release entity
         Entity relEntity = new Entity(releaseKey);
@@ -101,7 +101,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
     // Delete release from the Datastore 
     public void deleteRelease(Release release){
-        Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + release.platform().getLabel());
+        Key releaseKey = KeyFactory.createKey("Release", release.platform().getLabel() + "_" + release.releaseName());
         DATASTORE.delete(releaseKey);
     }           
 }
