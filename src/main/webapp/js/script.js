@@ -77,9 +77,10 @@ function showOrHideNotes(version) {
     $('div.setup-panel div a.btn-success').trigger('click');
 });
 
-//Fetch data from API endpoint
 
-//fetch for landing page
+//Fetch data from API endpoint
+ 
+// Fetch for landing page
 let doms = ["web", "android", "games", "ios"]
 
 async function getPlatforms() {
@@ -166,6 +167,3 @@ function getDate(time) {
 getPlatforms();
 getReleases();
 getSDKs();
-
-
-

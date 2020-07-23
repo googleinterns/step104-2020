@@ -1,39 +1,54 @@
 package firebase.sdk.dashboard.data;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.time.Instant;
+import com.google.auto.value.AutoValue;
 
-public class Release {
-  private String platform;
-  private String releaseName;
-  private String releaseManager;
-  private long launchDeadline;
-  private long codeFreezeDate;
-  private long launchDate;
-  private ArrayList<String> enrolledSDKs;
+@AutoValue
+public abstract class Release {
 
-  public Release(String platform, String releaseName, String releaseManager) {
-    this.platform = platform;
-    this.releaseName = releaseName;
-    this.releaseManager = releaseManager;
-    this.enrolledSDKs = new ArrayList<String>();
+  public static Builder newBuilder() {
+    return new AutoValue_Release.Builder();
   }
 
-  public void addEnrolledSDK(String SDKName) {
-    this.enrolledSDKs.add(SDKName);
-  }
+  public abstract Platform platform();
 
-  public void setLaunchDeadline(long timestamp) {
-    this.launchDeadline = timestamp;
-  }
+  public abstract String releaseName();
 
-  public void setCodeFreezeDate(long timestamp) {
-    this.codeFreezeDate = timestamp;
-  }
+  public abstract String releaseManager();
 
-  public void setLaunchDate(long timestamp) {
-    this.launchDate = timestamp;
-  }
+  public abstract String buganizerHotlistLink();
 
-  // TODO: Add Getters and Setters
+  /* launchCalDeadline is the date by which an Ariane launch entry should be approved
+   * for minor/major versions. */
+  public abstract Instant launchCalDeadline();
+
+  /* codeFreezeTime is when they cut off a branch to create a release candidate
+   * for enrolled SDKS which will later be tested by the SDK owners. Any code
+   * that is merged into the master branch after the code freeze date is not
+   * released ad part of that launch. */
+  public abstract Instant codeFreezeTime();
+
+  /* launchDate is when the SDKs in the release are publically released. */
+  public abstract Instant launchDate();
+
+  @AutoValue.Builder
+  public interface Builder {
+    Builder platform(Platform platform);
+
+    Builder releaseName(String releaseName);
+
+    Builder releaseManager(String releaseManager);
+
+    Builder buganizerHotlistLink(String buganizerHotlistLink);
+
+    Builder launchCalDeadline(Instant launchCalDeadline);
+
+    Builder codeFreezeTime(Instant codeFreezeTime);
+
+    Builder launchDate(Instant launchDate);
+
+    Release build();
+  }
 }
 

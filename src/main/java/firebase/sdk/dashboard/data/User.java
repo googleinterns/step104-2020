@@ -1,32 +1,30 @@
 package firebase.sdk.dashboard.data;
 
-import java.util.ArrayList;
+import com.google.auto.value.AutoValue;
+import java.util.List;
+import java.util.Map;
 
-public class User {
-  private long id;
-  private String email;
-  private ArrayList<SDK> favorites;
+@AutoValue
+public abstract class User {
 
-  private User(long id, String email, ArrayList<SDK> favorites) {
-    this.id = id;
-    this.email = email;
-    this.favorites = favorites;
+  public static Builder newBuilder() {
+    return new AutoValue_User.Builder();
   }
 
-  public void addSDKToFavorites(SDK sdk) {
-    if (favorites.contains(sdk)) {
-      return;
-    } else {
-      favorites.add(sdk);
-    }
-  }
+  public abstract String uid();
 
-  public void removeSDKFromFavorites(SDK sdk) {
-    if (favorites.contains(sdk)) {
-      favorites.remove(sdk);
-    }
-  }
+  /* Example: {"Android": ["firebase-common", "firebase-common-ktx"]} */
+  public abstract Map<Platform, List<String>> favoriteSDKs();
 
-  // TODO: Add Getters and Setters
+  @AutoValue.Builder
+  public interface Builder {
+    Builder uid(String uid);
+
+    /* The key is the platform and the value will be a list of the names of
+     * the users favorite SDKs for that platform. */ 
+    Builder favoriteSDKs(Map<Platform, List<String>> favoriteSDKs);
+
+    User build();
+  }
 }
-  
+

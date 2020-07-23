@@ -1,7 +1,8 @@
-// TODO: Not entirely sure how interacting with user data will be but created a boiler plate.
 package firebase.sdk.dashboard.dao;
 
 import firebase.sdk.dashboard.data.User;
+import firebase.sdk.dashboard.data.SDK;
+import java.util.Map;
 
 /**
  * An interface for retrieving and manipulating data about Users.
@@ -12,7 +13,7 @@ public interface UserDao {
    * Retrieves a User object from a data source.
    *
    * @param id The unique id that identifies the user.
-   * @return A User object containg data that represents the user and their preferences.
+   * @return A User object containg data that represents the user and their favorite sdks.
    */
   public User getUser(String id);
 
@@ -24,10 +25,9 @@ public interface UserDao {
   public void addUser(User user);
 
   /**
-   * Updates the user's settings and registers the change in the data source.
+   * Registers the changes in the User object to the database.
    *
-   * @param user The user object that contains the new settings.
-   * @return Whether or not the transaction was successful.
+   * @param user The user being updated in the data source.
    */
-  public boolean updateUserSettings(User user);
+  public void updateUser(User user);
 }
