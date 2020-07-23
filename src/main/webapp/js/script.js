@@ -100,7 +100,7 @@ $(document).ready(function(){
                     // Regular Expression to format the semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
-                        message: 'The current version can only consist of a symantic version'
+                        message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
                     }
                 }  
             },
@@ -115,7 +115,7 @@ $(document).ready(function(){
                     // Regular Expression to format the semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
-                        message: 'The current version can only consist of a symantic version'
+                        message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
                     }
                 }  
             },
