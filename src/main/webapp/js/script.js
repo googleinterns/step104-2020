@@ -88,7 +88,7 @@ $(document).ready(function(){
                 validating: 'glyphicon glyphicon-refresh'
             },
 
-        // Validation of fields form
+        // Validation of fields on the Enrollment wizard form
         fields: {
             currentVersion: {
               message: 'The username is not valid',
