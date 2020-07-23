@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * An interface for retrieving and manipulating data about Users.
  */
-public interface UserDao {
+ public interface UserDao {
 
   /** 
    * Retrieves a User object from a data source.
@@ -15,7 +15,8 @@ public interface UserDao {
    * @param id The unique id that identifies the user.
    * @return A User object containg data that represents the user and their favorite sdks.
    */
-  
+  public User getUser(String id);
+
   /**
    * Adds a User to the data source.
    *
@@ -26,10 +27,10 @@ public interface UserDao {
   /**
    * Registers the changes in the User object to the database.
    *
-   * @param user The user being update in the data source.
+   * @param user The user being updated in the data source.
    */
   public void updateUser(User user);
-
-
   
 }
+ 
+
