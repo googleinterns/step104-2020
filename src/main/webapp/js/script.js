@@ -88,7 +88,7 @@ $(document).ready(function(){
                 validating: 'glyphicon glyphicon-refresh'
             },
 
-        // Validation of fields form
+        // Validation of fields on the Enrollment wizard form
         fields: {
             currentVersion: {
               message: 'The username is not valid',
@@ -96,15 +96,11 @@ $(document).ready(function(){
                     notEmpty: {
                         message: 'The current version is required and cannot be empty'
                     },
-                    stringLength: {
-                        min: 6,
-                        max: 6,
-                        message: 'The current version must be 6 characters long'
-                    },
-                    //Regular Expression to format the semantic version
+                 
+                    // Regular Expression to format the semantic version
                     regexp: {
-                        regexp: /^(\d+\.)?(\d\.)?(\*|\d)$/,
-                        message: 'The current version can only consist of a symantic version'
+                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
+                        message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
                     }
                 }  
             },
@@ -115,15 +111,11 @@ $(document).ready(function(){
                     notEmpty: {
                         message: 'The current version is required and cannot be empty'
                     },
-                    stringLength: {
-                        min: 6,
-                        max: 6,
-                        message: 'The current version must be 6 characters long'
-                    },
-                    //Regular Expression to format the semantic version
+                   
+                    // Regular Expression to format the semantic version
                     regexp: {
-                        regexp: /^(\d+\.)?(\d\.)?(\*|\d)$/,
-                        message: 'The current version can only consist of a symantic version'
+                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
+                        message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
                     }
                 }  
             },
