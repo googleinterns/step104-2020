@@ -30,13 +30,14 @@ public class PlatformResource {
   @GET
   public Response getPlatforms() {
     // TODO: implement this method
+
+      Date date = new Date();
       HashMap<String, String> platforms = new HashMap<String, String>();
       platforms.put("android", "ANDROID");
       platforms.put("ios", "iOS");
       platforms.put("web", "WEB");
       platforms.put("games", "GAMES");
       return ResponseHandler.createJsonResponse(Status.OK, platforms);
-
   }
 
   /**
@@ -55,7 +56,7 @@ public class PlatformResource {
 
   /**
    * Method handling HTTP GET requests.
-   * Exposed at "v1/platforms/{plstform}/sdks", this endpoint returns
+   * Exposed at "v1/platforms/{platform}/sdks", this endpoint returns
    * an SDKResource object which handles the functionality of all endpoints
    * starting with the endpoint path.
    *
