@@ -97,7 +97,7 @@ $(document).ready(function(){
                         message: 'The current version is required and cannot be empty'
                     },
                  
-                    //Regular Expression to format the semantic version
+                    // Regular Expression to format the semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
                         message: 'The current version can only consist of a symantic version'
@@ -112,7 +112,7 @@ $(document).ready(function(){
                         message: 'The current version is required and cannot be empty'
                     },
                    
-                    //Regular Expression to format the semantic version
+                    // Regular Expression to format the semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
                         message: 'The current version can only consist of a symantic version'
