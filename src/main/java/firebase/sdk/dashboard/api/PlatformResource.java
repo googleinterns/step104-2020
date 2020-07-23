@@ -30,7 +30,6 @@ public class PlatformResource {
   @GET
   public Response getPlatforms() {
     // TODO: implement this method
-<<<<<<< HEAD
       Date date = new Date();
       HashMap<String, String> platforms = new HashMap<String, String>();
       platforms.put("android", "ANDROID");
@@ -38,14 +37,6 @@ public class PlatformResource {
       platforms.put("web", "WEB");
       platforms.put("games", "GAMES");
       return ResponseHandler.createJsonResponse(Status.OK, platforms);
-=======
-    HashMap<String, Instant> platforms = new HashMap<String, Instant>();
-    platforms.put("Android", Instant.now());
-    platforms.put("iOS", Instant.now());
-    platforms.put("Web", Instant.now());
-    platforms.put("Games", Instant.now());
-    return ResponseHandler.createJsonResponse(Status.OK, platforms);
->>>>>>> 971f8ef72eed3f217d5f966ed474905fb66b311a
   }
 
   /**
