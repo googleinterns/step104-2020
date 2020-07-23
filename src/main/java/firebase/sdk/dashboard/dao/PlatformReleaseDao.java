@@ -46,6 +46,6 @@ public interface PlatformReleaseDao {
    * @return Whether or not the release object was succesfully removed from the data
    * source.
    */
-  public void deleteRelease(Platform platform, Release releaseName);
+  public void deleteRelease(Release releaseName);
 } 
 
