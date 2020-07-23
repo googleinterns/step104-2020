@@ -100,8 +100,8 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     }
 
     // Delete release from the Datastore 
-    public void deleteRelease(Platform platform, Release release){
-        Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + platform.getLabel());
+    public void deleteRelease(Release release){
+        Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + release.platform().getLabel());
         DATASTORE.delete(releaseKey);
     }           
 }
