@@ -49,7 +49,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
         return platforms;  
     }
 
-    // Get a list releases of a platform from the Datastore
+    // Get a list of releases for a platform from the Datastore
     public List<Release> getPlatformReleases(Platform platform) {
         List<Release> releases = new ArrayList<>();
         Query query = new Query("Release");
