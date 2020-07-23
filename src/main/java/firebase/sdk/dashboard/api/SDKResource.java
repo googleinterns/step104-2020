@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import firebase.sdk.dashboard.dao.SDKDao;
+import firebase.sdk.dashboard.dao.SDKDaoDatastore;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.Platform;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
@@ -25,10 +26,11 @@ import firebase.sdk.dashboard.data.VersionMetadata;
 @Consumes(MediaType.APPLICATION_JSON)
 public class SDKResource {
 
-  private String platform;
+  private Platform platform;
+  private SDKDao sdkDao = new SDKDaoDatastore();
 
   public SDKResource(String platform) {
-    this.platform = platform;
+    this.platform = Platform.get(platform);
   }
 
   /**
@@ -41,13 +43,7 @@ public class SDKResource {
   @GET
   public Response getSDKs() {
     // TODO: implement this method
-    ArrayList<String> sdks = new ArrayList<>();
-    sdks.add("firebase-common");
-    sdks.add("firebase-common-ktx");
-    sdks.add("firebase-ml");
-    sdks.add("firebase-database");
-    sdks.add("firebase-auth");
-    sdks.add("firebase-components");
+    ArrayList<String> sdks = sdkDao.getSDKs(platform);
     return ResponseHandler.createJsonResponse(Status.OK, sdks);
   }
 
