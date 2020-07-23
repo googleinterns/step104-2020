@@ -35,7 +35,7 @@ public class UserResource {
    * Method handling HTTP GET requests. 
    * Returns a list of the names of the given users favorite sdks. 
    *
-   * @return A Response object containing an HTTP status code and a list of string
+   * @return A Response object containing an HTTP status code and a list of strings
    * in its body.
    */
   @GET
