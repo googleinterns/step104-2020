@@ -54,7 +54,7 @@ public class PlatformResource {
 
   /**
    * Method handling HTTP GET requests.
-   * Exposed at "v1/platforms/{plstform}/sdks", this endpoint returns
+   * Exposed at "v1/platforms/{platform}/sdks", this endpoint returns
    * an SDKResource object which handles the functionality of all endpoints
    * starting with the endpoint path.
    *
