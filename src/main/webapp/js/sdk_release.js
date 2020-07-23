@@ -3,6 +3,27 @@ async function getSDKRelease(platform, releaseName, libraryName) {
   const sdkReleaseMetadata = await response.json();
 
   console.log(sdkReleaseMetadata);
+  for (const [key, value] of Object.entries(sdkReleaseMetadata)) {
+    if (key === "platform" || key === "libraryName") {
+      continue;
+    } else if (key === "additionalInfo") {
+      for (const [innerKey, innerValue] of Object.entries(sdkReleaseMetadata[key])) {
+        addTextToElement(innerKey, innerValue);
+      }
+    }
+    addTextToElement(key, value);
+  }
+}
+
+function addTextToElement(elementId, text) {
+  const element = document.getElementById(elementId);
+  if (!element) {
+    // TODO: Leaving here for now because useful when debugging once full integration begins.
+    console.log(`Not adding ${elementId} and ${text} because element not defined.`);
+    return;
+  }
+  const textNode = document.createTextNode(text);
+  element.appendChild(textNode);
 }
 
 getSDKRelease("android", "M78", "firebase-common");
