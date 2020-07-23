@@ -79,8 +79,7 @@ public class ReleaseResource {
   @POST
   public Response addRelease(Release release) {
     // TODO: Implement this method.
-    String message = String.format("Added %s release to the dashboard.", "M79"/*release.releaseName*/);
-    return ResponseHandler.createJsonResponse(Status.OK, message);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
   /**
@@ -94,8 +93,7 @@ public class ReleaseResource {
   @Path("{release}")
   public Response deleteRelease(@PathParam("release") String release) {
     // TODO: Implement this method.
-    String message = String.format("Deleting %s release from %s platform", release, platform);
-    return ResponseHandler.createJsonResponse(Status.OK, message);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
   /**
@@ -121,15 +119,13 @@ public class ReleaseResource {
    * Exposed at "v1/platforms/{platform}/releases/{release}/sdks", this endpoint 
    * consumes an SDKRelease object and enrolls it in the given release.
    *
-   * @return Response object containing a status code and a message to be displayed to
-   * the client.
+   * @return Response object containing a status code.
    */
   @POST
   @Path("{release}/sdks")
   public Response enrollSDKinRelease(SDKReleaseMetadata sdk) {
     //TODO: enroll this sdk in the given release
-    String message = String.format("Enrolled %s in %s", "firebase-common", "M78"/*sdk.libraryName, sdk.release*/);
-    return ResponseHandler.createJsonResponse(Status.OK, message); 
+    return ResponseHandler.createJsonResponse(Status.OK, null); 
   }
 
   /**
@@ -163,14 +159,13 @@ public class ReleaseResource {
    * disenrolls the given sdk from the given release, if it is a part of it, and deletes the 
    * entries from the database.
    *
-   * @return Response object containing a status code and a message.
+   * @return Response object containing a status code.
    */
   @DELETE
   @Path("{release}/sdks/{sdkName}")
   public Response deleteReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
     // TODO: implement this method
-    String message = String.format("Disenrolled %s from %s release", "firebase-common", "M78");
-    return ResponseHandler.createJsonResponse(Status.OK, message);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
 }
