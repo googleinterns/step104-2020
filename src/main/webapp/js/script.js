@@ -96,7 +96,8 @@ async function getPlatforms() {
     }
 }
 
-//fetch release pages
+
+//Fetch release pages
 async function getReleases() {
    const response = await fetch('/v1/platforms/android/releases');
    const releases = await response.json();
@@ -132,7 +133,7 @@ async function getReleases() {
     }
 }
 
-//fetch release pages
+//Fetch release pages
 async function getSDKs() {
    const response = await fetch('v1/platforms/android/releases/M78/sdks');
    const sdks = await response.json();
@@ -157,11 +158,39 @@ async function getSDKs() {
 
 }
 
+// Fetch Version History
+async function getVersionHistory() {
+    const response = await fetch('v1/platforms/android/sdks/firebase-common');
+    const versionHistory = await response.json();
+    console.log(versionHistory);
+
+    const name = versionHistory["libraryName"];
+    const owner = versionHistory["owner"];
+    const externalName = versionHistory["externalName"];
+    const libraryGroup = versionHistory["libraryGroup"];
+    // TODO: Fetch for the latest version from endpoint
+    const latestVersion = "19.2.9";
+
+    createNode(name, "#sdk-name");
+    createNode("External Name: " + externalName, "#external");
+    createNode("Latest Version: " + latestVersion, "#latest-version");
+    createNode("Library Group: " + libraryGroup, "#library-group");
+    createNode(owner, "#owner");
+}
+
 function getDate(time) {
     var date = new Date(time);
     return date;
 }
 
+
+function createNode(tag, id) {
+    const tagElement = document.querySelector(id);
+    const tagText = document.createTextNode(tag);
+    tagElement.appendChild(tagText);
+}
+
 getPlatforms();
 getReleases();
 getSDKs();
+getVersionHistory();

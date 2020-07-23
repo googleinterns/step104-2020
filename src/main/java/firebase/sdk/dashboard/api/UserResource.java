@@ -66,6 +66,7 @@ public class UserResource {
    */
   @DELETE
   @Path("{uid}/sdks/{sdkName}")
+
   public Response deleteSdkFromUserFavorites(@PathParam("uid") String uid, @PathParam("sdkName") String sdkName) {
     // TODO: implement this method
     favourites.remove(sdkName);
