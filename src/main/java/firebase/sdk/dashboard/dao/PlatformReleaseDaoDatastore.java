@@ -33,6 +33,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
     public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
+    // Get a list of platforms from the datastore
     public List<Platform> getPlatforms(){
         List<Platform> platforms = new ArrayList<>();
         
@@ -48,13 +49,13 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
         return platforms;  
     }
 
+    // Get a list releases of a platform from the Datastore
     public List<Release> getPlatformReleases(Platform platform) {
         List<Release> releases = new ArrayList<>();
         Query query = new Query("Release");
     
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
-        FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
-        QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable(fetchOptions);
+        QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable();
 
         for (Entity releaseEntity : releaseQuery) {
             String name = (String) releaseEntity.getProperty("platform");
@@ -62,9 +63,9 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
             String releaseManager = (String) releaseEntity.getProperty("releaseManager");
             String releaseName = (String) releaseEntity.getProperty("releaseName");
             String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
-            Instant launchDate = (Instant) releaseEntity.getProperty("launchDate");
-            Instant launchCalDeadline = (Instant) releaseEntity.getProperty("launchCalDeadline");
-            Instant codeFreezeTime = (Instant) releaseEntity.getProperty("codeFreezeTime");
+            Instant launchDate = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchDate"));
+            Instant launchCalDeadline = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchCalDeadline"));
+            Instant codeFreezeTime = Instant.ofEpochMilli((Long) releaseEntity.getProperty("codeFreezeTime"));
            
             Release release = Release.newBuilder()
                 .platform(releasePlatform)
@@ -74,28 +75,31 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
                 .launchCalDeadline(launchCalDeadline)
                 .codeFreezeTime(codeFreezeTime)
                 .launchDate(launchDate).build();
-            if (name == platform.getLabel()){
-                 releases.add(release);
+            if (releasePlatform == platform) {
+                releases.add(release);
             } 
         }   
         return releases;
     }
 
+    // Add release to the Datastore
     public void addRelease(Platform platform, Release release){
-        Key releaseKey = KeyFactory.createKey("Release", platform.getLabel());
+        Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + platform.getLabel());
 
+        // Create a release entity
         Entity relEntity = new Entity(releaseKey);
         relEntity.setProperty("platform", platform.getLabel());
         relEntity.setProperty("releaseName", release.releaseName());
         relEntity.setProperty("releaseManager", release.releaseManager());
-        relEntity.setProperty("launchDate", release.launchDate());
+        relEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
         relEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
-        relEntity.setProperty("launchCalDeadline", release.launchCalDeadline());
-        relEntity.setProperty("codeFreezeTime", release.codeFreezeTime());
+        relEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
+        relEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
         
         DATASTORE.put(relEntity);
     }
 
+    // Delete release from the Datastore 
     public void deleteRelease(Platform platform, Release release){
         Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + platform.getLabel());
         DATASTORE.delete(releaseKey);
