@@ -58,29 +58,7 @@ public class SDKResource {
   @Path("/{sdkName}")
   public Response getSDK(@PathParam("sdkName") String sdkName) {
     //TODO: Implement this method.
-    ArrayList<VersionMetadata> versionHistory = new ArrayList<>();
-    int release = 78;
-    for (int i = 0; i < 5; i++) {
-      release -= i * 3;
-      String newVersion = String.format("%d.%d.%d", 19, 2, 9 - i);
-      VersionMetadata version = VersionMetadata.newBuilder()
-        .libraryName("firebase-common")
-        .platform(Platform.ANDROID)
-        .releaseName( "M" + Integer.toString(release))
-        .version(newVersion)
-        .launchDate(Instant.now())
-        .build();
-      versionHistory.add(version);
-    }
-    SDK sdk = SDK.newBuilder()
-      .platform(Platform.ANDROID)
-      .libraryName(sdkName)
-      .libraryGroup("firebase-common")
-      .externalName("firebase-common")
-      .owner("ashwin@")
-      .fireEscapeName("firebase-common")
-      .versionHistory(versionHistory)
-      .build();
+    SDK sdk = sdkDao.getSDK(platform, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, sdk);
   }
 }
