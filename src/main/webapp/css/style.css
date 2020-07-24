@@ -10,8 +10,8 @@
 .card {
     text-align: center;
     background-color: #2C384A !important;
-    width: 300px; 
-    height: 300px;
+    width: 350px; 
+    height: 350px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43); 
 }
 
@@ -172,8 +172,8 @@
   background: rgb(5, 27, 48);
   padding: 20px;
   padding-top: 175px; 
-  width: 500px;
-  height: 450px;  
+  width: 350px;
+  height: 350px;  
   text-align: center;
   margin-right: auto;
   margin-left: auto;
@@ -221,7 +221,7 @@
 .button {
   background-color: #039BE5 !important; /* Green */
   border: none;
-  color: black;
+  color: black !important;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -301,4 +301,8 @@ h1 {
   margin-right: auto;
   padding: 14px 40px;
   transition-duration: 0.4s;
+}
+
+.history {
+    color: black;
 }
