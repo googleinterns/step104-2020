@@ -51,8 +51,10 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
     // Get a list of releases for a platform from the Datastore
     public List<Release> getPlatformReleases(Platform platform) {
+        
+        FilterPredicate platformFilter = makePropertyFilter("platform", platform.getLabel());
         List<Release> releases = new ArrayList<>();
-        Query query = new Query("Release");
+        Query query = new Query("Release").setFilter(platformFilter);
     
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
         QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable();
@@ -75,9 +77,8 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
                 .launchCalDeadline(launchCalDeadline)
                 .codeFreezeTime(codeFreezeTime)
                 .launchDate(launchDate).build();
-            if (releasePlatform == platform) {
-                releases.add(release);
-            } 
+            
+            releases.add(release);  
         }   
         return releases;
     }
