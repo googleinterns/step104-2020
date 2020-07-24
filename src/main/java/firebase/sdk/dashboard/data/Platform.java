@@ -1,25 +1,36 @@
 package firebase.sdk.dashboard.data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Platform {
-  UNKNOWN(0),
-  ANDROID(1),
-  IOS(2),
-  WEB(3),
-  GAMES(4);
+  ANDROID("Android"),
+  IOS("iOS"),
+  WEB("Web"),
+  GAMES("Games");
 
-  private int value;
-  private static final Platform[] platformValues = Platform.values();
+  private String label;
 
-  private Platform(int value) {
-    this.value = value;
+  Platform(String enumName){
+    this.label = enumName;
   }
 
-  public int getValue() {
-    return value;
+  public String getLabel() {
+    return label;
   }
 
-  public static Platform fromInteger(int x) {
-    return platformValues[x];
+  private static final Map<String, Platform> enumMapping = new HashMap<>();
+
+  static{
+
+    for(Platform plat : Platform.values()){
+       enumMapping.put(plat.getLabel(), plat);
+    }
   }
+ 
+  public static Platform get(String enumName) {
+    return enumMapping.get(enumName);
+  }
+
 }
 
