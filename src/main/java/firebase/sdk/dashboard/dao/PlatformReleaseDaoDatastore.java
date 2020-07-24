@@ -49,7 +49,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
         return platforms;  
     }
 
-    // Get a list releases of a platform from the Datastore
+    // Get a list of releases for a platform from the Datastore
     public List<Release> getPlatformReleases(Platform platform) {
         List<Release> releases = new ArrayList<>();
         Query query = new Query("Release");
@@ -84,24 +84,24 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
     // Add release to the Datastore
     public void addRelease(Platform platform, Release release){
-        Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + platform.getLabel());
+        Key releaseKey = KeyFactory.createKey("Release", platform.getLabel() + "_" + release.releaseName());
 
         // Create a release entity
-        Entity relEntity = new Entity(releaseKey);
-        relEntity.setProperty("platform", platform.getLabel());
-        relEntity.setProperty("releaseName", release.releaseName());
-        relEntity.setProperty("releaseManager", release.releaseManager());
-        relEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
-        relEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
-        relEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
-        relEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
+        Entity releaseEntity = new Entity(releaseKey);
+        releaseEntity.setProperty("platform", platform.getLabel());
+        releaseEntity.setProperty("releaseName", release.releaseName());
+        releaseEntity.setProperty("releaseManager", release.releaseManager());
+        releaseEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
+        releaseEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
+        releaseEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
+        releaseEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
         
-        DATASTORE.put(relEntity);
+        DATASTORE.put(releaseEntity);
     }
 
-    // Delete release from the Datastore 
-    public void deleteRelease(Platform platform, Release release){
-        Key releaseKey = KeyFactory.createKey("Release", release.releaseName() + "_" + platform.getLabel());
+    // Delete a release from the Datastore 
+    public void deleteRelease(Release release){
+        Key releaseKey = KeyFactory.createKey("Release", release.platform().getLabel() + "_" + release.releaseName());
         DATASTORE.delete(releaseKey);
     }           
 }
