@@ -99,7 +99,7 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
         DATASTORE.put(releaseEntity);
     }
 
-    // Delete release from the Datastore 
+    // Delete a release from the Datastore 
     public void deleteRelease(Release release){
         Key releaseKey = KeyFactory.createKey("Release", release.platform().getLabel() + "_" + release.releaseName());
         DATASTORE.delete(releaseKey);
