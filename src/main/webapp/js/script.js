@@ -100,8 +100,8 @@ async function getPlatforms() {
 }
 
 //Fetch release pages
-async function getReleases() {
-   const response = await fetch('/v1/platforms/android/releases');
+async function getReleases(platform) {
+   const response = await fetch(`/v1/platforms/${platform}/releases`);
    const releases = await response.json();
    
     //Create text elements for each release detail
@@ -135,19 +135,19 @@ async function getReleases() {
     }
 }
 
-//Fetch release pages
-async function getSDKs() {
-   const response = await fetch('v1/platforms/android/releases/M78/sdks');
+// Fetch release pages
+async function getSDKs(platform, releaseName) {
+   const response = await fetch(`v1/platforms/${platform}/releases/${releaseName}/sdks`);
    const sdks = await response.json();
    
-   const listSDKs = sdks["M78"];
+   const listSDKs = sdks[releaseName];
 
-  //Create header for release
+  // Create header for release
    const headerElement = document.querySelector("#header");
-   const headerText = document.createTextNode("M78");
+   const headerText = document.createTextNode(releaseName);
    headerElement.appendChild(headerText);
 
-   //Creating elements for all sdks
+   // Creating elements for all sdks
    console.log(listSDKs);
    for (i = 0; i < listSDKs.length; i++) {
         let element = "sdk" + i;
@@ -161,8 +161,8 @@ async function getSDKs() {
 }
 
 // Fetch Version History
-async function getVersionHistory() {
-    const response = await fetch('v1/platforms/android/sdks/firebase-common');
+async function getVersionHistory(platform, sdkName) {
+    const response = await fetch(`v1/platforms/${platform}/sdks/{sdkName}`);
     const versionHistory = await response.json();
     console.log(versionHistory);
 
@@ -193,6 +193,6 @@ function createNode(tag, id) {
 }
 
 getPlatforms();
-getReleases();
-getSDKs();
-getVersionHistory();
+getReleases("android");
+getSDKs("android", "M78");
+getVersionHistory("android", "firebase-common");
