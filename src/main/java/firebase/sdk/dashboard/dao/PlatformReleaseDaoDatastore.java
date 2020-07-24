@@ -87,16 +87,16 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
         Key releaseKey = KeyFactory.createKey("Release", platform.getLabel() + "_" + release.releaseName());
 
         // Create a release entity
-        Entity relEntity = new Entity(releaseKey);
-        relEntity.setProperty("platform", platform.getLabel());
-        relEntity.setProperty("releaseName", release.releaseName());
-        relEntity.setProperty("releaseManager", release.releaseManager());
-        relEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
-        relEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
-        relEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
-        relEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
+        Entity releaseEntity = new Entity(releaseKey);
+        releaseEntity.setProperty("platform", platform.getLabel());
+        releaseEntity.setProperty("releaseName", release.releaseName());
+        releaseEntity.setProperty("releaseManager", release.releaseManager());
+        releaseEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
+        releaseEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
+        releaseEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
+        releaseEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
         
-        DATASTORE.put(relEntity);
+        DATASTORE.put(releaseEntity);
     }
 
     // Delete release from the Datastore 
