@@ -1,0 +1,22 @@
+
+.jumbotron {
+    text-align: center;
+    background-color:#039BE5 !important;
+}
+
+.card {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 500px; 
+    height: 500px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-size: 100px;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+.nav {
+    font-size: 30px;
+}
