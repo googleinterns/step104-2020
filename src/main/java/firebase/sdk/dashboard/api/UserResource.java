@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 /**
- * Root resource (exposed at "myresource" path)
+ * User resource (exposed at "users" path)
  */
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
@@ -24,17 +24,19 @@ public class UserResource {
 
   private ArrayList<String> favourites;
   public UserResource() {
-    favourites = new ArrayList<String>(Arrays.asList("firebase-common", "firebase-common-ktx", "firebase-installations", "firebase-installations-interop"));
+    favourites = new ArrayList<String>(Arrays.asList(
+          "firebase-common", 
+          "firebase-common-ktx", 
+          "firebase-installations", 
+          "firebase-installations-interop"));
   }
 
-  //private static final PlatformReleaseDao PRDAO = new PlatformReleaseDaoDatastore();
-//  private static final SDKDao SDAO = new SDKDao();
-
   /**
-   * Method handling HTTP GET requests. The returned object will be sent
-   * to the client as "text/plain" media type.
+   * Method handling HTTP GET requests. 
+   * Returns a list of the names of the given users favorite sdks. 
    *
-   * @return String that will be returned as a text/plain response.
+   * @return A Response object containing an HTTP status code and a list of strings
+   * in its body.
    */
   @GET
   @Path("{uid}/sdks")
@@ -44,23 +46,29 @@ public class UserResource {
   }
 
   /**
-   * Method handling HTTP GET requests. The returned object will be sent
-   * to the client as "text/plain" media type.
+   * Method handling HTTP POST requests.
+   * Adds the given sdk to the users favorites.
    *
-   * @return String that will be returned as a text/plain response.
+   * @return A Response object that contains an HTTP status code.
    */
   @POST
   @Path("{uid}/sdks")
-  public Response addSdkToUserFavorites(@PathParam("uid") String uid) {
+  public Response addSdkToUserFavorites(@PathParam("uid") String uid, String sdkKey) {
     // TODO: implement this method
-    return ResponseHandler.createJsonResponse(Status.OK, favourites);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
+  /**
+   * Method handling HTTP DELETE requests.
+   * Removes the given sdk from the users favorites.
+   *
+   * @return A Response object that contains an HTTP status code.
+   */
   @DELETE
   @Path("{uid}/sdks/{sdkName}")
-  public Response addSdkToUserFavorites(@PathParam("uid") String uid, @PathParam("sdkName") String sdkName) {
+  public Response deleteSdkFromUserFavorites(@PathParam("uid") String uid, @PathParam("sdkName") String sdkName) {
     // TODO: implement this method
     favourites.remove(sdkName);
-    return ResponseHandler.createJsonResponse(Status.OK, favourites);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 }
