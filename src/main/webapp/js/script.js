@@ -11,7 +11,6 @@ function favouriteSDK() {
   }
 }
 
-
 function loadFiveEarlierVersions() {
   console.log("Showing 5 more versions.");
   const releaseList = document.getElementById("release-history");
@@ -78,9 +77,11 @@ function showOrHideNotes(version) {
 });
 
 
+
 //Fetch data from API endpoint
  
 // Fetch for landing page
+
 let doms = ["web", "android", "games", "ios"]
 
 async function getPlatforms() {
@@ -98,7 +99,7 @@ async function getPlatforms() {
     }
 }
 
-//fetch release pages
+//Fetch release pages
 async function getReleases() {
    const response = await fetch('/v1/platforms/android/releases');
    const releases = await response.json();
@@ -110,31 +111,31 @@ async function getReleases() {
 
         const divElement = document.querySelector(element);
         
-        let name = release["releaseName"];
+        const name = release["releaseName"];
         const textNode0 = document.createTextNode(name); 
         divElement.appendChild(textNode0);
        
         divElement.appendChild(document.createElement("HR"));
 
-        let deadline = release["launchDeadline"];
-        const textNode1 = document.createTextNode("Launch Deadline: " + getDate(deadline)); 
+        const deadline = release["launchDeadline"];
+        const textNode1 = document.createTextNode("Launch Deadline: " + getDate(1595424871)); 
         divElement.appendChild(textNode1);
 
         divElement.appendChild(document.createElement("HR"));
 
-        let coldfreeze = release["codeFreezeDate"];
-        const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(coldfreeze)); 
+        const coldfreeze = release["codeFreezeDate"];
+        const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(1595424871)); 
         divElement.appendChild(textNode3);
 
         divElement.appendChild(document.createElement("HR"));
 
-        let launch = release["launchDate"];
-        const textNode4 = document.createTextNode("Launch Date: " + getDate(launch)); 
+        const launch = release["launchDate"];
+        const textNode4 = document.createTextNode("Launch Date: " + getDate(Date.now())); 
         divElement.appendChild(textNode4); 
     }
 }
 
-//fetch release pages
+//Fetch release pages
 async function getSDKs() {
    const response = await fetch('v1/platforms/android/releases/M78/sdks');
    const sdks = await response.json();
@@ -159,11 +160,39 @@ async function getSDKs() {
 
 }
 
+// Fetch Version History
+async function getVersionHistory() {
+    const response = await fetch('v1/platforms/android/sdks/firebase-common');
+    const versionHistory = await response.json();
+    console.log(versionHistory);
+
+    const name = versionHistory["libraryName"];
+    const owner = versionHistory["owner"];
+    const externalName = versionHistory["externalName"];
+    const libraryGroup = versionHistory["libraryGroup"];
+    // TODO: Fetch for the latest version from endpoint
+    const latestVersion = "19.2.9";
+
+    createNode(name, "#sdk-name");
+    createNode("External Name: " + externalName, "#external");
+    createNode("Latest Version: " + latestVersion, "#latest-version");
+    createNode("Library Group: " + libraryGroup, "#library-group");
+    createNode(owner, "#owner");
+}
+
 function getDate(time) {
     var date = new Date(time);
     return date;
 }
 
+
+function createNode(tag, id) {
+    const tagElement = document.querySelector(id);
+    const tagText = document.createTextNode(tag);
+    tagElement.appendChild(tagText);
+}
+
 getPlatforms();
 getReleases();
 getSDKs();
+getVersionHistory();
