@@ -196,6 +196,3 @@ getPlatforms();
 getReleases();
 getSDKs();
 getVersionHistory();
-
-
-
