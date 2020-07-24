@@ -162,7 +162,7 @@ async function getSDKs(platform, releaseName) {
 
 // Fetch Version History
 async function getVersionHistory(platform, sdkName) {
-    const response = await fetch(`v1/platforms/${platform}/sdks/{sdkName}`);
+    const response = await fetch(`v1/platforms/${platform}/sdks/${sdkName}`);
     const versionHistory = await response.json();
     console.log(versionHistory);
 
