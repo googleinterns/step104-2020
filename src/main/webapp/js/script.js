@@ -123,8 +123,8 @@ async function getReleases(platform) {
 
         divElement.appendChild(document.createElement("HR"));
 
-        const coldfreeze = release["codeFreezeDate"];
-        const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(1595424871)); 
+        const codefreeze = release["codeFreezeDate"];
+        const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(1595424871)); 
         divElement.appendChild(textNode3);
 
         divElement.appendChild(document.createElement("HR"));
