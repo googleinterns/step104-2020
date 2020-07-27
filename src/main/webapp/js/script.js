@@ -76,9 +76,7 @@ function showOrHideNotes(version) {
     $('div.setup-panel div a.btn-success').trigger('click');
 });
 
-
-
-//Fetch data from API endpoint
+// Fetch data from API endpoint
  
 // Fetch for landing page
 
@@ -99,12 +97,12 @@ async function getPlatforms() {
     }
 }
 
-//Fetch release pages
+// Fetch release pages
 async function getReleases(platform) {
    const response = await fetch(`/v1/platforms/${platform}/releases`);
    const releases = await response.json();
    
-    //Create text elements for each release detail
+    // Create text elements for each release detail
     for (i = 0; i < releases.length; i++) {
         let element = "#release-" + i;
         let release = releases[i];
