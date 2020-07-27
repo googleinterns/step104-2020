@@ -45,23 +45,14 @@ public class SDKDaoDatastore implements SDKDao {
       return null;
     }
 
-    Platform sdkPlatform = Platform.get((String) entity.getProperty("platform"));
-    String sdkLibraryName = (String) entity.getProperty("libraryName");
-    String sdkLibraryGroup = (String) entity.getProperty("libraryGroup");
-    String sdkExternalName = (String) entity.getProperty("externalName");
-    String sdkFireEscapeName = (String) entity.getProperty("fireEscapeName");
-    String sdkOwner = (String) entity.getProperty("owner");
-    List<VersionMetadata> sdkVersionHistory = getVersionHistoryFromProperty(
-        (List<EmbeddedEntity>) entity.getProperty("versionHistory"));
-
     SDK sdk = SDK.newBuilder()
-      .platform(sdkPlatform)
-      .libraryName(sdkLibraryName)
-      .libraryGroup(sdkLibraryGroup)
-      .externalName(sdkExternalName)
-      .fireEscapeName(sdkFireEscapeName)
-      .owner(sdkOwner)
-      .versionHistory(sdkVersionHistory)
+      .platform(Platform.get((String) entity.getProperty("platform")))
+      .libraryName((String) entity.getProperty("libraryName"))
+      .libraryGroup((String) entity.getProperty("libraryGroup"))
+      .externalName((String) entity.getProperty("externalName"))
+      .fireEscapeName((String) entity.getProperty("fireEscapeName"))
+      .owner((String) entity.getProperty("owner"))
+      .versionHistory(getVersionHistoryFromProperty((List<EmbeddedEntity>) entity.getProperty("versionHistory")))
       .build();
 
     return sdk;
@@ -126,21 +117,13 @@ public class SDKDaoDatastore implements SDKDao {
       return null;
     }
 
-    Platform srmPlatform = Platform.get((String) entity.getProperty("platform"));
-    String srmLibraryName = (String) entity.getProperty("libraryName");
-    String srmReleaseName = (String) entity.getProperty("releaseName");
-    String srmReleaseVersion = (String) entity.getProperty("releaseVersion");
-    String srmOldVersion = (String) entity.getProperty("oldVersion");
-    HashMap<String, String> srmAdditionalInfo = getAdditionalInfoFromProperty(
-        (EmbeddedEntity) entity.getProperty("additionalInfo"));
-
     SDKReleaseMetadata sdkReleaseMetadata = SDKReleaseMetadata.newBuilder()
-      .platform(srmPlatform)
-      .libraryName(srmLibraryName)
-      .releaseName(srmReleaseName)
-      .releaseVersion(srmReleaseVersion)
-      .oldVersion(srmOldVersion)
-      .additionalInfo(srmAdditionalInfo)
+      .platform(Platform.get((String) entity.getProperty("platform")))
+      .libraryName((String) entity.getProperty("libraryName"))
+      .releaseName((String) entity.getProperty("releaseName"))
+      .releaseVersion((String) entity.getProperty("releaseVersion"))
+      .oldVersion((String) entity.getProperty("oldVersion"))
+      .additionalInfo(getAdditionalInfoFromProperty((EmbeddedEntity) entity.getProperty("additionalInfo")))
       .build();
 
     return sdkReleaseMetadata;
@@ -291,18 +274,12 @@ public class SDKDaoDatastore implements SDKDao {
 
     ArrayList<VersionMetadata> versionHistory = new ArrayList<>();
     for (EmbeddedEntity entity : property) {
-      Platform platform = Platform.get((String) entity.getProperty("platform"));
-      String libraryName = (String) entity.getProperty("libraryName");
-      String releaseName = (String) entity.getProperty("releaseName");
-      String version = (String) entity.getProperty("version");
-      Instant launchDate = Instant.ofEpochMilli((long) entity.getProperty("launchDate"));
-
       VersionMetadata versionMetadata = VersionMetadata.newBuilder()
-        .platform(platform)
-        .libraryName(libraryName)
-        .releaseName(releaseName)
-        .version(version)
-        .launchDate(launchDate)
+        .platform(Platform.get((String) entity.getProperty("platform")))
+        .libraryName((String) entity.getProperty("libraryName"))
+        .releaseName((String) entity.getProperty("releaseName"))
+        .version((String) entity.getProperty("version"))
+        .launchDate(Instant.ofEpochMilli((long) entity.getProperty("launchDate")))
         .build();
 
       versionHistory.add(versionMetadata);
