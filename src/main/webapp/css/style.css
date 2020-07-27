@@ -4,7 +4,7 @@
 
 .jumbotron {
     text-align: center;
-    background-color:#039BE5 !important;
+    background-color: #039BE5 !important;
 }
 
 .card {
@@ -12,12 +12,12 @@
     background-color: #2C384A !important;
     width: 350px; 
     height: 350px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43); 
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43);  
 }
 
 .sdk {
     text-align: center;
-    background-color:#2C384A !important;
+    background-color: #2C384A !important;
     width: 500px; 
     height: 50px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
@@ -42,7 +42,7 @@
 }
 
  .card-header {
-    font-size:30px;
+    font-size: 30px;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -60,12 +60,12 @@
 @import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
 
  body {
-    margin-top:30px;
+    margin-top: 30px;
 }
 
 .stepwizard-step p {
     margin-top: 0px;
-    color:#666;
+    color: #666;
 }
 
 .stepwizard-row {
@@ -85,7 +85,7 @@
 
 .stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
     opacity:1 !important;
-    color:#bbb;
+    color: #bbb;
 }
 
 .stepwizard-row:before {
@@ -139,7 +139,7 @@
   float: right;
   color: white;
   border-radius: 25px;
-  background: rgb(5, 27, 48);
+  background: #2C384A;
   padding: 20px;
   padding-top: 175px; 
   width: 350px;
@@ -275,4 +275,10 @@ h1 {
 
 .history {
     color: black;
+}
+
+.enroll {
+    position: relative;
+    justify-content: center;
+}
 

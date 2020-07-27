@@ -26,7 +26,7 @@ function loadFiveEarlierVersions() {
 
 function showOrHideNotes(version) {
   console.log("Showing or hiding the notes of " + version);
-  const versionNotes = document.getElementById(version).firstElementChild
+  const versionNotes = document.getElementById(version).firstElementChild;
   if (versionNotes.style.display === "none") {
     versionNotes.style.display = "block";
   } else {
@@ -34,92 +34,204 @@ function showOrHideNotes(version) {
   }
 }
 
- $(document).ready(function () {
-    var navListItems = $('div.setup-panel div a'),
-        allWells = $('.setup-content'),
-        allNextBtn = $('.nextBtn');
+$(document).ready(function () {
+  var navListItems = $('div.setup-panel div a'),
+    allWells = $('.setup-content'),
+    allNextBtn = $('.nextBtn');
 
-    allWells.hide();
+  allWells.hide();
 
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-            $item = $(this);
+  navListItems.click(function (e) {
+    e.preventDefault();
+    var $target = $($(this).attr('href')),
+      $item = $(this);
 
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-success').addClass('btn-default');
-            $item.addClass('btn-success');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-        }
-    });
+    if (!$item.hasClass('disabled')) {
+      navListItems.removeClass('btn-success').addClass('btn-default');
+      $item.addClass('btn-success');
+      allWells.hide();
+      $target.show();
+      $target.find('input:eq(0)').focus();
+    }
+  });
 
-    allNextBtn.click(function () {
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
+  allNextBtn.click(function () {
+    var curStep = $(this).closest(".setup-content"),
+      curStepBtn = curStep.attr("id"),
+      nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+      curInputs = curStep.find("input[type='text'],input[type='url']"),
+      isValid = true;
 
-        $(".form-group").removeClass("has-error");
-        for (var i = 0; i < curInputs.length; i++) {
-            if (!curInputs[i].validity.valid) {
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
+    $(".form-group").removeClass("has-error");
+    for (var i = 0; i < curInputs.length; i++) {
+      if (!curInputs[i].validity.valid) {
+        isValid = false;
+        $(curInputs[i]).closest(".form-group").addClass("has-error");
+      }
+    }
 
-        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
-    });
+    if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
+  });
 
-    $('div.setup-panel div a.btn-success').trigger('click');
+  $('div.setup-panel div a.btn-success').trigger('click');
 });
+
+// Fetch data from API endpoint
+
+let doms = ["web", "android", "games", "ios"]
+
+async function getPlatforms() {
+  const response = await fetch('/v1/platforms');
+  const platforms = await response.json();
+
+  count = 0;
+  for (let plat in platforms){
+    if (plat == doms[count]){
+      const divElement = document.getElementById(plat); 
+      const textNode = document.createTextNode(platforms[plat]); 
+      divElement.appendChild(textNode);
+    }
+    count+=1;
+  }
+}
+
+async function getReleases(platform) {
+  const response = await fetch(`/v1/platforms/${platform}/releases`);
+  const releases = await response.json();
+
+  // Create text elements for each release detail
+  for (i = 0; i < releases.length; i++) {
+    let element = "#release-" + i;
+    let release = releases[i];
+
+    const divElement = document.querySelector(element);
+
+    const name = release["releaseName"];
+    const textNode0 = document.createTextNode(name); 
+    divElement.appendChild(textNode0);
+
+    divElement.appendChild(document.createElement("HR"));
+
+    const deadline = release["launchDeadline"];
+    const textNode1 = document.createTextNode("Launch Deadline: " + getDate(1595424871)); 
+    divElement.appendChild(textNode1);
+
+    divElement.appendChild(document.createElement("HR"));
+
+    const codefreeze = release["codeFreezeDate"];
+    const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(1595424871)); 
+    divElement.appendChild(textNode3);
+
+    divElement.appendChild(document.createElement("HR"));
+
+    const launch = release["launchDate"];
+    const textNode4 = document.createTextNode("Launch Date: " + getDate(Date.now())); 
+    divElement.appendChild(textNode4); 
+  }
+}
+
+async function getReleaseSDKs(platform, releaseName) {
+  const response = await fetch(`v1/platforms/${platform}/releases/${releaseName}/sdks`);
+  const sdks = await response.json();
+
+  const listSDKs = sdks[releaseName];
+
+  // Create header for release
+  const headerElement = document.querySelector("#header");
+  const headerText = document.createTextNode(releaseName);
+  headerElement.appendChild(headerText);
+
+  // Creating elements for all sdks
+  console.log(listSDKs);
+  for (i = 0; i < listSDKs.length; i++) {
+    let element = "sdk" + i;
+    console.log(element);
+    console.log(listSDKs[i]);
+    const divElement = document.getElementById(element);
+    const textNode = document.createTextNode(listSDKs[i]); 
+    divElement.appendChild(textNode);
+  }
+}
+
+async function getVersionHistory(platform, sdkName) {
+  const response = await fetch(`v1/platforms/${platform}/sdks/${sdkName}`);
+  const versionHistory = await response.json();
+  console.log(versionHistory);
+
+  const name = versionHistory["libraryName"];
+  const owner = versionHistory["owner"];
+  const externalName = versionHistory["externalName"];
+  const libraryGroup = versionHistory["libraryGroup"];
+  // TODO: Fetch for the latest version from endpoint
+  const latestVersion = "19.2.9";
+
+  createNode(name, "#sdk-name");
+  createNode("External Name: " + externalName, "#external");
+  createNode("Latest Version: " + latestVersion, "#latest-version");
+  createNode("Library Group: " + libraryGroup, "#library-group");
+  createNode(owner, "#owner");
+}
+
+function getDate(time) {
+  var date = new Date(time);
+  return date;
+}
+
+function createNode(tag, id) {
+  const tagElement = document.querySelector(id);
+  const tagText = document.createTextNode(tag);
+  tagElement.appendChild(tagText);
+}
+
+getPlatforms();
+getReleases("android");
+getReleaseSDKs("android", "M78");
+getVersionHistory("android", "firebase-common");
 
 // Enroll Form Validation using bootstrapValidator Framework
 
 $(document).ready(function(){
-    $(".enrollForm").bootstrapValidator({
+  $(".enrollForm").bootstrapValidator({
 
-        message: "This value is not valid",
-        feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
+    message: "This value is not valid",
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
 
-        // Validation of fields on the Enrollment wizard form
-        fields: {
-            currentVersion: {
-              message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'The current version is required and cannot be empty'
-                    },
-                 
-                    // Regular Expression to check the format of semantic version
-                    regexp: {
-                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
-                        message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
-                    }
-                }  
-            },
+    // Validation of fields on the Enrollment wizard form
+    fields: {
+      currentVersion: {
+        message: 'The username is not valid',
+        validators: {
+          notEmpty: {
+            message: 'The current version is required and cannot be empty'
+          },
 
-            newReleaseVersion: {
-              message: 'The username is not valid',
-                validators: {
-                    notEmpty: {
-                        message: 'The current version is required and cannot be empty'
-                    },
-                   
-                    // Regular Expression to check the format of semantic version
-                    regexp: {
-                        regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
-                        message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
-                    }
-                }  
-            },
-        }
-    });
+          // Regular Expression to check the format of semantic version
+          regexp: {
+            regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
+            message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
+          }
+        }  
+      },
 
+      newReleaseVersion: {
+        message: 'The username is not valid',
+        validators: {
+          notEmpty: {
+            message: 'The current version is required and cannot be empty'
+          },
+
+          // Regular Expression to check the format of semantic version
+          regexp: {
+            regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
+            message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
+          }
+        }  
+      },
+    }
+  });
 });
+
