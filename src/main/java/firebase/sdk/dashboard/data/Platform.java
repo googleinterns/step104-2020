@@ -5,8 +5,6 @@ import java.util.Map;
 
 public enum Platform {
   
-  private static final Map<String, Platform> enumMapping = new HashMap<>();
-  
   ANDROID("Android"),
   IOS("iOS"),
   WEB("Web"),
@@ -22,7 +20,9 @@ public enum Platform {
     return label;
   }
   
-  static{
+  private static final Map<String, Platform> enumMapping = new HashMap<>();
+
+  static {
     // Maps string labels to the enum names
     for(Platform plat : Platform.values()){
        enumMapping.put(plat.getLabel(), plat);
