@@ -31,79 +31,79 @@ import com.google.appengine.api.datastore.QueryResultIterable;
  */
 public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
-    public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
+  public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
-    // Get a list of platforms from the datastore
-    public List<Platform> getPlatforms(){
-        List<Platform> platforms = new ArrayList<>();
-        
-        Query query = new Query("Platform");
-        PreparedQuery results = DATASTORE.prepare(query);
-        QueryResultIterable<Entity> entities = results.asQueryResultIterable();
+  // Get a list of platforms from the datastore
+  public List<Platform> getPlatforms(){
+    List<Platform> platforms = new ArrayList<>();
 
-        for (Entity result : entities) {
-            String name = (String) result.getProperty("name");
-            Platform platform = Platform.get(name);
-            platforms.add(platform);
-        }
-        return platforms;  
+    Query query = new Query("Platform");
+    PreparedQuery results = DATASTORE.prepare(query);
+    QueryResultIterable<Entity> entities = results.asQueryResultIterable();
+
+    for (Entity result : entities) {
+      String name = (String) result.getProperty("name");
+      Platform platform = Platform.get(name);
+      platforms.add(platform);
     }
+    return platforms;  
+  }
 
-    // Get a list of releases for a platform from the Datastore
-    public List<Release> getPlatformReleases(Platform platform) {
-        
-        FilterPredicate platformFilter = makePropertyFilter("platform", platform.getLabel());
-        List<Release> releases = new ArrayList<>();
-        Query query = new Query("Release").setFilter(platformFilter);
-    
-        PreparedQuery preparedQuery = DATASTORE.prepare(query);
-        QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable();
+  // Get a list of releases for a platform from the Datastore
+  public List<Release> getPlatformReleases(Platform platform) {
+    FilterPredicate platformFilter =
+      new FilterPredicate("platform", FilterOperator.EQUAL, platform.getLabel());
+    List<Release> releases = new ArrayList<>();
+    Query query = new Query("Release").setFilter(platformFilter);
 
-        for (Entity releaseEntity : releaseQuery) {
-            String name = (String) releaseEntity.getProperty("platform");
-            Platform releasePlatform = Platform.get(name);
-            String releaseManager = (String) releaseEntity.getProperty("releaseManager");
-            String releaseName = (String) releaseEntity.getProperty("releaseName");
-            String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
-            Instant launchDate = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchDate"));
-            Instant launchCalDeadline = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchCalDeadline"));
-            Instant codeFreezeTime = Instant.ofEpochMilli((Long) releaseEntity.getProperty("codeFreezeTime"));
-           
-            Release release = Release.newBuilder()
-                .platform(releasePlatform)
-                .releaseName(releaseName)
-                .releaseManager(releaseManager)
-                .buganizerHotlistLink(buganizerHotlistLink)
-                .launchCalDeadline(launchCalDeadline)
-                .codeFreezeTime(codeFreezeTime)
-                .launchDate(launchDate).build();
-            
-            releases.add(release);  
-        }   
-        return releases;
-    }
+    PreparedQuery preparedQuery = DATASTORE.prepare(query);
+    QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable();
 
-    // Add release to the Datastore
-    public void addRelease(Platform platform, Release release){
-        Key releaseKey = KeyFactory.createKey("Release", platform.getLabel() + "_" + release.releaseName());
+    for (Entity releaseEntity : releaseQuery) {
+      String name = (String) releaseEntity.getProperty("platform");
+      Platform releasePlatform = Platform.get(name);
+      String releaseManager = (String) releaseEntity.getProperty("releaseManager");
+      String releaseName = (String) releaseEntity.getProperty("releaseName");
+      String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
+      Instant launchDate = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchDate"));
+      Instant launchCalDeadline = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchCalDeadline"));
+      Instant codeFreezeTime = Instant.ofEpochMilli((Long) releaseEntity.getProperty("codeFreezeTime"));
 
-        // Create a release entity
-        Entity releaseEntity = new Entity(releaseKey);
-        releaseEntity.setProperty("platform", platform.getLabel());
-        releaseEntity.setProperty("releaseName", release.releaseName());
-        releaseEntity.setProperty("releaseManager", release.releaseManager());
-        releaseEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
-        releaseEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
-        releaseEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
-        releaseEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
-        
-        DATASTORE.put(releaseEntity);
-    }
+      Release release = Release.newBuilder()
+        .platform(releasePlatform)
+        .releaseName(releaseName)
+        .releaseManager(releaseManager)
+        .buganizerHotlistLink(buganizerHotlistLink)
+        .launchCalDeadline(launchCalDeadline)
+        .codeFreezeTime(codeFreezeTime)
+        .launchDate(launchDate).build();
 
-    // Delete a release from the Datastore 
-    public void deleteRelease(Release release){
-        Key releaseKey = KeyFactory.createKey("Release", release.platform().getLabel() + "_" + release.releaseName());
-        DATASTORE.delete(releaseKey);
-    }           
+      releases.add(release);  
+    }   
+    return releases;
+  }
+
+  // Add release to the Datastore
+  public void addRelease(Platform platform, Release release){
+    Key releaseKey = KeyFactory.createKey("Release", platform.getLabel() + "_" + release.releaseName());
+
+    // Create a release entity
+    Entity releaseEntity = new Entity(releaseKey);
+    releaseEntity.setProperty("platform", platform.getLabel());
+    releaseEntity.setProperty("releaseName", release.releaseName());
+    releaseEntity.setProperty("releaseManager", release.releaseManager());
+    releaseEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
+    releaseEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
+    releaseEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
+    releaseEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
+
+    DATASTORE.put(releaseEntity);
+  }
+
+  // Delete a release from the Datastore 
+  public void deleteRelease(Release release){
+    Key releaseKey = KeyFactory.createKey("Release", release.platform().getLabel() + "_" + release.releaseName());
+    DATASTORE.delete(releaseKey);
+  }           
 }
 
