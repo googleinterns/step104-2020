@@ -55,7 +55,7 @@ public class UserDaoDatastore implements UserDao {
         Entity userEntity = new Entity(userKey);
         userEntity.setProperty("id",user.uid());
         userEntity.setProperty("email",user.email());
-        userEntity.setProptery("favoriteSDKs",user.favoriteSDKs);
+        userEntity.setProperty("favoriteSDKs",user.favoriteSDKs);
 
         DATASTORE.put(userEntity);
     }
@@ -64,8 +64,15 @@ public class UserDaoDatastore implements UserDao {
     public void updateUser(User user){
          User outdated = getUser(user.uid());
          outdated.favoriteSDKs() = user.favoriteSDKs();
+         addUser(User outdated);
 
     }
+
+    private FilterPredicate makePropertyFilter(String property, Object value) {
+    FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
+
+    return propertyFilter;
+  }
     
 
 
