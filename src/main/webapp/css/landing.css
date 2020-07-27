@@ -17,6 +17,12 @@
     margin-bottom: 10px;
 }
 
-.nav {
+.user-favorite {
     font-size: 30px;
+}  
+
+.dashboard {
+    text-align: center;
+    font-size: 80px;
 }
+
