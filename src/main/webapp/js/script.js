@@ -133,8 +133,8 @@ async function getReleases(platform) {
     }
 }
 
-// Fetch release pages
-async function getSDKs(platform, releaseName) {
+// Fetch release sdks
+async function getReleaseSDKs(platform, releaseName) {
    const response = await fetch(`v1/platforms/${platform}/releases/${releaseName}/sdks`);
    const sdks = await response.json();
    
@@ -192,5 +192,5 @@ function createNode(tag, id) {
 
 getPlatforms();
 getReleases("android");
-getSDKs("android", "M78");
+getReleaseSDKs("android", "M78");
 getVersionHistory("android", "firebase-common");
