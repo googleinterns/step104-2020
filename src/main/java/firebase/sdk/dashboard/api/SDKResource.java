@@ -51,6 +51,7 @@ public class SDKResource {
       sdks.add("firebase-messaging");
       
       return ResponseHandler.createJsonResponse(Status.OK, sdks);
+    }
     /*} catch (Exception e) {
       return e.toString();
     }*/

@@ -180,11 +180,27 @@ async function getVersionHistory(platform, sdkName) {
     createNode(owner, "#owner");
 }
 
+// Fetch favorite SDKS
+
+function getFavoriteSdks() {
+    //const response = await fetch(`v1/users/${userID}/sdks`);
+    //const favorites = await response.json();
+
+     // Build the list of favorite sdks
+    const favorites = ["firebase-common", "tagmanager", "machine-learnigng"]
+    const favoriteSDK = document.getElementById('favorites');  
+        for (i = 0; i < favorites.length; i++) {
+            favoriteSDK.appendChild(
+                createListElement(favorites[i]));
+        }
+}
+
+
+
 function getDate(time) {
     var date = new Date(time);
     return date;
 }
-
 
 function createNode(tag, id) {
     const tagElement = document.querySelector(id);
@@ -196,3 +212,4 @@ getPlatforms();
 getReleases("android");
 getSDKs("android", "M78");
 getVersionHistory("android", "firebase-common");
+getFavoriteSdks();
