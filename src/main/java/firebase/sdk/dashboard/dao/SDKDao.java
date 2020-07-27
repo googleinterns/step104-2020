@@ -13,17 +13,16 @@ import java.util.List;
 public interface SDKDao {
 
   /**
-   * Retrieves the SDK object from a datasource.
+   * Retrieves the SDK object from a data source.
    *
    * @param platform The sdk's operating platform (ie Android, iOS, etc,).
    * @param libraryName The sdk's name.
-   * @return An SDK object containg all the information about the SDK from the 
-   * data source.
+   * @return An SDK object containg all the information about the SDK.
    */
   public SDK getSDK(Platform platform, String libraryName);
 
   /**
-   * Retrieves the names of all SDK objects in the given platform from a datasource.
+   * Retrieves the names of all SDKs that are available for the given platform.
    *
    * @param platform The sdks' operating platform (ie Android, iOS, etc,).
    * @return A list of the names of all the sdks for the given platform.
@@ -41,14 +40,13 @@ public interface SDKDao {
   public List<String> getSDKsEnrolledInRelease(Platform platform, String releaseName);
 
   /**
-   * Retrieves the SDKRelease object from a datasource.
+   * Retrieves the SDKRelease object from a data source.
    *
    * @param platform The SDKRelease object's operating platform (ie Android, iOS, etc,).
    * @param releaseName The name of the release the SDKRelease object is enrolled 
    * in (ie M74, M75_hotfix, etc,).
    * @param libraryName The sdk's name.
-   * @return An SDKReleaseMetadata object containing all the information about the SDKRelease from
-   * the data source.
+   * @return An SDKReleaseMetadata object containing all the information about the SDKRelease.
    */
   public SDKReleaseMetadata getSDKReleaseMetadata(Platform platform, String releaseName, String libraryName);
 
@@ -67,32 +65,30 @@ public interface SDKDao {
   public void deleteSDK(SDK sdk);
 
   /**
-   * Adds the SDKReleaseMetadata object to the datasource.
+   * Adds the SDKReleaseMetadata object to the data source.
    *
    * @param sdkRelease The SDKReleaseMetadata object that is being added.
    */
   public void addSDKRelease(SDKReleaseMetadata sdkRelease);
 
   /**
-   * Deletes the SDKReleaseMetadata object from the datasource.
+   * Deletes the SDKReleaseMetadata object from the data source.
    *
-   * @param sdkRelease The SDKReleaseMetadata object that is being deleted from the 
-   * data source.
+   * @param sdkRelease The SDKReleaseMetadata object that is being deleted.
    */
   public void deleteSDKRelease(SDKReleaseMetadata sdkRelease);
 
   /**
-   * Adds the VersionMetadata object to the datasource.
+   * Adds the VersionMetadata object to the data source.
    *
    * @param sdkVersion The VersionMetadata object that is being added.
    */
   public void addSDKVersion(VersionMetadata sdkVersion);
 
   /**
-   * Deletes the VersionMetadata object from the datasource.
+   * Deletes the VersionMetadata object from the data source.
    *
-   * @param sdkVersion The VersionMetadata object that is being deleted from the 
-   * data source.
+   * @param sdkVersion The VersionMetadata object that is being deleted.
    */
   public void deleteSDKVersion(VersionMetadata sdkVersion);
 
@@ -102,6 +98,6 @@ public interface SDKDao {
    *
    * @param sdkRelease The SDKRelease after the changes were made.
    */
-  /* TODO: P2 functionality
-  public void updateSDKEnrolledInRelease(SDKReleaseMetadata sdkRelease);*/
+  // TODO: P2 functionality
+  public void updateSDKEnrolledInRelease(SDKReleaseMetadata sdkRelease);
 }
