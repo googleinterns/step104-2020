@@ -65,7 +65,6 @@ public class SDKResource {
   @GET
   @Path("/{sdkName}")
   public Response getSDK(@PathParam("sdkName") String sdkName) {
-    //TODO: Implement this method.
     ArrayList<VersionMetadata> versionHistory = new ArrayList<>();
     int release = 78;
     for (int i = 0; i < 17; i++) {
