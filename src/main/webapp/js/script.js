@@ -97,7 +97,7 @@ $(document).ready(function(){
                         message: 'The current version is required and cannot be empty'
                     },
                  
-                    // Regular Expression to format the semantic version
+                    // Regular Expression to check the format of semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
                         message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
@@ -105,14 +105,14 @@ $(document).ready(function(){
                 }  
             },
 
-            versionReleased: {
+            newReleaseVersion: {
               message: 'The username is not valid',
                 validators: {
                     notEmpty: {
                         message: 'The current version is required and cannot be empty'
                     },
                    
-                    // Regular Expression to format the semantic version
+                    // Regular Expression to check the format of semantic version
                     regexp: {
                         regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
                         message: 'Incorrect format: Version should contain a major, minor and patch version numbers separated by a dot (.)'
