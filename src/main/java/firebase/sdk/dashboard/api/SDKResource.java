@@ -49,7 +49,7 @@ public class SDKResource {
     sdks.add("firebase-messaging");
 
     return ResponseHandler.createJsonResponse(Status.OK, sdks);
-    }
+  }
 
   /**
    * Method handling HTTP GET requests.
