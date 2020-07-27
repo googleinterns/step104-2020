@@ -10,8 +10,8 @@
 .card {
     text-align: center;
     background-color: #2C384A !important;
-    width: 300px; 
-    height: 300px;
+    width: 350px; 
+    height: 350px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43); 
 }
 
@@ -135,4 +135,144 @@
     font-size:15px;
 }
 
+#box {
+  float: right;
+  color: white;
+  border-radius: 25px;
+  background: rgb(5, 27, 48);
+  padding: 20px;
+  padding-top: 175px; 
+  width: 350px;
+  height: 350px;  
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#sdk {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 500px; 
+    height: 75px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: white;
+    position: relative;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.sdkleft {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 500px; 
+    height: 75px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: white;
+    position: relative;
+    padding: 20px;
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+.sdkright {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 500px; 
+    height: 75px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: white;
+    position: relative;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.button {
+  background-color: #039BE5 !important; /* Green */
+  border: none;
+  color: black !important;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  border-radius: 30px;
+  margin-left: 350px;
+  margin-right: auto;
+  padding: 14px 40px;
+  transition-duration: 0.4s;
+}
+
+.button:hover {
+  background-color: white;
+  color: black;
+  border-color:  #039BE5;
+}
+
+p {
+    font-style: italic;
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+/* Add Release */
+#sdklarge {
+    text-align: left;
+    background-color:rgb(122, 146, 182) !important;
+    width: 800px; 
+    height: 190px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: rgb(0, 0, 0);
+    position: relative;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+#sdkleft {
+    text-align: left;
+    background-color:rgb(122, 146, 182) !important;
+    width: 800px; 
+    height: 75px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: black;
+    position: relative;
+    padding: 20px;
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+#sdkright {
+    text-align: left;
+    background-color: rgb(122, 146, 182) !important;
+    width: 800px; 
+    height: 75px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: black;
+    position: relative;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.buttonlaunch {
+  background-color: #039BE5 !important; /* Green */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 24px;
+  border-radius: 30px;
+  margin-left: 1840px;
+  margin-right: auto;
+  padding: 14px 40px;
+  transition-duration: 0.4s;
+}
+
+.history {
+    color: black;
 
