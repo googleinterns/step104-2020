@@ -40,7 +40,7 @@ public class SDKResource {
    */
   @GET
   public Response getSDKs() {
-    // TODO: implement this method
+  
     //try {
       ArrayList<String> sdks = new ArrayList<>();
       sdks.add("firebase-common");
