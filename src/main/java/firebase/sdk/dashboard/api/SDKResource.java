@@ -40,16 +40,20 @@ public class SDKResource {
    */
   @GET
   public Response getSDKs() {
-    // TODO: implement this method
-    ArrayList<String> sdks = new ArrayList<>();
-    sdks.add("firebase-common");
-    sdks.add("firebase-common-ktx");
-    sdks.add("firebase-ml");
-    sdks.add("firebase-database");
-    sdks.add("firebase-auth");
-    sdks.add("firebase-components");
-    return ResponseHandler.createJsonResponse(Status.OK, sdks);
-  }
+  
+    //try {
+      ArrayList<String> sdks = new ArrayList<>();
+      sdks.add("firebase-common");
+      sdks.add("firebase-common-ktx");
+      sdks.add("firebase-ml");
+      sdks.add("firebase-database");
+      sdks.add("firebase-auth");
+      sdks.add("firebase-messaging");
+      
+      return ResponseHandler.createJsonResponse(Status.OK, sdks);
+    /*} catch (Exception e) {
+      return e.toString();
+    }*/
 
   /**
    * Method handling HTTP GET requests.
@@ -61,10 +65,9 @@ public class SDKResource {
   @GET
   @Path("/{sdkName}")
   public Response getSDK(@PathParam("sdkName") String sdkName) {
-    //TODO: Implement this method.
     ArrayList<VersionMetadata> versionHistory = new ArrayList<>();
     int release = 78;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 17; i++) {
       release -= i * 3;
       String newVersion = String.format("%d.%d.%d", 19, 2, 9 - i);
       VersionMetadata version = VersionMetadata.newBuilder()

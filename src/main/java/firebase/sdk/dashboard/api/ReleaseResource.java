@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.time.Instant;
+import java.util.Date;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.DELETE;
@@ -40,6 +41,18 @@ public class ReleaseResource {
     sdks.add("firebase-database");
     sdks.add("firebase-auth");
     sdks.add("firebase-components");
+    sdks.add("firebase-iid");
+    sdks.add("firebase-analytics");
+    sdks.add("measurement");
+    sdks.add("measurement_api");
+    sdks.add("tagmanager");
+    sdks.add("tagmanager-api");
+    sdks.add("firebase-ads");
+    sdks.add("phenotype");
+    sdks.add("functions");
+    sdks.add("transport-runtime");
+    sdks.add("crashlytics-gradle");
+    sdks.add("firebase-components"); 
   }
 
   /**
@@ -54,7 +67,9 @@ public class ReleaseResource {
     // TODO: implement this method
     List<String> releaseManagers = Arrays.asList("ashwinraghav@", "rlazo@", "davidmotson@", "vkrtachko@", "vguthal@");
     ArrayList<HashMap<String, Object>> releases = new ArrayList<HashMap<String, Object>>();
-    for (int i = 78; i > 0; i--) {
+    Date date = new Date();
+    for (int i = 78; i > 72; i--) {
+
       HashMap<String, Object> release = new HashMap<String, Object>();
       release.put("releaseName", String.format("M%d", i));
       release.put("platform", "Android");
