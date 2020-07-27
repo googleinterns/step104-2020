@@ -107,5 +107,3 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     }           
 }
 
-
-
