@@ -34,15 +34,18 @@ public class UserDaoDatastore implements UserDao {
 
     // Get a user from the datastore
     public User getUser(String id){
-        Query query = new Query("User");
-        PreparedQuery results = DATASTORE.prepare(query);
-        QueryResultIterable<Entity> users = preparedQuery.asQueryResultIterable();
+         FilterPredicate userPropertyFilter = makePropertyFilter("user", id;
+        Query query = new Query("User").setFilter(userPropertyFilter);
 
-        for (Entity user: users){
-            String iD = (String) user.getProperty("id");
-            if (iD.equals(id)){
-                return user;
-            }
+        PreparedQuery preparedQuery = DATASTORE.prepare(query);
+        FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
+        QueryResultIterable<Entity> users = preparedQuery.asQueryResultIterable();
+        if (users == null) {
+        return null;
+        }
+
+        for (Entity entity : results) {
+            return entity;
         }
     }
 
@@ -65,4 +68,9 @@ public class UserDaoDatastore implements UserDao {
          outdated.favoriteSDKs() = user.favoriteSDKs();
          addUser(User outdated);
     }
+                                                                 
+   private FilterPredicate makePropertyFilter(String property, Object value) {
+    FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
+
+    return propertyFilter;                                                              
 }
