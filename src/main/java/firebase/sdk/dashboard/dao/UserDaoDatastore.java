@@ -39,14 +39,11 @@ public class UserDaoDatastore implements UserDao {
 
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
         FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
-        QueryResultIterable<Entity> users = preparedQuery.asQueryResultIterable();
-        if (users == null) {
+        Entity user = preparedQuery.asSingleEntity();
+        if (user == null) {
         return null;
         }
-
-        for (Entity entity : results) {
-            return entity;
-        }
+        return user;
     }
 
     // Add a user to the datastore
