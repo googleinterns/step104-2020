@@ -44,7 +44,6 @@ public class UserDaoDatastore implements UserDao {
                 return user;
             }
         }
-
     }
 
     // Add a user to the datastore
@@ -66,15 +65,4 @@ public class UserDaoDatastore implements UserDao {
          outdated.favoriteSDKs() = user.favoriteSDKs();
          addUser(User outdated);
     }
-    
-
-
-
-
-
-
-
-
-
-
 }
