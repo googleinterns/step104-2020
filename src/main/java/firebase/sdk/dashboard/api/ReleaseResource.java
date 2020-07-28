@@ -129,20 +129,10 @@ public class ReleaseResource {
    * @return Response object containing a status code and an SDKReleaseMetadata object.
    */
   @GET
-  @Path("{release}/sdks/{sdkName}")
-  public Response getReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
-    // TODO: implement this method
-    String newVersion = String.format("%d.%d.%d", 19, 2, 9 );
-    String oldVersion = String.format("%d.%d.%d", 19, 2, 9 - 1);
-    SDKReleaseMetadata version = SDKReleaseMetadata.newBuilder()
-      .libraryName("firebase-common")
-      .platform(Platform.ANDROID)
-      .releaseName(release)
-      .verifier("Ashwin Ganesh")
-      .releaseVersion(newVersion)
-      .oldVersion(oldVersion)
-      .additionalInfo(new HashMap<String, String>())
-      .build();
+  @Path("{releaseName}/sdks/{sdkName}")
+  public Response getReleaseSDK(@PathParam("releaseName") String releaseName, @PathParam("sdkName") String sdkName) {
+    // TODO: Catch exceptions.
+    SDKReleaseMetadata version = SDKDAO.getSDKReleaseMetadata(platform, releaseName, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, version);
   }
   
@@ -157,7 +147,7 @@ public class ReleaseResource {
   @DELETE
   @Path("{release}/sdks/{sdkName}")
   public Response deleteReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
-    // TODO: implement this method
+    // TODO: Catch exceptions.
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
