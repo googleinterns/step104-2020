@@ -94,9 +94,10 @@ public class ReleaseResource {
    * the names of all the sdks enrolled in the given release.
    */
   @GET
-  @Path("{release}/sdks")
-  public Response getReleaseSDKs(@PathParam("release") String release) {
-    // TODO: implement this method
+  @Path("{releaseName}/sdks")
+  public Response getReleaseSDKs(@PathParam("releaseName") String releaseName) {
+    // TODO: Catch exceptions.
+    List<String> sdksEnrolledInRelease = SDKDAO.getSDKsEnrolledInRelease(platform, releaseName);
     return ResponseHandler.createJsonResponse(Status.OK, sdks);
   }
 
