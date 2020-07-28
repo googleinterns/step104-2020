@@ -64,7 +64,8 @@ public class ReleaseResource {
   // TODO: Check membership in Firebase core team for allowing only admin access.
   @POST
   public Response addRelease(Release release) {
-    // TODO: Implement this method.
+    // TODO: Catch exceptions.
+    RELEASEDAO.addRelease(platform, release);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
