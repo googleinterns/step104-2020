@@ -34,7 +34,7 @@ public class UserDaoDatastore implements UserDao {
 
     // Get a user from the datastore
     public User getUser(String id){
-         FilterPredicate userPropertyFilter = makePropertyFilter("user", id;
+         FilterPredicate userPropertyFilter = makePropertyFilter("id", id);
         Query query = new Query("User").setFilter(userPropertyFilter);
 
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
