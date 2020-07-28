@@ -98,7 +98,7 @@ public class ReleaseResource {
   public Response getReleaseSDKs(@PathParam("releaseName") String releaseName) {
     // TODO: Catch exceptions.
     List<String> sdksEnrolledInRelease = SDKDAO.getSDKsEnrolledInRelease(platform, releaseName);
-    return ResponseHandler.createJsonResponse(Status.OK, sdks);
+    return ResponseHandler.createJsonResponse(Status.OK, sdksEnrolledInRelease);
   }
 
   /**
@@ -109,9 +109,15 @@ public class ReleaseResource {
    * @return Response object containing a status code.
    */
   @POST
-  @Path("{release}/sdks")
-  public Response enrollSDKinRelease(SDKReleaseMetadata sdk) {
-    //TODO: enroll this sdk in the given release
+  @Path("{releaseName}/sdks")
+  public Response enrollSDKinRelease(@PathParam("releaseName") String releaseName, SDKReleaseMetadata sdk) {
+    // TODO: Catch exceptions.
+    // Get the release that it is a part of
+
+    // Create a versionmetadata object with the launch date from the release and the fields
+    // in the sdkreleasemetadata object
+    
+    // Add the sdkReleaseMEtadata to the database and add the verionmetadata object to the database
     return ResponseHandler.createJsonResponse(Status.OK, null); 
   }
 
