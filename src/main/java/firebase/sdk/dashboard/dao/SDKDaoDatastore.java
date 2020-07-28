@@ -61,6 +61,7 @@ public class SDKDaoDatastore implements SDKDao {
   public List<String> getSDKs(Platform platform) {
     FilterPredicate platformPropertyFilter = makePropertyFilter("platform", platform.getLabel());
     Query query = new Query("SDK")
+      .addSort("libraryName", Query.SortDirection.ASCENDING)
       .setFilter(platformPropertyFilter);
 
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
