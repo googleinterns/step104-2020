@@ -23,6 +23,9 @@ public abstract class SDKReleaseMetadata {
    
   public abstract String releaseName();
 
+  /* The email of the user that enrolled the sdk. */
+  public abstract String verifier();
+
   public abstract String releaseVersion();
 
   public abstract String oldVersion();
@@ -38,6 +41,8 @@ public abstract class SDKReleaseMetadata {
     Builder platform(Platform platform);
 
     Builder releaseName(String releaseName);
+
+    Builder verifier(String verifier);
 
     Builder releaseVersion(String releaseVersion);
 
