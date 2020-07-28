@@ -42,9 +42,25 @@ public class SDKResource {
    */
   @GET
   public Response getSDKs() {
-    // TODO: implement this method
+    //TODO: Catch exceptions.
     ArrayList<String> sdks = sdkDao.getSDKs(platform);
     return ResponseHandler.createJsonResponse(Status.OK, sdks);
+  }
+
+  /**
+   * Method handling HTTP POST requests.
+   * Exposed at "v1/platforms/{platform}/sdks", this endpoint consumes
+   * an SDK and adds it to the database. This only works for users
+   * that have admin authorization.
+   *
+   * @return Response object containing a status code representing the ouput
+   * of the action.
+   */
+  @POST
+  public Response addSDK(SDK newSdk) {
+    //TODO: Catch exceptions.
+    sdkDao.addSDK(newSdk);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
   /**
@@ -57,8 +73,24 @@ public class SDKResource {
   @GET
   @Path("/{sdkName}")
   public Response getSDK(@PathParam("sdkName") String sdkName) {
-    //TODO: Implement this method.
+    //TODO: Catch exceptions.
     SDK sdk = sdkDao.getSDK(platform, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, sdk);
+  }
+
+  /**
+   * Method handling HTTP DELETE requests.
+   * Exposed at "v1/platforms/{platform}/sdks/{sdkName}", this endpoint consumes
+   * an SDK object and then deletes it from the database if it exists. This only works for
+   * users with admin authorization.
+   *
+   * @return Response object containing a status code.
+   */
+  @DELETE
+  @Path("/{sdkName}")
+  public Response getSDK(@PathParam("sdkName") String sdkName, SDK sdk) {
+    //TODO: Catch exceptions.
+    sdkDao.deleteSDK(sdk);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 }
