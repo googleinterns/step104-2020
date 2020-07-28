@@ -20,6 +20,10 @@ import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Release;
 import firebase.sdk.dashboard.data.Platform;
+import firebase.sdk.dashboard.dao.PlatformReleaseDao;
+import firebase.sdk.dashboard.dao.PlatformReleaseDaoDatastore;
+import firebase.sdk.dashboard.dao.SDKDao;
+import firebase.sdk.dashboard.dao.SDKDaoDatastore;
 
 /**
  * Root resource (exposed at "platforms/{platform}/releases" path)
@@ -29,30 +33,11 @@ import firebase.sdk.dashboard.data.Platform;
 public class ReleaseResource {
 
   private Platform platform;
-  // TODO: Delete once actual implementation is done
-  private ArrayList<String> sdks = new ArrayList<>();
+  private static final ReleaseDao RELEASEDAO = new PlatformReleaseDaoDatastore();
+  private static final SDKDao SDKDAO = new SDKDaoDatastore();
 
   public ReleaseResource(String platform) {
     this.platform = Platform.get(platform);
-    // Dummy Code for API
-    sdks.add("firebase-common");
-    sdks.add("firebase-common-ktx");
-    sdks.add("firebase-ml");
-    sdks.add("firebase-database");
-    sdks.add("firebase-auth");
-    sdks.add("firebase-components");
-    sdks.add("firebase-iid");
-    sdks.add("firebase-analytics");
-    sdks.add("measurement");
-    sdks.add("measurement_api");
-    sdks.add("tagmanager");
-    sdks.add("tagmanager-api");
-    sdks.add("firebase-ads");
-    sdks.add("phenotype");
-    sdks.add("functions");
-    sdks.add("transport-runtime");
-    sdks.add("crashlytics-gradle");
-    sdks.add("firebase-components"); 
   }
 
   /**
