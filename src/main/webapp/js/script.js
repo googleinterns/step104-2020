@@ -78,6 +78,7 @@ $(document).ready(function () {
 
 // Fetch data from API endpoint
 
+//fetch for landing page
 let doms = ["web", "android", "games", "ios"]
 
 async function getPlatforms() {
