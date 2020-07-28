@@ -34,22 +34,21 @@ public class UserDaoDatastore implements UserDao {
 
     // Get a user from the datastore
     public User getUser(String id){
-        Query query = new Query("User");
-        PreparedQuery results = DATASTORE.prepare(query);
-        QueryResultIterable<Entity> users = preparedQuery.asQueryResultIterable();
+         FilterPredicate userPropertyFilter = makePropertyFilter("id", id);
+        Query query = new Query("User").setFilter(userPropertyFilter);
 
-        for (Entity user: users){
-            String iD = (String) user.getProperty("id");
-            if (iD.equals(id)){
-                return user;
-            }
+        PreparedQuery preparedQuery = DATASTORE.prepare(query);
+        FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
+        Entity user = preparedQuery.asSingleEntity();
+        if (user == null) {
+        return null;
         }
-
+        return user;
     }
 
     // Add a user to the datastore
     public void addUser(User user){
-       Key userKey = KeyFactory.createKey(user.uid());
+       Key userKey = KeyFactory.createKey(user);
        
         // Create a user entity
         Entity userEntity = new Entity(userKey);
@@ -64,17 +63,11 @@ public class UserDaoDatastore implements UserDao {
     public void updateUser(User user){
          User outdated = getUser(user.uid());
          outdated.favoriteSDKs() = user.favoriteSDKs();
-
+         addUser(User outdated);
     }
-    
+                                                                 
+   private FilterPredicate makePropertyFilter(String property, Object value) {
+        FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
 
-
-
-
-
-
-
-
-
-
+        return propertyFilter;                                                              
 }
