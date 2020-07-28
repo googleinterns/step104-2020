@@ -76,10 +76,12 @@ public class ReleaseResource {
    *
    * @return Response object containing a status code.
    */
+  // TODO: Check membership in Firebase core team for allowing only admin access.
   @DELETE
-  @Path("{release}")
-  public Response deleteRelease(@PathParam("release") String release) {
-    // TODO: Implement this method.
+  @Path("{releaseName}")
+  public Response deleteRelease(@PathParam("releaseName") String releaseName) {
+    // TODO: Catch exceptions.
+    RELEASEDAO.deleteRelease(platform, releaseName);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
