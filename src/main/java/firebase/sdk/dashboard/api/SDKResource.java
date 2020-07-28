@@ -1,6 +1,6 @@
 package firebase.sdk.dashboard.api;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.time.Instant;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
