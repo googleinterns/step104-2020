@@ -34,21 +34,21 @@ public class UserDaoDatastore implements UserDao {
 
     // Get a user from the datastore
     public User getUser(String id){
-         FilterPredicate userPropertyFilter = makePropertyFilter("id", id);
+        FilterPredicate userPropertyFilter = makePropertyFilter("id", id);
         Query query = new Query("User").setFilter(userPropertyFilter);
 
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
         FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
         Entity user = preparedQuery.asSingleEntity();
         if (user == null) {
-        return null;
+            return null;
         }
         return user;
     }
 
     // Add a user to the datastore
     public void addUser(User user){
-       Key userKey = KeyFactory.createKey(user);
+       Key userKey = KeyFactory.createKey("User",user.uid());
        
         // Create a user entity
         Entity userEntity = new Entity(userKey);
