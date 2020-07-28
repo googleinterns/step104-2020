@@ -54,7 +54,9 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     FilterPredicate platformFilter =
       new FilterPredicate("platform", FilterOperator.EQUAL, platform.getLabel());
     List<Release> releases = new ArrayList<>();
-    Query query = new Query("Release").setFilter(platformFilter);
+    Query query = new Query("Release")
+      .addSort("codeFreezeTime", Query.SortDirection.DESCENDING)
+      .setFilter(platformFilter);
 
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
     QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable();
