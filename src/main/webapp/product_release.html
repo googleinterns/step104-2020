@@ -23,51 +23,52 @@
                 <div class="row">
                     <div class="leftcolumn">
                         <div class="row">
-                            <div class="sdkleft">
-                                <p>Current Version:19.3.0</p>
+                            <div id="oldVersion" class="sdkleft">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="sdkleft">
-                                <p>Release Note CL</p>
+                            <div id="releaseNotesCL" class="sdkleft">
                             </div>
                         </div>
                     </div>
                     <div class="rightcolumn">
                         <div class="row">
-                            <div class="sdkright">
-                                <p>New Release</p>
+                            <div id="releaseVersion" class="sdkright">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="sdkright">
-                                <p>Verifier: Ashwin Ganesh</p>
+                            <div id="verifier" class="sdkright">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class= "bottomrow">
-                    <div id="sdk">
-                        <p>Manual Verification Bug:b/156484117</p>
+                    <div id="manualVerificationBug">
                     </div>
                 </div>    
             </div>
-            <div class="rightcolumn">
-                <div class="row">
+            <div class="rightcolumn justify-content-center">
+                <div class="row justify-content-center">
                     <div id="box">
-                        <h1>M78</h1>    
+                        <h1 id="releaseName"></h1>    
                     </div>
                 </div>
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="leftcolumn">
                         <button class="button" type="submit">Unenroll</button>
                     </div>
-                    <div class="rightcolumn">
-                        <button class="button" type="submit">History</button>
+                   <div class="rightcolumn">
+                        <button class="button">
+                            <a href="release_history.html" class="stretched-link">
+                                <div class="history">History</div>
+                            </a>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="js/sdk_release.js"></script>
   </body>
 </html>
+
