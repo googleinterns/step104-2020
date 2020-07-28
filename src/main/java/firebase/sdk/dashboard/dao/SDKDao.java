@@ -96,7 +96,8 @@ public interface SDKDao {
    * Updates the given SDKRelease object and registers the changes in the data 
    * source.
    *
-   * @param sdkRelease The SDKRelease after the changes were made.
+   * @param sdkRelease The SDKRelease after the changes were made to its attributes (ie
+   * more additionalInfo).
    */
   // TODO: P2 functionality
   public void updateSDKEnrolledInRelease(SDKReleaseMetadata sdkRelease);
