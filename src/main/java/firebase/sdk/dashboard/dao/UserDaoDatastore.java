@@ -67,7 +67,7 @@ public class UserDaoDatastore implements UserDao {
     }
                                                                  
    private FilterPredicate makePropertyFilter(String property, Object value) {
-    FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
+        FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
 
-    return propertyFilter;                                                              
+        return propertyFilter;                                                              
 }
