@@ -64,7 +64,7 @@ public class UserDaoDatastore implements UserDao {
     public void updateUser(User user){
          User outdated = getUser(user.uid());
          outdated.favoriteSDKs() = user.favoriteSDKs();
-
+         addUser(User outdated);
     }
     
 
