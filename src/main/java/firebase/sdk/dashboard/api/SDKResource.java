@@ -28,7 +28,7 @@ import firebase.sdk.dashboard.data.VersionMetadata;
 public class SDKResource {
 
   private Platform platform;
-  private SDKDao sdkDao = new SDKDaoDatastore();
+  private final SDKDao SDKDAO = new SDKDaoDatastore();
 
   public SDKResource(String platform) {
     this.platform = Platform.get(platform);
@@ -44,7 +44,7 @@ public class SDKResource {
   @GET
   public Response getSDKs() {
     //TODO: Catch exceptions.
-    List<String> sdks = sdkDao.getSDKs(platform);
+    List<String> sdks = SDKDAO.getSDKs(platform);
     return ResponseHandler.createJsonResponse(Status.OK, sdks);
   }
 
@@ -60,7 +60,7 @@ public class SDKResource {
   @POST
   public Response addSDK(SDK newSdk) {
     //TODO: Catch exceptions.
-    sdkDao.addSDK(newSdk);
+    SDKDAO.addSDK(newSdk);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
@@ -75,7 +75,7 @@ public class SDKResource {
   @Path("/{sdkName}")
   public Response getSDK(@PathParam("sdkName") String sdkName) {
     //TODO: Catch exceptions.
-    SDK sdk = sdkDao.getSDK(platform, sdkName);
+    SDK sdk = SDKDAO.getSDK(platform, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, sdk);
   }
 
@@ -91,7 +91,7 @@ public class SDKResource {
   @Path("/{sdkName}")
   public Response deleteSDK(@PathParam("sdkName") String sdkName) {
     //TODO: Catch exceptions.
-    sdkDao.deleteSDK(platform, sdkName);
+    SDKDAO.deleteSDK(platform, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 }
