@@ -28,12 +28,12 @@ import firebase.sdk.dashboard.data.Platform;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ReleaseResource {
 
-  private String platform;
+  private Platform platform;
   // TODO: Delete once actual implementation is done
   private ArrayList<String> sdks = new ArrayList<>();
 
   public ReleaseResource(String platform) {
-    this.platform = platform;
+    this.platform = Platform.get(platform);
     // Dummy Code for API
     sdks.add("firebase-common");
     sdks.add("firebase-common-ktx");
