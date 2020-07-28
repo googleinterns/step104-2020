@@ -1,7 +1,9 @@
 package firebase.sdk.dashboard.data;
 
-import com.google.auto.value.AutoValue;
 import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.auto.value.AutoValue;
 
 /**
  * This differs from SDKReleaseMetadata in the attributes it contains
@@ -14,32 +16,43 @@ import java.time.Instant;
  * launch date of the release.
  */
 @AutoValue
+@JsonDeserialize(builder = AutoValue_Versionmetadata.Builder.class)
 public abstract class VersionMetadata {
 
   public static Builder newBuilder() {
     return new AutoValue_VersionMetadata.Builder();
   }
 
+  @JsonProperty("libraryName")
   public abstract String libraryName();
 
+  @JsonProperty("platform")
   public abstract Platform platform();
 
+  @JsonProperty("releaseName")
   public abstract String releaseName();
 
+  @JsonProperty("version")
   public abstract String version();
 
+  @JsonProperty("launchDate")
   public abstract Instant launchDate();
 
   @AutoValue.Builder
   public interface Builder {
+    @JsonProperty("libraryName")
     Builder libraryName(String libraryName);
 
+    @JsonProperty("platform")
     Builder platform(Platform platform);
 
+    @JsonProperty("releaseName")
     Builder releaseName(String releaseName);
 
+    @JsonProperty("version")
     Builder version(String version);
 
+    @JsonProperty("launchDate")
     Builder launchDate(Instant launchDate);
 
     VersionMetadata build();
