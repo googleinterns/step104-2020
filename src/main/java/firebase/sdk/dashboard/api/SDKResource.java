@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.time.Instant;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -43,7 +44,7 @@ public class SDKResource {
   @GET
   public Response getSDKs() {
     //TODO: Catch exceptions.
-    ArrayList<String> sdks = sdkDao.getSDKs(platform);
+    List<String> sdks = sdkDao.getSDKs(platform);
     return ResponseHandler.createJsonResponse(Status.OK, sdks);
   }
 
@@ -80,17 +81,17 @@ public class SDKResource {
 
   /**
    * Method handling HTTP DELETE requests.
-   * Exposed at "v1/platforms/{platform}/sdks/{sdkName}", this endpoint consumes
-   * an SDK object and then deletes it from the database if it exists. This only works for
-   * users with admin authorization.
+   * Exposed at "v1/platforms/{platform}/sdks/{sdkName}", this endpoint deletes the
+   * given sdk from the database if it exists. This only works for users with admin 
+   * authorization.
    *
    * @return Response object containing a status code.
    */
   @DELETE
   @Path("/{sdkName}")
-  public Response getSDK(@PathParam("sdkName") String sdkName, SDK sdk) {
+  public Response deleteSDK(@PathParam("sdkName") String sdkName) {
     //TODO: Catch exceptions.
-    sdkDao.deleteSDK(sdk);
+    sdkDao.deleteSDK(platform, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 }
