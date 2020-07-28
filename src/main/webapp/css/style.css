@@ -19,7 +19,8 @@
     text-align: center;
     background-color: #2C384A !important;
     width: 500px; 
-    height: 50px;
+    height: 100px;
+    font-size: 40px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
     color: white;
     position: relative;
@@ -149,11 +150,12 @@
   margin-left: auto;
 }
 
-#sdk {
+.attributes {
     text-align: center;
     background-color:#2C384A !important;
     width: 500px; 
-    height: 75px;
+    height: 200px;
+    font-size: 40px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
     color: white;
     position: relative;
