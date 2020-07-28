@@ -60,9 +60,10 @@ public interface SDKDao {
   /**
    * Removes the SDK from the data source.
    *
-   * @param sdk The SDK being removed.
+   * @param platform The platform of the SDK being removed.
+   * @param sdkName The name of the SDK being removed.
    */
-  public void deleteSDK(SDK sdk);
+  public void deleteSDK(Platform platform, String sdkName);
 
   /**
    * Adds the SDKReleaseMetadata object to the data source.
