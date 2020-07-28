@@ -43,27 +43,14 @@ public class ReleaseResource {
   /**
    * Method handling HTTP GET requests.
    * Exposed at "v1/platforms/{platform}/releases", this endpoint returns a list
-   * of Release objects representing all the sdks enrolled in the given platform.
+   * of Release objects representing all the release for the given platform.
    *
-   * @return Response object containing a list of Releease objects in JSON.
+   * @return Response object containing a status code and a list of Strings in JSON.
    */
   @GET
   public Response getReleases() {
-    // TODO: implement this method
-    List<String> releaseManagers = Arrays.asList("ashwinraghav@", "rlazo@", "davidmotson@", "vkrtachko@", "vguthal@");
-    ArrayList<HashMap<String, Object>> releases = new ArrayList<HashMap<String, Object>>();
-    for (int i = 78; i > 72; i--) {
-      HashMap<String, Object> release = new HashMap<String, Object>();
-      release.put("releaseName", String.format("M%d", i));
-      release.put("platform", "Android");
-      release.put("releaseManager", releaseManagers.get(i % releaseManagers.size()));
-      release.put("launchCalDeadline", Instant.now());
-      release.put("codeFreezeTime", Instant.now());
-      release.put("launchDate", Instant.now());
-      release.put("buganizerHotlistLink", "b/12345678");
-      releases.add(release);
-    }
-
+    // TODO: Catch exceptions.
+    List<Release> releases = RELEASEDAO.getPlatformReleases(platform);
     return ResponseHandler.createJsonResponse(Status.OK, releases);
   }
 
