@@ -146,7 +146,7 @@ public class ReleaseResource {
    */
   @DELETE
   @Path("{release}/sdks/{sdkName}")
-  public Response deleteReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
+  public Response disenrollSDKinRelease(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
     // TODO: Catch exceptions.
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
