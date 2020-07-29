@@ -148,6 +148,10 @@ public class ReleaseResource {
   @Path("{release}/sdks/{sdkName}")
   public Response disenrollSDKinRelease(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
     // TODO: Catch exceptions.
+    // Get the sdkversionmetadata object and get its releaseVersion in order to ...
+    // Get the versionMetadata object from the database
+    // delete the sdkreleasemetadata object
+    // delete the version metadata object
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
