@@ -15,10 +15,14 @@
   <body onload="googleSignIn()">
     
     <div class="jumbotron">
-        <h1>SDK Firebase Release Dashboard</h1>  
+        <div id="firebase">
+            <img src="images/firebase.png" class="img-rounded" alt="Firebase">
+        </div>
+        <h1 class="dashboard">SDK Firebase Release Dashboard</h1>   
         <a href="#" class="btn btn-info btn-lg" style="float: right">
           <span class="glyphicon glyphicon-log-out" onclick="googleSignOut()" ></span> Log out
         </a>
+
     </div>  
 
     <div class="container-fluid">
@@ -42,7 +46,7 @@
                                     <div class="card-body align-items-center d-flex justify-content-center">
                                         <div id="android"></div>
                                         <div>
-                                            <a href="release_sdks.html" class="stretched-link"></a>
+                                            <a href="release.html" class="stretched-link"></a>
                                         </div>
                                     </div>  
                                 </div>
@@ -100,9 +104,9 @@
                     </div>   
                 </div>
            </div>      
-    </div>
-    
-    
+      </div>
+    </div>    
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
@@ -161,3 +165,4 @@
     <script src="js/script.js"></script>
   </body>
 </html>
+

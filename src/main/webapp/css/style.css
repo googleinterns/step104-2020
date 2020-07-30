@@ -8,24 +8,28 @@
 }
 
 .card {
-  text-align: center;
-  background-color: #2C384A !important;
-  width: 350px; 
-  height: 350px;
-  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43);  
+
+    text-align: center;
+    background-color: #2C384A !important;
+    width: 350px; 
+    height: 350px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43); 
+    font-size: 22px; 
 }
 
 .sdk {
-  text-align: center;
-  background-color: #2C384A !important;
-  width: 500px; 
-  height: 50px;
-  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
-  color: white;
-  position: relative;
-  padding: 20px;
-  margin-right: auto;
-  margin-left: auto;
+    text-align: center;
+    background-color: #2C384A !important;
+    width: 400px; 
+    height: 75px;
+    font-size: 35px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: white;
+    position: relative;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: auto;
+
 }
 
 .col {
@@ -149,17 +153,19 @@
   margin-left: auto;
 }
 
-#sdk {
-  text-align: center;
-  background-color:#2C384A !important;
-  width: 500px; 
-  height: 75px;
-  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
-  color: white;
-  position: relative;
-  padding: 20px;
-  margin-right: auto;
-  margin-left: auto;
+
+.attributes {
+    text-align: center;
+    background-color:#2C384A !important;
+    width: 500px; 
+    height: 200px;
+    font-size: 40px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+    color: white;
+    position: relative;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .sdkleft {
@@ -259,7 +265,7 @@ h1 {
 }
 
 .buttonlaunch {
-  background-color: #039BE5 !important; /* Green */
+  background-color: #039BE5 !important; 
   border: none;
   color: black;
   text-align: center;
@@ -308,3 +314,12 @@ h1 {
   position: relative;
   justify-content: center;
 }
+
+.btn-primary, .btn-secondary {
+    background-color: #FFA000 !important;
+}
+
+#header {
+    font-size: 100px;
+}
+
