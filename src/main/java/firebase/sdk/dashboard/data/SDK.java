@@ -41,26 +41,20 @@ public abstract class SDK {
   public abstract List<VersionMetadata> versionHistory();
 
   @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
   public interface Builder {
-    @JsonProperty("platform")
     Builder platform(Platform platform);
 
-    @JsonProperty("libraryName")
     Builder libraryName(String libraryName);
 
-    @JsonProperty("libraryGroup")
     Builder libraryGroup(String libraryGroup);
 
-    @JsonProperty("externalName")
     Builder externalName(String externalName);
 
-    @JsonProperty("fireEscapeName")
     Builder fireEscapeName(String fireEscapeName);
 
-    @JsonProperty("owner")
     Builder owner(String owner);
 
-    @JsonProperty("versionHistory")
     Builder versionHistory(List<VersionMetadata> versionHistory);
 
     SDK build();

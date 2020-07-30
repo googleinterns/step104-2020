@@ -22,13 +22,12 @@ public abstract class User {
   public abstract Map<Platform, List<String>> favoriteSDKs();
 
   @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
   public interface Builder {
-    @Jsonproperty("uid")
     Builder uid(String uid);
 
     /* The key is the platform and the value will be a list of the names of
      * the users favorite SDKs for that platform. */ 
-    @Jsonproperty("favoriteSDKs")
     Builder favoriteSDKs(Map<Platform, List<String>> favoriteSDKs);
 
     User build();

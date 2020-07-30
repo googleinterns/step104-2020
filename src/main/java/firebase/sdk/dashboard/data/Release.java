@@ -43,26 +43,20 @@ public abstract class Release {
   public abstract Instant launchDate();
 
   @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
   public interface Builder {
-    @JsonProperty("platform")
     Builder platform(Platform platform);
 
-    @JsonProperty("releaseName")
     Builder releaseName(String releaseName);
 
-    @JsonProperty("releaseManager")
     Builder releaseManager(String releaseManager);
 
-    @JsonProperty("buganizerHotlistLink")
     Builder buganizerHotlistLink(String buganizerHotlistLink);
 
-    @JsonProperty("launchCalDeadline")
     Builder launchCalDeadline(Instant launchCalDeadline);
 
-    @JsonProperty("codeFreezeTime")
     Builder codeFreezeTime(Instant codeFreezeTime);
 
-    @JsonProperty("launchDate")
     Builder launchDate(Instant launchDate);
 
     Release build();

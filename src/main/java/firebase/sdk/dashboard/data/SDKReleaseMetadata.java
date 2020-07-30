@@ -45,26 +45,20 @@ public abstract class SDKReleaseMetadata {
   public abstract HashMap<String, String> additionalInfo();
 
   @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
   public interface Builder {
-    @JsonProperty("libraryName")
     Builder libraryName(String libraryName);
 
-    @JsonProperty("platform")
     Builder platform(Platform platform);
 
-    @JsonProperty("releaseName")
     Builder releaseName(String releaseName);
 
-    @JsonProperty("verifier")
     Builder verifier(String verifier);
 
-    @JsonProperty("releaseVersion")
     Builder releaseVersion(String releaseVersion);
 
-    @JsonProperty("oldVersion")
     Builder oldVersion(String oldVersion);
 
-    @JsonProperty("additionalInfo")
     Builder additionalInfo(HashMap<String, String> additionalInfo);
 
     SDKReleaseMetadata build();

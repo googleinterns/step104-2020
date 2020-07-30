@@ -39,20 +39,16 @@ public abstract class VersionMetadata {
   public abstract Instant launchDate();
 
   @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
   public interface Builder {
-    @JsonProperty("libraryName")
     Builder libraryName(String libraryName);
 
-    @JsonProperty("platform")
     Builder platform(Platform platform);
 
-    @JsonProperty("releaseName")
     Builder releaseName(String releaseName);
 
-    @JsonProperty("version")
     Builder version(String version);
 
-    @JsonProperty("launchDate")
     Builder launchDate(Instant launchDate);
 
     VersionMetadata build();
