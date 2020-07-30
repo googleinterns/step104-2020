@@ -23,7 +23,7 @@ $(document).ready(function () {
     }
   });
 
-  // Moves to the next step in the wizard if there is no error in the inputs 
+  // Moves to the next step in the wizard if there are no error in the inputs 
   allNextBtn.click(function () {
     var curStep = $(this).closest(".setup-content"),
       curStepBtn = curStep.attr("id"),
