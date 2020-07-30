@@ -112,12 +112,18 @@ public class ReleaseResource {
   @Path("{releaseName}/sdks")
   public Response enrollSDKinRelease(@PathParam("releaseName") String releaseName, SDKReleaseMetadata sdk) {
     // TODO: Catch exceptions.
-    // Get the release that it is a part of
+    Release release = RELEASEDAO.getRelease(platform, releaseName);
 
-    // Create a versionmetadata object with the launch date from the release and the fields
-    // in the sdkreleasemetadata object
+    VersionMetadata version = VersionMetadata.newBuilder()
+      .libraryName(sdk.libraryName())
+      .platform(sdk.platform())
+      .releaseName(releaseName)
+      .version(sdk.releaseVersion())
+      .launchDate(release.launchDate())
+      .build()
     
-    // Add the sdkReleaseMEtadata to the database and add the verionmetadata object to the database
+    SDKDAO.addSDKRelease(sdk);
+    SDKDAO.addSDKVersion(version);
     return ResponseHandler.createJsonResponse(Status.OK, null); 
   }
 
