@@ -6,16 +6,23 @@
       <title>SDK Dashboard</title>
       
       <link rel="stylesheet" href="css/landing.css">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-      <script src="https://kit.fontawesome.com/4588e35b97.js" crossorigin="anonymous"></script>    
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      <script src="https://kit.fontawesome.com/4588e35b97.js" crossorigin="anonymous"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
   </head>
 
-  <body>
+  <body onload="googleSignIn()">
+    
     <div class="jumbotron">
         <div id="firebase">
             <img src="images/firebase.png" class="img-rounded" alt="Firebase">
         </div>
-        <h1 class="dashboard">SDK Firebase Release Dashboard</h1> 
+        <h1 class="dashboard">SDK Firebase Release Dashboard</h1>   
+        <a href="#" class="btn btn-info btn-lg" style="float: right">
+          <span class="glyphicon glyphicon-log-out" onclick="googleSignOut()" ></span> Log out
+        </a>
+
     </div>  
 
     <div class="container-fluid">
@@ -105,10 +112,57 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Initialize firebase products -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAGk_4TZiVf_TslWON5hNQDYVODuJifP7A",
+            authDomain: "com-sdk-dashboard-step-2020.firebaseapp.com",
+            databaseURL: "https://com-sdk-dashboard-step-2020.firebaseio.com",
+            projectId: "google.com:sdk-dashboard-step-2020",
+            messagingSenderId: "412575630040",
+            appId: "1:412575630040:web:824b2d31f4e1f06b100dad",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Redirect to Google Sign In
+        function googleSignIn() {
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+            } else {
+                // No user is signed in.
+                var provider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithRedirect(provider);
+                firebase.auth().getRedirectResult().then(function(result) {
+                    if (result.credential) {
+                        console.info("Successful sign in")
+                    }
+                    // The signed-in user info.
+                    var user = result.user;
+                    }).catch(function(error) {
+                        console.info("Unsuccessful sign in");
+                    });
+                }
+            });
+        }
+           
+        // Sign user out of google sign-in
+        function googleSignOut() {
+            firebase.auth().signOut().then(function() {
+                Console.info("Sign out Successful");
+                }).catch(function(error) {
+                Console.info("Sign out Unsuccessful");
+                });
+           }
+    </script>
     <script src="js/script.js"></script>
   </body>
 </html>
-  
-
- 
 
