@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
+import firebase.sdk.dashboard.data.VersionMetadata;
 import firebase.sdk.dashboard.data.Release;
 import firebase.sdk.dashboard.data.Platform;
 import firebase.sdk.dashboard.dao.PlatformReleaseDao;
@@ -120,7 +121,7 @@ public class ReleaseResource {
       .releaseName(releaseName)
       .version(sdk.releaseVersion())
       .launchDate(release.launchDate())
-      .build()
+      .build();
     
     SDKDAO.addSDKRelease(sdk);
     SDKDAO.addSDKVersion(version);
@@ -151,13 +152,13 @@ public class ReleaseResource {
    * @return Response object containing a status code.
    */
   @DELETE
-  @Path("{release}/sdks/{sdkName}")
-  public Response disenrollSDKinRelease(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
+  @Path("{releaseName}/sdks/{sdkName}")
+  public Response disenrollSDKinRelease(@PathParam("releaseName") String releaseName, @PathParam("sdkName") String sdkName) {
     // TODO: Catch exceptions.
-    // Get the sdkversionmetadata object and get its releaseVersion in order to ...
-    // Get the versionMetadata object from the database
-    // delete the sdkreleasemetadata object
-    // delete the version metadata object
+    SDKReleaseMetadata sdkRelease = SDKDAO.getSDKReleaseMetadata(platform, releaseName, sdkName);
+    VersionMetadata sdkVersion = SDKDAO.getSDKVersionMetadata(platform, sdkRelease.releaseVersion(), sdkName);
+    SDKDAO.deleteSDKRelease(sdkRelease);
+    SDKDAO.deleteSDKVersion(sdkVersion);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
