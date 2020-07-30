@@ -34,27 +34,28 @@ public class UserDaoDatastore implements UserDao {
 
     // Get a user from the datastore
     public User getUser(String id){
-         FilterPredicate userPropertyFilter = makePropertyFilter("id", id);
-        Query query = new Query("User").setFilter(userPropertyFilter);
+        Query query = new Query("User");
+        PreparedQuery results = DATASTORE.prepare(query);
+        QueryResultIterable<Entity> users = preparedQuery.asQueryResultIterable();
 
-        PreparedQuery preparedQuery = DATASTORE.prepare(query);
-        FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
-        Entity user = preparedQuery.asSingleEntity();
-        if (user == null) {
-        return null;
+        for (Entity user: users){
+            String iD = (String) user.getProperty("id");
+            if (iD.equals(id)){
+                return user;
+            }
         }
-        return user;
+
     }
 
     // Add a user to the datastore
     public void addUser(User user){
-       Key userKey = KeyFactory.createKey(user);
+       Key userKey = KeyFactory.createKey(user.uid());
        
         // Create a user entity
         Entity userEntity = new Entity(userKey);
         userEntity.setProperty("id",user.uid());
         userEntity.setProperty("email",user.email());
-        userEntity.setProptery("favoriteSDKs",user.favoriteSDKs);
+        userEntity.setProperty("favoriteSDKs",user.favoriteSDKs);
 
         DATASTORE.put(userEntity);
     }
@@ -64,10 +65,23 @@ public class UserDaoDatastore implements UserDao {
          User outdated = getUser(user.uid());
          outdated.favoriteSDKs() = user.favoriteSDKs();
          addUser(User outdated);
-    }
-                                                                 
-   private FilterPredicate makePropertyFilter(String property, Object value) {
-        FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
 
-        return propertyFilter;                                                              
+    }
+
+    private FilterPredicate makePropertyFilter(String property, Object value) {
+    FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
+
+    return propertyFilter;
+  }
+    
+
+
+
+
+
+
+
+
+
+
 }
