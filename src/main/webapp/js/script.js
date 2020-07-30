@@ -92,7 +92,8 @@ async function getReleases(platform) {
 async function getReleaseSDKs(platform, releaseName) {
   const response = await fetch(`v1/platforms/${platform}/releases/${releaseName}/sdks`);
   const sdks = await response.json();
-
+  
+  // TODO: Remove console log
   console.log(sdks);
 
   // Create header for release
