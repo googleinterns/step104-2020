@@ -6,7 +6,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 @ApplicationPath("v1")
 public class Main extends ResourceConfig {
 
-    public Main() {
-        packages("firebase.sdk.dashboard.api");
-    }
+  public Main() {
+    packages("firebase.sdk.dashboard.api");
+  }
 }
