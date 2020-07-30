@@ -69,7 +69,6 @@ function showOrHideNotes(version) {
                 $(curInputs[i]).closest(".form-group").addClass("has-error");
             }
         }
-
         if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
     });
 
@@ -78,7 +77,7 @@ function showOrHideNotes(version) {
 
 
 
-//Fetch data from API endpoint
+// Fetch data from API endpoint
  
 // Fetch for landing page
 
@@ -184,7 +183,6 @@ async function getVersionHistory(platform, sdkName) {
 async function getFavoriteSdks(userID) {
     const response = await fetch(`v1/users/${userID}/sdks`);
     const favorites = await response.json();
-
     // Build the links for favorite sdks
     const favoriteSDK = document.getElementById('favorites');  
         for (i = 0; i < favorites.length; i++) {
