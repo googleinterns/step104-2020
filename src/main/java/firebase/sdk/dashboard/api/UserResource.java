@@ -42,7 +42,9 @@ public class UserResource {
   @Path("{uid}/sdks")
   public Response getUserFavorites(@PathParam("uid") String uid) {
     // TODO: implement this method
+
     return ResponseHandler.createJsonResponse(Status.OK, favourites);
+    
   }
 
   /**
