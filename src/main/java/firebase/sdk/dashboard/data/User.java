@@ -1,22 +1,28 @@
 package firebase.sdk.dashboard.data;
 
-import com.google.auto.value.AutoValue;
 import java.util.List;
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.auto.value.AutoValue;
 
 @AutoValue
+@JsonDeserialize(builder = AutoValue_User.Builder.class)
 public abstract class User {
 
   public static Builder newBuilder() {
     return new AutoValue_User.Builder();
   }
 
+  @Jsonproperty("uid")
   public abstract String uid();
 
   /* Example: {"Android": ["firebase-common", "firebase-common-ktx"]} */
+  @Jsonproperty("favoriteSDKs")
   public abstract Map<Platform, List<String>> favoriteSDKs();
 
   @AutoValue.Builder
+  @JsonPOJOBuilder(withPrefix = "")
   public interface Builder {
     Builder uid(String uid);
 
