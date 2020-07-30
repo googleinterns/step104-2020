@@ -1,5 +1,6 @@
 package firebase.sdk.dashboard;
 
+import org.glassfish.jersey.jackson.JacksonFeature;
 import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -7,6 +8,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class Main extends ResourceConfig {
 
   public Main() {
+    register(JacksonFeature.class);
     packages("firebase.sdk.dashboard.api");
   }
 }

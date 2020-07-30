@@ -34,8 +34,8 @@ import firebase.sdk.dashboard.dao.SDKDaoDatastore;
 public class ReleaseResource {
 
   private Platform platform;
-  private final PlatformReleaseDao RELEASEDAO = new PlatformReleaseDaoDatastore();
-  private final SDKDao SDKDAO = new SDKDaoDatastore();
+  private final static PlatformReleaseDao RELEASEDAO = new PlatformReleaseDaoDatastore();
+  private final static SDKDao SDKDAO = new SDKDaoDatastore();
 
   public ReleaseResource(String platform) {
     this.platform = Platform.get(platform);

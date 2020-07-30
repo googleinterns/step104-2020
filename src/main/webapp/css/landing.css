@@ -2,6 +2,7 @@
 .jumbotron {
     text-align: center;
     background-color: #039BE5 !important;
+    position:relative;
 }
 
 .card {
@@ -17,6 +18,18 @@
     margin-bottom: 10px;
 }
 
-.nav {
-    font-size: 30px;
+.page-footer {
+    background-color: #039BE5 !important;
 }
+
+
+#firebase {
+    position:absolute; 
+    top:5px; 
+    left:5px;
+}
+
+.dashboard {
+    text-align: center;
+    font-size: 80px;
+}	
