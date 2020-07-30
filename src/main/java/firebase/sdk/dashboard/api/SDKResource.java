@@ -41,7 +41,7 @@ public class SDKResource {
   @GET
   public Response getSDKs() {
   
-    //try {
+    try {
       ArrayList<String> sdks = new ArrayList<>();
       sdks.add("firebase-common");
       sdks.add("firebase-common-ktx");
@@ -52,9 +52,10 @@ public class SDKResource {
       
       return ResponseHandler.createJsonResponse(Status.OK, sdks);
     }
-    /*} catch (Exception e) {
+    } catch (Exception e) {
+      // TODO: Implement method to catch errors 
       return e.toString();
-    }*/
+    }
 
   /**
    * Method handling HTTP GET requests.
