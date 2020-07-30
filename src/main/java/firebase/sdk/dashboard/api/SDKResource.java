@@ -28,7 +28,7 @@ import firebase.sdk.dashboard.data.VersionMetadata;
 public class SDKResource {
 
   private Platform platform;
-  private final SDKDao SDKDAO = new SDKDaoDatastore();
+  private static final SDKDao SDKDAO = new SDKDaoDatastore();
 
   public SDKResource(String platform) {
     this.platform = Platform.get(platform);
