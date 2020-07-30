@@ -53,6 +53,6 @@ public interface PlatformReleaseDao {
    * @param platform The platform the release is a part of.
    * @param releaseName The name of the release object that is to be deleted from the data source.
    */
-  public void deleteRelease(Platform, platform, String releaseName);
+  public void deleteRelease(Platform platform, String releaseName);
 } 
 
