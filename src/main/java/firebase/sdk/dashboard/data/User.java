@@ -3,6 +3,7 @@ package firebase.sdk.dashboard.data;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
 
@@ -14,11 +15,11 @@ public abstract class User {
     return new AutoValue_User.Builder();
   }
 
-  @Jsonproperty("uid")
+  @JsonProperty("uid")
   public abstract String uid();
 
   /* Example: {"Android": ["firebase-common", "firebase-common-ktx"]} */
-  @Jsonproperty("favoriteSDKs")
+  @JsonProperty("favoriteSDKs")
   public abstract Map<Platform, List<String>> favoriteSDKs();
 
   @AutoValue.Builder
