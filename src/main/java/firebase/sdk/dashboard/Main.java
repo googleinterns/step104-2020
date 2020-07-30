@@ -1,6 +1,6 @@
 package firebase.sdk.dashboard;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -8,7 +8,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class Main extends ResourceConfig {
 
   public Main() {
-    register(new JacksonJsonProvider());
+    register(JacksonFeature.class);
     packages("firebase.sdk.dashboard.api");
   }
 }
