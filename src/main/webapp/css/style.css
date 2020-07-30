@@ -292,3 +292,16 @@ h1 {
 #header {
     font-size: 100px;
 }
+
+
+#firebase {
+    position:absolute; 
+    top:25px; 
+    left:5px;
+}
+
+@media only screen and (max-width: 1024px) {
+   .sdk {
+        width: 33.3%;
+   }
+}
