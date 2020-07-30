@@ -26,6 +26,15 @@ public interface PlatformReleaseDao {
    */
   public List<Release> getPlatformReleases(Platform platform);
 
+  /**
+   * Retrieves a Release object from the data source.
+   *
+   * @param platform The platform the release is a part of.
+   * @param releaseName The name of the Release object.
+   * @return A Release object representing all the information regarding the release.
+   */
+  public Release getRelease(Platform platform, String releaseName);
+
   //TODO: Define exception
   /**
    * Adds the given release object to given platform in a data source. Only admins should
