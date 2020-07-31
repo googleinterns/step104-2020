@@ -26,8 +26,7 @@ import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultIterable;
 
-/* Class to implement UserDao */
-
+/* Class to implement UserDao to manipulate data about the users */
 public class UserDaoDatastore implements UserDao {
 
     public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
