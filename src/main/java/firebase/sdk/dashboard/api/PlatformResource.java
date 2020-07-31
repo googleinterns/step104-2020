@@ -25,17 +25,16 @@ public class PlatformResource {
    * the closest release deadline.
    *
    * @return Response object containing an HTTP status code and a HashMap contaning
-   * the names of all the supported platforms along with a timestamp as its value.
+   * the names of all the supported platforms.
    */
   @GET
   public Response getPlatforms() {
- 
-      HashMap<String, String> platforms = new HashMap<String, String>();
-      platforms.put("android", "ANDROID");
-      platforms.put("ios", "iOS");
-      platforms.put("web", "WEB");
-      platforms.put("games", "GAMES");
-      return ResponseHandler.createJsonResponse(Status.OK, platforms);
+    HashMap<String, String> platforms = new HashMap<String, String>();
+    platforms.put("android", "ANDROID");
+    platforms.put("ios", "iOS");
+    platforms.put("web", "WEB");
+    platforms.put("games", "GAMES");
+    return ResponseHandler.createJsonResponse(Status.OK, platforms);
   }
 
   /**

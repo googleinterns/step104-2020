@@ -34,54 +34,10 @@ function showOrHideNotes(version) {
   }
 }
 
- $(document).ready(function () {
-    var navListItems = $('div.setup-panel div a'),
-        allWells = $('.setup-content'),
-        allNextBtn = $('.nextBtn');
-
-    allWells.hide();
-
-    navListItems.click(function (e) {
-        e.preventDefault();
-        var $target = $($(this).attr('href')),
-            $item = $(this);
-
-        if (!$item.hasClass('disabled')) {
-            navListItems.removeClass('btn-success').addClass('btn-default');
-            $item.addClass('btn-success');
-            allWells.hide();
-            $target.show();
-            $target.find('input:eq(0)').focus();
-        }
-    });
-
-    allNextBtn.click(function () {
-        var curStep = $(this).closest(".setup-content"),
-            curStepBtn = curStep.attr("id"),
-            nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-            curInputs = curStep.find("input[type='text'],input[type='url']"),
-            isValid = true;
-
-        $(".form-group").removeClass("has-error");
-        for (var i = 0; i < curInputs.length; i++) {
-            if (!curInputs[i].validity.valid) {
-                isValid = false;
-                $(curInputs[i]).closest(".form-group").addClass("has-error");
-            }
-        }
-        if (isValid) nextStepWizard.removeAttr('disabled').trigger('click');
-    });
-
-    $('div.setup-panel div a.btn-success').trigger('click');
-});
-
-
-
 // Fetch data from API endpoint
- 
-// Fetch for landing page
 
-let doms = ["web", "android", "games", "ios"]
+//fetch for landing page
+const doms = ["web", "android", "games", "ios"]
 
 async function getPlatforms() {
   const response = await fetch('/v1/platforms');
@@ -93,17 +49,17 @@ async function getPlatforms() {
       const divElement = document.getElementById(plat); 
       const textNode = document.createTextNode(platforms[plat]); 
       divElement.appendChild(textNode);
-     }
-     count+=1;
     }
+    count+=1;
+  }
 }
 
-//Fetch release pages
 async function getReleases(platform) {
   const response = await fetch(`/v1/platforms/${platform}/releases`);
   const releases = await response.json();
-   
-  //Create text elements for each release detail
+
+
+  // Create text elements for each release detail
   for (i = 0; i < releases.length; i++) {
     let element = "#release-" + i;
     let release = releases[i];
@@ -113,30 +69,34 @@ async function getReleases(platform) {
     const name = release["releaseName"];
     const textNode0 = document.createTextNode(name); 
     divElement.appendChild(textNode0);
+
     divElement.appendChild(document.createElement("HR"));
 
     const deadline = release["launchDeadline"];
-    const textNode1 = document.createTextNode("Launch Deadline: " + getDate(1595424871)); 
+    const textNode1 = document.createTextNode("Launch Deadline: " + getDate(1595424871).toDateString()); 
     divElement.appendChild(textNode1);
+
     divElement.appendChild(document.createElement("HR"));
 
-    const coldfreeze = release["codeFreezeDate"];
-    const textNode3 = document.createTextNode("Cold Freeze Date: " + getDate(1595424871)); 
+    const codefreeze = release["codeFreezeDate"];
+    const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(1595424871).toDateString()); 
     divElement.appendChild(textNode3);
+
+
     divElement.appendChild(document.createElement("HR"));
 
     const launch = release["launchDate"];
-    const textNode4 = document.createTextNode("Launch Date: " + getDate(Date.now())); 
+    const textNode4 = document.createTextNode("Launch Date: " + getDate(Date.now()).toDateString()); 
     divElement.appendChild(textNode4); 
-    }
+  }
 }
 
-// Fetch release pages
-async function getSDKs(platform, releaseName) {
+async function getReleaseSDKs(platform, releaseName) {
   const response = await fetch(`v1/platforms/${platform}/releases/${releaseName}/sdks`);
   const sdks = await response.json();
-
-  const listSDKs = sdks[releaseName];
+  
+  // TODO: Remove console log
+  console.log(sdks);
 
   // Create header for release
   const headerElement = document.querySelector("#header");
@@ -144,18 +104,16 @@ async function getSDKs(platform, releaseName) {
   headerElement.appendChild(headerText);
 
   // Creating elements for all sdks
-  console.log(listSDKs);
-  for (i = 0; i < listSDKs.length; i++) {
-      let element = "sdk" + i;
-      console.log(element);
-      console.log(listSDKs[i]);
-      const divElement = document.getElementById(element);
-      const textNode = document.createTextNode(listSDKs[i]); 
-      divElement.appendChild(textNode);
+  
+  for (i = 0; i < sdks.length; i++) {
+    let element = "sdk" + i;
+    const divElement = document.getElementById(element);
+    const textNode = document.createTextNode(sdks[i]); 
+    divElement.appendChild(textNode);
+
   }
 }
 
-// Fetch Version History
 async function getVersionHistory(platform, sdkName) {
   const response = await fetch(`v1/platforms/${platform}/sdks/${sdkName}`);
   const versionHistory = await response.json();
@@ -172,7 +130,7 @@ async function getVersionHistory(platform, sdkName) {
   createNode("External Name: " + externalName, "#external");
   createNode("Latest Version: " + latestVersion, "#latest-version");
   createNode("Library Group: " + libraryGroup, "#library-group");
-  createNode(owner, "#owner");
+  createNode("Owner: " + owner, "#owner");
 }
 
 // Fetch favorite SDKS
@@ -203,6 +161,7 @@ function getDate(time) {
   return date;
 }
 
+
 function createNode(tag, id) {
   const tagElement = document.querySelector(id);
   const tagText = document.createTextNode(tag);
@@ -211,8 +170,6 @@ function createNode(tag, id) {
 
 getPlatforms();
 getReleases("android");
-getSDKs("android", "M78");
+getReleaseSDKs("android", "M78");
 getVersionHistory("android", "firebase-common");
-
-
 

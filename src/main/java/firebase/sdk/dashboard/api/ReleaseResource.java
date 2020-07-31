@@ -67,9 +67,7 @@ public class ReleaseResource {
     // TODO: implement this method
     List<String> releaseManagers = Arrays.asList("ashwinraghav@", "rlazo@", "davidmotson@", "vkrtachko@", "vguthal@");
     ArrayList<HashMap<String, Object>> releases = new ArrayList<HashMap<String, Object>>();
-    Date date = new Date();
     for (int i = 78; i > 72; i--) {
-
       HashMap<String, Object> release = new HashMap<String, Object>();
       release.put("releaseName", String.format("M%d", i));
       release.put("platform", "Android");
@@ -117,17 +115,14 @@ public class ReleaseResource {
    * Exposed at "v1/platforms/{platform}/releases/{release}/sdks", this endpoint
    * returns a list of the names of all skds enrolled in the given release.
    *
-   * @return Response object containing a status code and a HashMap with the key being the
-   * release and the values being a list of strings representing the names of all the 
-   * sdks enrolled in the given release.
+   * @return Response object containing a status code and a list of strings representing 
+   * the names of all the sdks enrolled in the given release.
    */
   @GET
   @Path("{release}/sdks")
   public Response getReleaseSDKs(@PathParam("release") String release) {
     // TODO: implement this method
-    HashMap <String, ArrayList<String>> releaseSDKs = new HashMap<>();
-    releaseSDKs.put(release, sdks);
-    return ResponseHandler.createJsonResponse(Status.OK, releaseSDKs);
+    return ResponseHandler.createJsonResponse(Status.OK, sdks);
   }
 
   /**

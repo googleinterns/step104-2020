@@ -20,9 +20,9 @@ public enum Platform {
     return label;
   }
   
-  private static final Map<String, Platform> enumMapping = new HashMap<String, Platform>();
+  private static final Map<String, Platform> enumMapping = new HashMap<>();
 
-  static{
+  static {
     // Maps string labels to the enum names
     for(Platform platform : Platform.values()){
        enumMapping.put(plat.getLabel(), platform);
