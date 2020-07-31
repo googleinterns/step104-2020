@@ -1,11 +1,14 @@
 
 $(document).ready(function () {
+  // Create navigation items for the enrollment 
   var navListItems = $('div.setup-panel div a'),
     allWells = $('.setup-content'),
     allNextBtn = $('.nextBtn');
-
+  
+  // Hide enrollment step panels
   allWells.hide();
 
+  // Allow navigation from one step to the other only when the step is filled
   navListItems.click(function (e) {
     e.preventDefault();
     var $target = $($(this).attr('href')),
@@ -20,6 +23,7 @@ $(document).ready(function () {
     }
   });
 
+  // Moves to the next step in the wizard if there are no error in the inputs 
   allNextBtn.click(function () {
     var curStep = $(this).closest(".setup-content"),
       curStepBtn = curStep.attr("id"),

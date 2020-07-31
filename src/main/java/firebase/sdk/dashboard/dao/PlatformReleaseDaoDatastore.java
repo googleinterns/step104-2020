@@ -54,7 +54,9 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     FilterPredicate platformFilter =
       new FilterPredicate("platform", FilterOperator.EQUAL, platform.getLabel());
     List<Release> releases = new ArrayList<>();
-    Query query = new Query("Release").setFilter(platformFilter);
+    Query query = new Query("Release")
+      .addSort("codeFreezeTime", Query.SortDirection.DESCENDING)
+      .setFilter(platformFilter);
 
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
     QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable();
@@ -81,6 +83,28 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
       releases.add(release);  
     }   
     return releases;
+  }
+
+  public Release getRelease(Platform platform, String releaseName) {
+    Key releaseKey = KeyFactory.createKey("Release", platform.getLabel() + "_" + releaseName);
+    FilterPredicate keyFilter =
+      new FilterPredicate("__key__", FilterOperator.EQUAL, releaseKey);
+    Query query = new Query("Release").setFilter(keyFilter);
+
+    PreparedQuery preparedQuery = DATASTORE.prepare(query);
+    Entity releaseEntity = preparedQuery.asSingleEntity();
+
+    Release release = Release.newBuilder()
+      .platform(Platform.get((String) releaseEntity.getProperty("platform")))
+      .releaseName((String) releaseEntity.getProperty("releaseManager"))
+      .releaseManager((String) releaseEntity.getProperty("releaseName"))
+      .buganizerHotlistLink((String) releaseEntity.getProperty("buganizerHotlistLink"))
+      .launchDate(Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchDate")))
+      .launchCalDeadline(Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchCalDeadline")))
+      .codeFreezeTime(Instant.ofEpochMilli((Long) releaseEntity.getProperty("codeFreezeTime")))
+      .build();
+
+    return release;
   }
 
   // Add release to the Datastore
