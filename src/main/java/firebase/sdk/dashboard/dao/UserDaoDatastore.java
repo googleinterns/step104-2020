@@ -48,13 +48,13 @@ public class UserDaoDatastore implements UserDao {
 
     // Add a user to the datastore
     public void addUser(User user){
-       Key userKey = KeyFactory.createKey("User",user.uid());
+       Key userKey = KeyFactory.createKey("User", user.uid());
        
         // Create a user entity
         Entity userEntity = new Entity(userKey);
         userEntity.setProperty("id",user.uid());
         userEntity.setProperty("email",user.email());
-        userEntity.setProptery("favoriteSDKs",user.favoriteSDKs);
+        userEntity.setProptery("favoriteSDKs",user.favoriteSDKs());
 
         DATASTORE.put(userEntity);
     }
