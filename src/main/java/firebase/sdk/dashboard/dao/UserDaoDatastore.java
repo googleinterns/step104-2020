@@ -41,6 +41,7 @@ public class UserDaoDatastore implements UserDao {
         Entity user = preparedQuery.asSingleEntity();
         if (user == null) {
             return null;
+            //TODO: Throw user not found exception
         }
         return user;
     }
