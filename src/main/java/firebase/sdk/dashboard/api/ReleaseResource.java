@@ -20,6 +20,10 @@ import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.Release;
 import firebase.sdk.dashboard.data.Platform;
+import firebase.sdk.dashboard.dao.PlatformReleaseDao;
+import firebase.sdk.dashboard.dao.PlatformReleaseDaoDatastore;
+import firebase.sdk.dashboard.dao.SDKDao;
+import firebase.sdk.dashboard.dao.SDKDaoDatastore;
 
 /**
  * Root resource (exposed at "platforms/{platform}/releases" path)
@@ -28,57 +32,25 @@ import firebase.sdk.dashboard.data.Platform;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ReleaseResource {
 
-  private String platform;
-  // TODO: Delete once actual implementation is done
-  private ArrayList<String> sdks = new ArrayList<>();
+  private Platform platform;
+  private final static ReleaseDao RELEASEDAO = new PlatformReleaseDaoDatastore();
+  private final static SDKDao SDKDAO = new SDKDaoDatastore();
 
   public ReleaseResource(String platform) {
-    this.platform = platform;
-    // Dummy Code for API
-    sdks.add("firebase-common");
-    sdks.add("firebase-common-ktx");
-    sdks.add("firebase-ml");
-    sdks.add("firebase-database");
-    sdks.add("firebase-auth");
-    sdks.add("firebase-components");
-    sdks.add("firebase-iid");
-    sdks.add("firebase-analytics");
-    sdks.add("measurement");
-    sdks.add("measurement_api");
-    sdks.add("tagmanager");
-    sdks.add("tagmanager-api");
-    sdks.add("firebase-ads");
-    sdks.add("phenotype");
-    sdks.add("functions");
-    sdks.add("transport-runtime");
-    sdks.add("crashlytics-gradle");
-    sdks.add("firebase-components"); 
+    this.platform = Platform.get(platform);
   }
 
   /**
    * Method handling HTTP GET requests.
    * Exposed at "v1/platforms/{platform}/releases", this endpoint returns a list
-   * of Release objects representing all the sdks enrolled in the given platform.
+   * of Release objects representing all the release for the given platform.
    *
-   * @return Response object containing a list of Releease objects in JSON.
+   * @return Response object containing a status code and a list of Strings in JSON.
    */
   @GET
   public Response getReleases() {
-    // TODO: implement this method
-    List<String> releaseManagers = Arrays.asList("ashwinraghav@", "rlazo@", "davidmotson@", "vkrtachko@", "vguthal@");
-    ArrayList<HashMap<String, Object>> releases = new ArrayList<HashMap<String, Object>>();
-    for (int i = 78; i > 72; i--) {
-      HashMap<String, Object> release = new HashMap<String, Object>();
-      release.put("releaseName", String.format("M%d", i));
-      release.put("platform", "Android");
-      release.put("releaseManager", releaseManagers.get(i % releaseManagers.size()));
-      release.put("launchCalDeadline", Instant.now());
-      release.put("codeFreezeTime", Instant.now());
-      release.put("launchDate", Instant.now());
-      release.put("buganizerHotlistLink", "b/12345678");
-      releases.add(release);
-    }
-
+    // TODO: Catch exceptions.
+    List<Release> releases = RELEASEDAO.getPlatformReleases(platform);
     return ResponseHandler.createJsonResponse(Status.OK, releases);
   }
 
@@ -92,7 +64,8 @@ public class ReleaseResource {
   // TODO: Check membership in Firebase core team for allowing only admin access.
   @POST
   public Response addRelease(Release release) {
-    // TODO: Implement this method.
+    // TODO: Catch exceptions.
+    RELEASEDAO.addRelease(platform, release);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
@@ -103,10 +76,12 @@ public class ReleaseResource {
    *
    * @return Response object containing a status code.
    */
+  // TODO: Check membership in Firebase core team for allowing only admin access.
   @DELETE
-  @Path("{release}")
-  public Response deleteRelease(@PathParam("release") String release) {
-    // TODO: Implement this method.
+  @Path("{releaseName}")
+  public Response deleteRelease(@PathParam("releaseName") String releaseName) {
+    // TODO: Catch exceptions.
+    RELEASEDAO.deleteRelease(platform, releaseName);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
@@ -119,10 +94,11 @@ public class ReleaseResource {
    * the names of all the sdks enrolled in the given release.
    */
   @GET
-  @Path("{release}/sdks")
-  public Response getReleaseSDKs(@PathParam("release") String release) {
-    // TODO: implement this method
-    return ResponseHandler.createJsonResponse(Status.OK, sdks);
+  @Path("{releaseName}/sdks")
+  public Response getReleaseSDKs(@PathParam("releaseName") String releaseName) {
+    // TODO: Catch exceptions.
+    List<String> sdksEnrolledInRelease = SDKDAO.getSDKsEnrolledInRelease(platform, releaseName);
+    return ResponseHandler.createJsonResponse(Status.OK, sdksEnrolledInRelease);
   }
 
   /**
@@ -133,9 +109,15 @@ public class ReleaseResource {
    * @return Response object containing a status code.
    */
   @POST
-  @Path("{release}/sdks")
-  public Response enrollSDKinRelease(SDKReleaseMetadata sdk) {
-    //TODO: enroll this sdk in the given release
+  @Path("{releaseName}/sdks")
+  public Response enrollSDKinRelease(@PathParam("releaseName") String releaseName, SDKReleaseMetadata sdk) {
+    // TODO: Catch exceptions.
+    // Get the release that it is a part of
+
+    // Create a versionmetadata object with the launch date from the release and the fields
+    // in the sdkreleasemetadata object
+    
+    // Add the sdkReleaseMEtadata to the database and add the verionmetadata object to the database
     return ResponseHandler.createJsonResponse(Status.OK, null); 
   }
 
@@ -147,20 +129,10 @@ public class ReleaseResource {
    * @return Response object containing a status code and an SDKReleaseMetadata object.
    */
   @GET
-  @Path("{release}/sdks/{sdkName}")
-  public Response getReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
-    // TODO: implement this method
-    String newVersion = String.format("%d.%d.%d", 19, 2, 9 );
-    String oldVersion = String.format("%d.%d.%d", 19, 2, 9 - 1);
-    SDKReleaseMetadata version = SDKReleaseMetadata.newBuilder()
-      .libraryName("firebase-common")
-      .platform(Platform.ANDROID)
-      .releaseName(release)
-      .verifier("Ashwin Ganesh")
-      .releaseVersion(newVersion)
-      .oldVersion(oldVersion)
-      .additionalInfo(new HashMap<String, String>())
-      .build();
+  @Path("{releaseName}/sdks/{sdkName}")
+  public Response getReleaseSDK(@PathParam("releaseName") String releaseName, @PathParam("sdkName") String sdkName) {
+    // TODO: Catch exceptions.
+    SDKReleaseMetadata version = SDKDAO.getSDKReleaseMetadata(platform, releaseName, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, version);
   }
   
@@ -174,8 +146,8 @@ public class ReleaseResource {
    */
   @DELETE
   @Path("{release}/sdks/{sdkName}")
-  public Response deleteReleaseSDK(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
-    // TODO: implement this method
+  public Response disenrollSDKinRelease(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
+    // TODO: Catch exceptions.
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
