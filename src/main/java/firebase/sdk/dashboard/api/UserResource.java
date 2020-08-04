@@ -39,7 +39,6 @@ public class UserResource {
   @Path("{uid}/sdks")
   public Response getUserFavorites(@PathParam("uid") String uid) {
     return ResponseHandler.createJsonResponse(Status.OK, favourites);
-    
   }
 
   /**
