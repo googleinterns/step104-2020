@@ -81,7 +81,6 @@ async function getReleases(platform) {
     const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(1595424871).toDateString()); 
     divElement.appendChild(textNode3);
 
-
     divElement.appendChild(document.createElement("HR"));
 
     const launch = release["launchDate"];
@@ -109,7 +108,6 @@ async function getReleaseSDKs(platform, releaseName) {
     const divElement = document.getElementById(element);
     const textNode = document.createTextNode(sdks[i]); 
     divElement.appendChild(textNode);
-
   }
 }
 
