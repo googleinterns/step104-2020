@@ -5,7 +5,7 @@ project_id = "google.com:sdk-dashboard-step-2020"
 datastore_client = datastore.Client(project_id)
 
 
-with open("../M87.csv") as f:
+with open("./release_csvs/M87.csv") as f:
   for i in range(12):
     print(f.readline())
 
