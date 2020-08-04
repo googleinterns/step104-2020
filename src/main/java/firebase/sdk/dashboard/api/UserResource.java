@@ -24,11 +24,8 @@ public class UserResource {
 
   private ArrayList<String> favourites;
   public UserResource() {
-    favourites = new ArrayList<String>(Arrays.asList(
-          "firebase-common", 
-          "firebase-common-ktx", 
-          "firebase-installations", 
-          "firebase-installations-interop"));
+    User user = getUser(uid);
+    Map<Platform, List<String>> favourites = user.favoriteSDKs();
   }
 
   /**
@@ -41,7 +38,6 @@ public class UserResource {
   @GET
   @Path("{uid}/sdks")
   public Response getUserFavorites(@PathParam("uid") String uid) {
-    // TODO: implement this method
     return ResponseHandler.createJsonResponse(Status.OK, favourites);
   }
 
@@ -54,7 +50,7 @@ public class UserResource {
   @POST
   @Path("{uid}/sdks")
   public Response addSdkToUserFavorites(@PathParam("uid") String uid, String sdkKey) {
-    // TODO: implement this method
+    favourites.put(sdkKey);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
@@ -68,7 +64,6 @@ public class UserResource {
   @Path("{uid}/sdks/{sdkName}")
 
   public Response deleteSdkFromUserFavorites(@PathParam("uid") String uid, @PathParam("sdkName") String sdkName) {
-    // TODO: implement this method
     favourites.remove(sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
