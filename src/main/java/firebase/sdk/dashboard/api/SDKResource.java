@@ -51,11 +51,11 @@ public class SDKResource {
       sdks.add("firebase-messaging");
       
       return ResponseHandler.createJsonResponse(Status.OK, sdks);
-    }
     } catch (Exception e) {
       // TODO: Implement method to catch errors 
       return e.toString();
     }
+  }
 
   /**
    * Method handling HTTP GET requests.
