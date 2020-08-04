@@ -43,7 +43,12 @@ public class UserDaoDatastore implements UserDao {
             return null;
             //TODO: Throw user not found exception
         }
-        return user;
+        User users = User.newBuilder()
+        .uid((String)user.getProperty("id"))
+        .email((String)user.getProperty("email"))
+        .favoriteSDKs((Map<Platform, List<String>>)user.getProperty("favoriteSDKs"))
+        .build();
+        return users;
     }
 
     // Add a user to the datastore
