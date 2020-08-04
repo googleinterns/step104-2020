@@ -123,6 +123,7 @@ public class SDKDaoDatastore implements SDKDao {
       .releaseName((String) entity.getProperty("releaseName"))
       .releaseVersion((String) entity.getProperty("releaseVersion"))
       .oldVersion((String) entity.getProperty("oldVersion"))
+      .verifier((String) entity.getProperty("verifier"))
       .additionalInfo(getAdditionalInfoFromProperty((EmbeddedEntity) entity.getProperty("additionalInfo")))
       .build();
 
@@ -140,17 +141,19 @@ public class SDKDaoDatastore implements SDKDao {
     Entity entity = preparedQuery.asSingleEntity();
     if (entity == null) {
       // TODO: Throw sdk/entity not found exception
+      System.out.println("Could not find sdk.");
       return null;
     }
 
     List<VersionMetadata> versionHistory =
       getVersionHistoryFromProperty((List<EmbeddedEntity>) entity.getProperty("versionHistory"));
     for (VersionMetadata version: versionHistory) {
-      if (version.version() == releaseVersion) {
+      if (version.version().equals(releaseVersion)) {
         return version;
       }
     }
     // TODO: Throw version not found exception.
+    System.out.println("Could not find sdkversion.");
     return null;
   }
 
@@ -272,6 +275,7 @@ public class SDKDaoDatastore implements SDKDao {
     sdkReleaseEntity.setProperty("releaseName", sdkReleaseMetadata.releaseName());
     sdkReleaseEntity.setProperty("releaseVersion", sdkReleaseMetadata.releaseVersion());
     sdkReleaseEntity.setProperty("oldVersion", sdkReleaseMetadata.oldVersion());
+    sdkReleaseEntity.setProperty("verifier", sdkReleaseMetadata.verifier());
     sdkReleaseEntity.setProperty("additionalInfo", createAdditionalInfoEmbeddedEntity(sdkReleaseMetadata.additionalInfo()));
 
     return sdkReleaseEntity;
