@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.time.Instant;
 import java.io.IOException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -61,6 +60,7 @@ public class SDKDaoDatastore implements SDKDao {
   public List<String> getSDKs(Platform platform) {
     FilterPredicate platformPropertyFilter = makePropertyFilter("platform", platform.getLabel());
     Query query = new Query("SDK")
+      .addSort("libraryName", Query.SortDirection.ASCENDING)
       .setFilter(platformPropertyFilter);
 
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
@@ -123,18 +123,44 @@ public class SDKDaoDatastore implements SDKDao {
       .releaseName((String) entity.getProperty("releaseName"))
       .releaseVersion((String) entity.getProperty("releaseVersion"))
       .oldVersion((String) entity.getProperty("oldVersion"))
+      .verifier((String) entity.getProperty("verifier"))
       .additionalInfo(getAdditionalInfoFromProperty((EmbeddedEntity) entity.getProperty("additionalInfo")))
       .build();
 
     return sdkReleaseMetadata;
   }
 
+  public VersionMetadata getSDKVersionMetadata(Platform platform, String releaseVersion, String sdkName) {
+    Key sdkKey = KeyFactory.createKey("SDK", platform.getLabel() + "_" + sdkName);
+    FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkKey);
+
+    Query query = new Query("SDK")
+      .setFilter(keyPropertyFilter);
+
+    PreparedQuery preparedQuery = DATASTORE.prepare(query);
+    Entity entity = preparedQuery.asSingleEntity();
+    if (entity == null) {
+      // TODO: Throw sdk/entity not found exception
+      return null;
+    }
+
+    List<VersionMetadata> versionHistory =
+      getVersionHistoryFromProperty((List<EmbeddedEntity>) entity.getProperty("versionHistory"));
+    for (VersionMetadata version: versionHistory) {
+      if (version.version().equals(releaseVersion)) {
+        return version;
+      }
+    }
+    // TODO: Throw version not found exception.
+    return null;
+  }
+
   public void addSDK(SDK sdk) {
     DATASTORE.put(createSDKEntity(sdk));
   }
 
-  public void deleteSDK(SDK sdk) {
-    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform().getLabel() + "_" + sdk.libraryName());
+  public void deleteSDK(Platform platform, String sdkName) {
+    Key sdkKey = KeyFactory.createKey("SDK", platform.getLabel() + "_" + sdkName);
     DATASTORE.delete(sdkKey);
   }
 
@@ -233,7 +259,7 @@ public class SDKDaoDatastore implements SDKDao {
     metadata.setProperty("libraryName", version.libraryName());
     metadata.setProperty("releaseName", version.releaseName());
     metadata.setProperty("version", version.version());
-    metadata.setProperty("launchDate", version.launchDate().toEpochMilli());
+    metadata.setProperty("launchDate", version.launchDate());
 
     return metadata;
   }
@@ -247,6 +273,7 @@ public class SDKDaoDatastore implements SDKDao {
     sdkReleaseEntity.setProperty("releaseName", sdkReleaseMetadata.releaseName());
     sdkReleaseEntity.setProperty("releaseVersion", sdkReleaseMetadata.releaseVersion());
     sdkReleaseEntity.setProperty("oldVersion", sdkReleaseMetadata.oldVersion());
+    sdkReleaseEntity.setProperty("verifier", sdkReleaseMetadata.verifier());
     sdkReleaseEntity.setProperty("additionalInfo", createAdditionalInfoEmbeddedEntity(sdkReleaseMetadata.additionalInfo()));
 
     return sdkReleaseEntity;
@@ -279,7 +306,7 @@ public class SDKDaoDatastore implements SDKDao {
         .libraryName((String) entity.getProperty("libraryName"))
         .releaseName((String) entity.getProperty("releaseName"))
         .version((String) entity.getProperty("version"))
-        .launchDate(Instant.ofEpochMilli((long) entity.getProperty("launchDate")))
+        .launchDate((long) entity.getProperty("launchDate"))
         .build();
 
       versionHistory.add(versionMetadata);

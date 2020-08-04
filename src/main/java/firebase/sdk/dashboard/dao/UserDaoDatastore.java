@@ -26,15 +26,12 @@ import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultIterable;
 
-/* Class to implement UserDao */
-
+/* Class to implement UserDao to manipulate data about the users */.
 public class UserDaoDatastore implements UserDao {
-
     public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
-
     // Get a user from the datastore
     public User getUser(String id){
-        FilterPredicate userPropertyFilter = makePropertyFilter("id", id);
+        FilterPredicate userPropertyFilter = equalPropertyFilter("id", id);
         Query query = new Query("User").setFilter(userPropertyFilter);
 
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
@@ -42,45 +39,40 @@ public class UserDaoDatastore implements UserDao {
         Entity user = preparedQuery.asSingleEntity();
         if (user == null) {
             return null;
+            //TODO: Throw user not found exception
         }
-
+        User users = User.newBuilder()
+        .uid((String)user.getProperty("id"))
+        .email((String)user.getProperty("email"))
+        .favoriteSDKs((Map<Platform, List<String>>)user.getProperty("favoriteSDKs"))
+        .build();
+        return users;
     }
-
     // Add a user to the datastore
     public void addUser(User user){
-       Key userKey = KeyFactory.createKey("User",user.uid());
-       
+       Key userKey = KeyFactory.createKey("User", user.uid());
         // Create a user entity
         Entity userEntity = new Entity(userKey);
-        userEntity.setProperty("id",user.uid());
-        userEntity.setProperty("email",user.email());
-        userEntity.setProperty("favoriteSDKs",user.favoriteSDKs);
-
+        userEntity.setProperty("id", user.uid());
+        userEntity.setProperty("email", user.email());
+        userEntity.setProptery("favoriteSDKs", user.favoriteSDKs());
         DATASTORE.put(userEntity);
     }
  
     // Updates user favorite SDKs
     public void updateUser(User user){
-         User outdated = getUser(user.uid());
-         outdated.favoriteSDKs() = user.favoriteSDKs();
-         addUser(User outdated);
-
-    }
-
-    private FilterPredicate makePropertyFilter(String property, Object value) {
-    FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
-
-    return propertyFilter;
-  }
-    
-
-
-
-
-
-
-
-
-
-
+        FilterPredicate userPropertyFilter = equalPropertyFilter("id", user.uid());
+        Query query = new Query("User").setFilter(userPropertyFilter);
+        PreparedQuery preparedQuery = DATASTORE.prepare(query);
+        FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
+        Entity userEntity = preparedQuery.asSingleEntity();
+        if (userEntity == null) {
+            //TODO: Throw user not found exception
+        }
+        userEntity.setProperty("favoriteSDKs", user.favoriteSDKs());
+        DATASTORE.put(userEntity);
+    }                                                              
+   private FilterPredicate equalPropertyFilter(String property, Object value) {
+        FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
+        return propertyFilter;                                                              
 }

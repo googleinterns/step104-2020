@@ -51,6 +51,16 @@ public interface SDKDao {
   public SDKReleaseMetadata getSDKReleaseMetadata(Platform platform, String releaseName, String libraryName);
 
   /**
+   * Retrieves the VersionMetadata object from the data source.
+   *
+   * @param platform The SDKRelease object's operating platform (ie Android, iOS, etc,).
+   * @param releaseVersion The name of the version of the VersionMetadata object.
+   * @param libraryName The sdk's name.
+   * @return A VersionMetadata object containing all the information about the SDK version.
+   */
+  public VersionMetadata getSDKVersionMetadata(Platform platform, String releaseVersion, String libraryName);
+
+  /**
    * Adds the SDK to the data source.
    *
    * @param sdk The SDK being added.
@@ -60,9 +70,10 @@ public interface SDKDao {
   /**
    * Removes the SDK from the data source.
    *
-   * @param sdk The SDK being removed.
+   * @param platform The platform of the SDK being removed.
+   * @param sdkName The name of the SDK being removed.
    */
-  public void deleteSDK(SDK sdk);
+  public void deleteSDK(Platform platform, String sdkName);
 
   /**
    * Adds the SDKReleaseMetadata object to the data source.

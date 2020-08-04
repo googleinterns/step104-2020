@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * An interface for retrieving and manipulating data about Users.
  */
- public interface UserDao {
+public interface UserDao {
 
   /** 
    * Retrieves a User object from a data source.
@@ -30,7 +30,4 @@ import java.util.Map;
    * @param user The user being updated in the data source.
    */
   public void updateUser(User user);
-  
 }
- 
-
