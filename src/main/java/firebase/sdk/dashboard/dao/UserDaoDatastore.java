@@ -31,7 +31,7 @@ public class UserDaoDatastore implements UserDao {
     public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
     // Get a user from the datastore
     public User getUser(String id){
-        FilterPredicate userPropertyFilter = makePropertyFilter("id", id);
+        FilterPredicate userPropertyFilter = equalPropertyFilter("id", id);
         Query query = new Query("User").setFilter(userPropertyFilter);
 
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
@@ -61,7 +61,7 @@ public class UserDaoDatastore implements UserDao {
  
     // Updates user favorite SDKs
     public void updateUser(User user){
-        FilterPredicate userPropertyFilter = makePropertyFilter("id", user.uid());
+        FilterPredicate userPropertyFilter = equalPropertyFilter("id", user.uid());
         Query query = new Query("User").setFilter(userPropertyFilter);
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
         FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
@@ -72,7 +72,7 @@ public class UserDaoDatastore implements UserDao {
         userEntity.setProperty("favoriteSDKs", user.favoriteSDKs());
         DATASTORE.put(userEntity);
     }                                                              
-   private FilterPredicate makePropertyFilter(String property, Object value) {
+   private FilterPredicate equalPropertyFilter(String property, Object value) {
         FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
         return propertyFilter;                                                              
 }
