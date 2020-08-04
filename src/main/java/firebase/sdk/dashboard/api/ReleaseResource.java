@@ -38,7 +38,6 @@ public class ReleaseResource {
   private final static SDKDao SDKDAO = new SDKDaoDatastore();
 
   public ReleaseResource(String platform) {
-    System.out.println("At Release Resource.");
     this.platform = Platform.get(platform);
   }
 
@@ -68,8 +67,6 @@ public class ReleaseResource {
   @Consumes(MediaType.APPLICATION_JSON)
   public Response addRelease(Release release) {
     // TODO: Catch exceptions.
-    System.out.println("Adding release");
-    System.out.println(release);
     RELEASEDAO.addRelease(platform, release);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }

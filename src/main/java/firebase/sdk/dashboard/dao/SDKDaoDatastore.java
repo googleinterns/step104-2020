@@ -141,7 +141,6 @@ public class SDKDaoDatastore implements SDKDao {
     Entity entity = preparedQuery.asSingleEntity();
     if (entity == null) {
       // TODO: Throw sdk/entity not found exception
-      System.out.println("Could not find sdk.");
       return null;
     }
 
@@ -153,7 +152,6 @@ public class SDKDaoDatastore implements SDKDao {
       }
     }
     // TODO: Throw version not found exception.
-    System.out.println("Could not find sdkversion.");
     return null;
   }
 
