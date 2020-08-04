@@ -1,0 +1,89 @@
+ ,http://b/hotlists/1917328,Release Manager: rlazo@,Code Freeze March 4, 2020 (Core team will create RC from Rapid next day)
+Launchcal Deadline March 6, 2020
+Launch March 12, 2020 (go/firebase-m-dates   go/firebase-android-calendar),,,,,,,,,,,,
+Library Name,External Name,Library Group,Owner,Launching?,OldVersion,NewVersion,Ariane Entry,Release
+Note CL,JavaDocs CL,Link to CHANGELOG,Internal Hotlist,Prebuilts Drop Bug,Manual Verification Bug,Javadoc Bug,Fireescape name(if applicable)
+,,,Responsible for making sure this sheet is updated,Yes/No if you intend to ship in this release. Remember, if anyone in your library group is shipping, you are forced to ship as well.,Current public version,Expected new version to go live publicly
+https://cs.corp.google.com/piper///depot/google3/java/com/google/android/gmscore/dev/client/XXX/library.bzl,Launchcal for Android launch (contents may reference feature launchcal shared between iOS and Android). Required only for libraries with new features or breaking changes (enter "N/A" if this release is bug fixes only for your library).,If releasing for "internal" reasons only, use the following:
+
+Internal changes to ensure functionality alignment with other SDK releases.,,Required: Text file that is customer-facing descriptions of all changes in the release ,Buganizer hotlist, Critique query, or other list depending on team's tracking and devleopment process that lists all changes in a release (different from Changelog in that this is for internal use by QA and Core team and must be complete, whereas Changelog may be sanitized/summarized),,,,
+,,,,,,,Firebase tips,,,,,,,,
+,,,,,,,GMS Core,,,,,,,,
+firebase-auth-interop,,firebase-auth-interop,mdeck,,,,,,N/A - no ref docs ever,,,,,,
+firebase-auth,,firebase_auth,mdeck,,,,,,,,,,,,
+firebase-auth-api,firebase-auth,firebase_auth,leosiracusa,,19.2.0,19.3.0,https://ariane.googleplex.com/launch/305011,cl/300176569,,,,b/150770098,b/151177845,b/151093643,
+firebase-database,firebase-database,firebase_database,mrschmidt,,,,,,,,,,,,firebase-database
+firebase_ml_natural_language,firebase-ml-natural-language,firebase_ml_naturallanguage,bauerb,No,,,,,,,,,,,
+firebase_ml_language_id,firebase-ml-natural-language-language-id-model,firebase_ml_naturallanguage,bauerb,No,,,,,,,,,,,
+predictondevice-api,firebase-ml-natural-language-smart-reply,firebase_ml_naturallanguage,bauerb,No,,,,,,,,,,,
+predictondevice,firebase-ml-natural-language-smart-reply-model,firebase_ml_naturallanguage,bauerb,No,,,,,,,,,,,
+firebase_ml_translate_api,firebase-ml-natural-language-translate,firebase_ml_naturallanguage_translate,bauerb,No,,,,,,,,,,,
+firebase_ml_translate,firebase-ml-natural-language-translate-model,firebase_ml_naturallanguage_translate,bauerb,No,,,,,,,,,,,
+firebase_ml_vision,firebase-ml-vision,firebase_ml,songchenxi,No,,,,,,,,,,,
+firebase_ml_model_interpreter,firebase-ml-model-interpreter,firebase_ml,songchenxi,No,,,,,,,,,,,
+firebase_ml_common,firebase-ml-common,firebase_ml,songchenxi,No,,,,,,,,,,,
+firebase_ml_vision_object_detection,firebase-ml-vision-object-detection,firebase_ml,songchenxi,No,,,,,,,,,,,
+firebase-ml-vision-automl,firebase-ml-vision-automl,firebase_ml,songchenxi,No,,,,,,,,,,,
+firebase-storage-api,firebase-storage,firebase_storage,mrschmidt,,,,,,,,,,,,firebase-storage
+firebase_common,firebase-common,firebase_common,ashwinraghav,,,,,,N/A - no ref docs ever,,,,,,firebase-common
+firebase_common_ktx,firebase-common,firebase_common,ashwinraghav,,,,,,N/A - no ref docs ever,,,,,,firebase-common:ktx
+firebase_components,firebase-components,firebase_components,vkryachko,,,,,,N/A - no ref docs ever,,,,,,firebase-components
+firebase-firestore,firebase-firestore,N/A,wuandy,,,,,,,,,,,,firebase-firestore
+firebase-firestore-ktx,firebase-firestore,N/A,wuandy,,,,,,,,,,,,firebase-firestore:ktx
+gcm,play-services-gcm,gcm,ciarandowney,,,,,,N/A - no ref docs ever,,,,,,
+iid,play-services-iid,gcm,ciarandowney,,,,,,N/A - no ref docs ever,,,,,,
+firebase-iid,firebase-iid,firebase-messaging,ciarandowney,Yes - bug fixes only,,,,cl/300235734,,,,b/150769928,b/151178572,b/151093785,
+firebase-iid-interop,firebase-iid-interop,firebase-iid-interop,ciarandowney,,,,,,N/A - no ref docs ever,,,,,,
+firebase-messaging,firebase-messaging,firebase-messaging,ciarandowney,,,,,,,,,,,,
+firebase-messaging-federation,firebase-messaging-federation,firebase-messaging-federation,yujiewang,,,,,,N/A - no ref docs ever,,,,,,
+appinvite,play-services-appinvite,firebase_dynamic_links,paulwroberts,,,,,,N/A - no ref docs ever,,,,,,
+firebase_dynamic_links,firebase-dynamic-links,firebase_dynamic_links,paulwroberts,,,,,,,,,,,,
+analyticsservices,play-services-analytics-impl,gtm,barretta,,,,,,N/A - no ref docs ever,,,,,,
+analyticsservices_app_library,play-services-analytics,gtm,barretta,,,,,,N/A - no ref docs ever,,,,,,
+firebase_analytics,firebase-analytics,measurement,dhm,,,,,,,,,,,,
+measurement_impl,firebase-analytics-impl,measurement,dhm,,,,,,,,,,,,
+measurement,play-services-measurement,measurement,dhm,,,,,,N/A - no ref docs ever,,,,,,
+measurement_api,play-services-measurement-api,measurement,dhm,,,,,,N/A - no ref docs ever,,,,,,
+measurement_base,play-services-measurement-base,measurement,dhm,,,,,,N/A - no ref docs ever,,,,,,
+measurement_sdk_api,play-services-measurement-sdk-api,measurement,dhm,,,,,,N/A - no ref docs ever,,,,,,
+measurement_sdk,play-services-measurement-sdk,measurement,dhm,,,,,,N/A - no ref docs ever,,,,,,
+tagmanager,play-services-tagmanager,gtm,eburley,,,,,,N/A - no ref docs ever,,,,,,
+tagmanager-api,play-services-tagmanager-api,gtm,eburley,,,,,,N/A - no ref docs ever,,,,,,
+tagmanager_legacy,play-services-tagmanager-v4-impl,gtm,eburley,,,,,,N/A - no ref docs ever,,,,,,
+measurement_connector,measurement_connector,measurement_connector,dhm,,,,,,N/A - no ref docs ever,,,,,,
+firebase_ads,,,ashwinraghav,,,,,,,,,,,,
+firebase_ads_lite,,,ashwinraghav,,,,,,,,,,,,
+clearcut,play-services-clearcut,clearcut,eworoshow,,,,,,N/A - no ref docs ever,,,,,,
+firebase_abt,firebase-abt,firebase_abt,welkinlan,,,,,N/A - no release notes ever,N/A - no ref docs ever,,,,,,firebase-abt
+firebase-database-collection,firebase-database-collection,firebase-database-collection,mrschmidt,,,,,,N/A - no ref docs ever,,,,,,firebase-database-collection
+crash,firebase-crash,crash,tdeshpande,,,,,,,,,,,,
+firebase-perf,firebase-perf,firebase-perf,rkhinda,,,,,,,,,,,,
+phenotype,play-services-phenotype,phenotype,eworoshow,,,,,,N/A - no ref docs ever,,,,,,
+firebase_remote_config,firebase-config,firebase_remote_config,danasilver,Yes - bug fixes only,19.1.2,19.1.3,N/A,cl/300216194,,,,b/150770118,b/151092505,b/151093391,firebase-config
+functions,,N/A,klimt,,,,,,,,,,,,firebase-functions
+functions-ktx,,N/A,klimt,,,,,,,,,,,,firebase-functions:ktx
+firebase_core,firebase-core,firebase_core,ashwinraghav,,,,,,N/A - no ref docs ever,,,,,,
+firebase_invites,firebase-invites,firebase-invites,ciarandowney,,,,,,,,,,,,
+firebase_remote_config_ktx,firebase-config-ktx,firebase_remote_config_ktx,danasilver,Yes - bug fixes only,19.1.2,19.1.3,N/A,cl/300216194,,,,b/145207846,b/145208330,,firebase-config:ktx
+protolite-well-known-types,,,ashwinraghav,,,,,,N/A - no ref docs ever,,,,,,protolite-well-known-types
+vision_image_label_impl,firebase-ml-vision-image-label-model,vision,songchenxi,No,,,,,,,,,,,
+vision_face_impl,firebase-ml-vision-face-model,vision,songchenxi,No,,,,,,,,,,,
+vision,play-services-vision,vision,songchenxi,No,,,,,,,,,,,
+vision_common,play-services-vision-common,vision,songchenxi,No,,,,,,,,,,,
+vision_image_label,play-services-vision-image-label,vision,songchenxi,No,,,,,,,,,,,
+icing,firebase-appindexing,icing,cassiewang,,,,,,,,,,,,
+firebase-inappmessaging,firebase-inappmessaging,N/A,jheron,Yes - bug fixes only,19.0.3,19.0.4,,,,,,b/150769659,b/151092570,b/151092562,firebase-inappmessaging
+firebase-inappmessaging-display,firebase-inappmessaging-display,N/A,jheron,Yes - bug fixes only,19.0.3,19.0.4,,,,,,b/150769452,b/151092095,b/151093485,firebase-inappmessaging-display
+google-services plugin ,n/a,n/a,davidmotson,,,,,,,,,,,,
+strict-version-matcher,n/a,n/a,davidmotson,,,,,,,,,,,,
+firebase-datatransport,firebase-datatransport,n/a,vkryachko,,,,,,,,,,,,firebase-datatransport
+transport-runtime,transport-runtime,n/a,vkryachko,,,,,,,,,,,,transport:transport-runtime
+transport-backend-cct,transport-backend-cct,n/a,vkryachko,,,,,,,,,,,,transport:transport-backend-cct
+transport-api,transport-api,n/a,vkryachko,,,,,,,,,,,,transport:transport-api
+firebase-transport-encoders,firebase-transport-encoders,n/a,rlazo,Yes - includes new functionality,16.0.0,16.1.0,ariane/4010506,,,,,,,,encoders:firebase-encoders-json
+firebase-appdistribution-gradle,n/a,n/a,tundeagboola,,,,,,,,,,,,
+firebase-crashlytics,firebase-crashlytics,firebase-crashlytics,mrwillis,Yes - bug fixes only,17.0.0-beta01,17.0.0-beta02,,cl/299358562,,,,b/150769231,b/151092586,b/151093328,firebase-crashlytics
+firebase-crashlytics-ndk,firebase-crashlytics-ndk,firebase-crashlytics-ndk,mrwillis,,,,,,,,,,,,firebase-crashlytics-ndk
+crashlytics-gradle,crashlytics-gradle,n/a,marcrichards,Yes - bug fixes only,2.0.0-beta02,2.0.0-beta03,,cl/299386032,,,,b/150872801,b/151178463,b/151093951,
+firebase-installations,firebase-installations,,andirayo,Yes - bug fixes only,16.0.0,16.1.0,ariane/4010123,cl/300370606,,,,b/150769586,b/151092155,b/151093266,firebase-installations
+firebase-installations-interop,firebase-installations-interop,,andirayo,No,,,,,,,,,,,firebase-installations-interop

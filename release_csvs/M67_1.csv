@@ -1,0 +1,15 @@
+M67_1,http://b/hotlists/1917294,Release Manager: davidmotson@,Code Freeze April 1, 2020 14:00:00 EST(Core team will create RC from Rapid next day)
+Launchcal Deadline March 31, 2020
+Launch April 3, 2020 (go/firebase-m-dates   go/firebase-android-calendar),,,,There was a bug in the linter released in firebase-installations. This is a fast follow release to rectify it.,,,,,,,,
+Library Name,External Name,Library Group,Owner,Launching?,OldVersion,NewVersion,Ariane Entry,Release
+Note CL,JavaDocs CL,Link to CHANGELOG,Internal Hotlist,Prebuilts Drop Bug,Manual Verification Bug,Javadoc Bug,Fireescape name(if applicable)
+,,,Responsible for making sure this sheet is updated,Yes/No if you intend to ship in this release. Remember, if anyone in your library group is shipping, you are forced to ship as well.,Current public version,Expected new version to go live publicly
+https://cs.corp.google.com/piper///depot/google3/java/com/google/android/gmscore/dev/client/XXX/library.bzl,Launchcal for Android launch (contents may reference feature launchcal shared between iOS and Android). Required only for libraries with new features or breaking changes (enter "N/A" if this release is bug fixes only for your library).,If releasing for "internal" reasons only, use the following:
+
+Internal changes to ensure functionality alignment with other SDK releases.,,Required: Text file that is customer-facing descriptions of all changes in the release ,Buganizer hotlist, Critique query, or other list depending on team's tracking and devleopment process that lists all changes in a release (different from Changelog in that this is for internal use by QA and Core team and must be complete, whereas Changelog may be sanitized/summarized),,,,
+,,,,,,,Firebase tips,,,,,,,,
+,,,,,,,GMS Core,,,,,,,,
+firebase-installations,firebase-installations,n/a,andirayo,Yes - bug fixes only,16.2.0,16.2.1,,cl/304552458,,,,b/152996979,b/152996761,,firebase-installations
+firebase-iid,firebase-iid,firebase-messaging,ciarandowney,Yes - bug fixes only,20.1.4,20.1.5,,cl/304459730,,,,b/152996998,b/153018477,,
+firebase-iid-interop,firebase-iid-interop,firebase-iid-interop,ciarandowney,,17.0.0,,,,N/A - no ref docs ever,,,,,,
+firebase-messaging,firebase-messaging,firebase-messaging,ciarandowney,Yes - bug fixes only,20.1.4,20.1.5,,cl/304459730,,,,b/152996409,b/153019186,,

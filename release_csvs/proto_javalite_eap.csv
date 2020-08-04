@@ -1,0 +1,22 @@
+Proto_Javalite_EAP,http://b/hotlists/2342874,Release Manager: rlazo@,Code Freeze July 20, 2020  23:59:59 PST(Core team will create RC from Rapid next day)
+Launchcal Deadline June 25, 2020
+Launch June 30 2020 (go/firebase-m-dates   go/firebase-android-calendar),,,,Automatically Send out RCs at code freeze?,No,firebase/firebase-android-sdk,ashwinraghav.grpc,,,,,
+Library Name,External Name,Library Group,Owner,Launching?,OldVersion,NewVersion,Ariane Entry,Release
+Note CL,JavaDocs CL,Link to CHANGELOG,Internal Hotlist,Prebuilts Drop Bug,Manual Verification Bug,Javadoc Bug,Fireescape name(if applicable)
+,,,Responsible for making sure this sheet is updated,Yes/No if you intend to ship in this release. Remember, if anyone in your library group is shipping, you are forced to ship as well.,Current public version,Expected new version to go live publicly
+https://cs.corp.google.com/piper///depot/google3/java/com/google/android/gmscore/dev/client/XXX/library.bzl,Launchcal for Android launch (contents may reference feature launchcal shared between iOS and Android). Required only for libraries with new features or breaking changes (enter "N/A" if this release is bug fixes only for your library).,If releasing for "internal" reasons only, use the following:
+
+Internal changes to ensure functionality alignment with other SDK releases.,,Required: Text file that is customer-facing descriptions of all changes in the release ,Buganizer hotlist, Critique query, or other list depending on team's tracking and devleopment process that lists all changes in a release (different from Changelog in that this is for internal use by QA and Core team and must be complete, whereas Changelog may be sanitized/summarized),,,,
+,,,,,,,Firebase tips,,,,,,,,
+,,,,,,,GMS Core,,,,,,,,
+protolite-well-known-types,protolite-well-known-types,,ashwinraghav,Yes - bug fixes only,17.1.0,17.1.0-alpha,Managed by ACore,,N/A - no ref docs ever,,,,,,protolite-well-known-types
+firebase-firestore,firebase-firestore,N/A,wuandy,Yes - bug fixes only,21.5.0,21.5.0-alpha,Managed by ACore,,,,,,,,firebase-firestore
+firebase-firestore-ktx,firebase-firestore-ktx,N/A,wuandy,Yes - bug fixes only,21.5.0,21.5.0-alpha,Managed by ACore,,,,,,,,firebase-firestore:ktx
+firebase-inappmessaging,firebase-inappmessaging,N/A,jheron,Yes - bug fixes only,19.1.0,19.1.0-alpha,Managed by ACore,,,,,,,,firebase-inappmessaging
+firebase-inappmessaging-ktx,firebase-inappmessaging-ktx,N/A,jheron,Yes - bug fixes only,19.1.0,19.1.0-alpha,Managed by ACore,,,,,,,,firebase-inappmessaging:ktx
+firebase-inappmessaging-display,firebase-inappmessaging-display,N/A,jheron,Yes - bug fixes only,19.1.0,19.1.0-alpha,Managed by ACore,,,,,,,,firebase-inappmessaging-display
+firebase-inappmessaging-display-ktx,firebase-inappmessaging-display-ktx,N/A,jheron,Yes - bug fixes only,19.1.0,19.1.0-alpha,Managed by ACore,,,,,,,,firebase-inappmessaging-display:ktx
+firebase_remote_config,firebase-config,firebase_remote_config,danasilver,Yes - bug fixes only,19.2.0,19.2.0-alpha,Managed by ACore,,,,,,,,firebase-config
+firebase_remote_config_ktx,firebase-config-ktx,firebase_remote_config_ktx,danasilver,Yes - bug fixes only,19.2.0,19.2.0-alpha,Managed by ACore,,,,,,,,firebase-config:ktx
+firebase_abt,firebase-abt,firebase_abt,welkinlan,Yes - bug fixes only,19.1.0,19.1.0-alpha,Managed by ACore,,N/A - no ref docs ever,,,,,,firebase-abt
+transport-backend-cct,transport-backend-cct,n/a,vkryachko,Yes - bug fixes only,2.3.0,2.3.0-alpha,Managed by ACore,,,,,,,,transport:transport-backend-cct
