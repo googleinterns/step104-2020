@@ -53,15 +53,15 @@ public class UserDaoDatastore implements UserDao {
        Key userKey = KeyFactory.createKey("User", user.uid());
         // Create a user entity
         Entity userEntity = new Entity(userKey);
-        userEntity.setProperty("id",user.uid());
-        userEntity.setProperty("email",user.email());
-        userEntity.setProptery("favoriteSDKs",user.favoriteSDKs());
+        userEntity.setProperty("id", user.uid());
+        userEntity.setProperty("email", user.email());
+        userEntity.setProptery("favoriteSDKs", user.favoriteSDKs());
         DATASTORE.put(userEntity);
     }
  
     // Updates user favorite SDKs
     public void updateUser(User user){
-         FilterPredicate userPropertyFilter = makePropertyFilter("id", user.uid());
+        FilterPredicate userPropertyFilter = makePropertyFilter("id", user.uid());
         Query query = new Query("User").setFilter(userPropertyFilter);
         PreparedQuery preparedQuery = DATASTORE.prepare(query);
         FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
@@ -69,8 +69,8 @@ public class UserDaoDatastore implements UserDao {
         if (userEntity == null) {
             //TODO: Throw user not found exception
         }
-         userEntity.setProperty("favoriteSDKs",user.favoriteSDKs());
-         DATASTORE.put(userEntity);
+        userEntity.setProperty("favoriteSDKs", user.favoriteSDKs());
+        DATASTORE.put(userEntity);
     }                                                              
    private FilterPredicate makePropertyFilter(String property, Object value) {
         FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
