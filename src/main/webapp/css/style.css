@@ -3,43 +3,45 @@
 }
 
 .jumbotron {
-    text-align: center;
-    background-color: #039BE5 !important;
+  text-align: center;
+  background-color: #039BE5 !important;
 }
 
 .card {
-    text-align: center;
-    background-color: #2C384A !important;
-    width: 350px; 
-    height: 350px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43);  
+  text-align: center;
+  background-color: #2C384A !important;
+  width: 350px; 
+  height: 350px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.43);  
+}
+
+#sdk {
+  text-align: center;
+  background-color: #2C384A !important;
+  width: 500px; 
+  height: 50px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+  color: white;
+  position: relative;
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 100px;
+  padding-bottom: 50px;
 }
 
 .sdk {
-    text-align: center;
-    background-color: #2C384A !important;
-    width: 500px; 
-    height: 50px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
-    color: white;
-    position: relative;
-    padding: 20px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.sdk {
-    text-align: center;
-    background-color: #2C384A !important;
-    width: 400px; 
-    height: 75px;
-    font-size: 35px;
-    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
-    color: white;
-    position: relative;
-    padding: 20px;
-    margin-right: auto;
-    margin-left: auto;
+  text-align: center;
+  background-color: #2C384A !important;
+  width: 400px; 
+  height: 75px;
+  font-size: 35px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+  color: white;
+  position: relative;
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
 
 }
 
@@ -188,8 +190,9 @@
   color: white;
   position: relative;
   padding: 20px;
-  margin-right: 10px;
-  margin-left: auto;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-bottom: 50px;
 }
 
 .sdkright {
@@ -201,8 +204,9 @@
   color: white;
   position: relative;
   padding: 20px;
-  margin-right: auto;
-  margin-left: 10px;
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-bottom: 50px;
 }
 
 .button {
@@ -247,6 +251,7 @@ h1 {
   padding: 20px;
   margin-right: auto;
   margin-left: 10px;
+  margin-bottom: 50px;
 }
 
 #sdkleft {
@@ -258,8 +263,9 @@ h1 {
   color: black;
   position: relative;
   padding: 20px;
-  margin-right: 10px;
+  margin-right: 50px;
   margin-left: auto;
+  margin-bottom: 45px;
 }
 
 #sdkright {
@@ -273,6 +279,7 @@ h1 {
   padding: 20px;
   margin-right: auto;
   margin-left: 10px;
+  margin-bottom: 50px;
 }
 
 .buttonlaunch {
@@ -301,6 +308,7 @@ h1 {
   padding: 20px;
   margin-right: auto;
   margin-left: 10px;
+  margin-bottom: 50px;
 }
 
 #sdkleftlast {
@@ -312,9 +320,10 @@ h1 {
   color: black;
   position: relative;
   padding: 20px;
-  margin-right: 10px;
+  margin-right: 50px;
   margin-left: auto;
   padding-top: 55px;
+  margin-bottom: 50px;
 }
 
 .history {
@@ -334,9 +343,11 @@ h1 {
     font-size: 100px;
 }
 
-#firebase {
-    position:absolute; 
-    top:25px; 
-    left:5px;
+.leftcolumn {
+    width: 50% ;
+}
+
+.rightcolumn {
+    width: 50%
 }
 
