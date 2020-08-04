@@ -1,9 +1,10 @@
 package firebase.sdk.dashboard.api;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.time.Instant;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import firebase.sdk.dashboard.dao.SDKDao;
+import firebase.sdk.dashboard.dao.SDKDaoDatastore;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.Platform;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
@@ -25,10 +27,11 @@ import firebase.sdk.dashboard.data.VersionMetadata;
 @Consumes(MediaType.APPLICATION_JSON)
 public class SDKResource {
 
-  private String platform;
+  private Platform platform;
+  private static final SDKDao SDKDAO = new SDKDaoDatastore();
 
   public SDKResource(String platform) {
-    this.platform = platform;
+    this.platform = Platform.get(platform);
   }
 
   /**
@@ -40,15 +43,25 @@ public class SDKResource {
    */
   @GET
   public Response getSDKs() {
-    ArrayList<String> sdks = new ArrayList<>();
-    sdks.add("firebase-common");
-    sdks.add("firebase-common-ktx");
-    sdks.add("firebase-ml");
-    sdks.add("firebase-database");
-    sdks.add("firebase-auth");
-    sdks.add("firebase-messaging");
-
+    //TODO: Catch exceptions.
+    List<String> sdks = SDKDAO.getSDKs(platform);
     return ResponseHandler.createJsonResponse(Status.OK, sdks);
+  }
+
+  /**
+   * Method handling HTTP POST requests.
+   * Exposed at "v1/platforms/{platform}/sdks", this endpoint consumes
+   * an SDK and adds it to the database. This only works for users
+   * that have admin authorization.
+   *
+   * @return Response object containing a status code representing the ouput
+   * of the action.
+   */
+  @POST
+  public Response addSDK(SDK newSdk) {
+    //TODO: Catch exceptions.
+    SDKDAO.addSDK(newSdk);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
   /**
@@ -61,29 +74,24 @@ public class SDKResource {
   @GET
   @Path("/{sdkName}")
   public Response getSDK(@PathParam("sdkName") String sdkName) {
-    ArrayList<VersionMetadata> versionHistory = new ArrayList<>();
-    int release = 78;
-    for (int i = 0; i < 17; i++) {
-      release -= i * 3;
-      String newVersion = String.format("%d.%d.%d", 19, 2, 9 - i);
-      VersionMetadata version = VersionMetadata.newBuilder()
-        .libraryName("firebase-common")
-        .platform(Platform.ANDROID)
-        .releaseName( "M" + Integer.toString(release))
-        .version(newVersion)
-        .launchDate(Instant.now().toEpochMilli())
-        .build();
-      versionHistory.add(version);
-    }
-    SDK sdk = SDK.newBuilder()
-      .platform(Platform.ANDROID)
-      .libraryName(sdkName)
-      .libraryGroup("firebase-common")
-      .externalName("firebase-common")
-      .owner("ashwin@")
-      .fireEscapeName("firebase-common")
-      .versionHistory(versionHistory)
-      .build();
+    //TODO: Catch exceptions.
+    SDK sdk = SDKDAO.getSDK(platform, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, sdk);
+  }
+
+  /**
+   * Method handling HTTP DELETE requests.
+   * Exposed at "v1/platforms/{platform}/sdks/{sdkName}", this endpoint deletes the
+   * given sdk from the database if it exists. This only works for users with admin 
+   * authorization.
+   *
+   * @return Response object containing a status code.
+   */
+  @DELETE
+  @Path("/{sdkName}")
+  public Response deleteSDK(@PathParam("sdkName") String sdkName) {
+    //TODO: Catch exceptions.
+    SDKDAO.deleteSDK(platform, sdkName);
+    return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 }
