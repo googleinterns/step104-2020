@@ -50,8 +50,9 @@ public interface PlatformReleaseDao {
    * Removes the requested release object from a data source. Only admins should
    * be able to delete release objects from data sources.
    *
-   * @param releaseName The release object that is to be deleted from the data source.
+   * @param platform The platform the release is a part of.
+   * @param releaseName The name of the release object that is to be deleted from the data source.
    */
-  public void deleteRelease(Release releaseName);
+  public void deleteRelease(Platform platform, String releaseName);
 } 
 
