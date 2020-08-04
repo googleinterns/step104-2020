@@ -87,7 +87,13 @@
       <version>1.9.0</version>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+
+    <dependency>
+      <groupId>com.google.firebase</groupId>
+      <artifactId>firebase-admin</artifactId>
+      <version>6.15.0</version>
+      </dependency>
+    </dependencies>
 
   <build>
     <plugins>

@@ -91,3 +91,15 @@ $(document).ready(function(){
     }
   });
 });
+
+function emailTrigger() {
+    admin.firestore().collection('mail').add({
+    to: user.email(),
+    message: {
+        subject: 'Hello from Firebase SDK Release Dashboard!',
+        text: 'This is the plaintext section of the email body.',
+        html: 'This is the <code>HTML</code> section of the email body.',
+    }
+    }).then(() => console.log('Queued email for delivery!'));
+
+}
