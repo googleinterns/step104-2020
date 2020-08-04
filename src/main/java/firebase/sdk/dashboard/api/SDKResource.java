@@ -40,15 +40,21 @@ public class SDKResource {
    */
   @GET
   public Response getSDKs() {
-    ArrayList<String> sdks = new ArrayList<>();
-    sdks.add("firebase-common");
-    sdks.add("firebase-common-ktx");
-    sdks.add("firebase-ml");
-    sdks.add("firebase-database");
-    sdks.add("firebase-auth");
-    sdks.add("firebase-messaging");
-
-    return ResponseHandler.createJsonResponse(Status.OK, sdks);
+  
+    try {
+      ArrayList<String> sdks = new ArrayList<>();
+      sdks.add("firebase-common");
+      sdks.add("firebase-common-ktx");
+      sdks.add("firebase-ml");
+      sdks.add("firebase-database");
+      sdks.add("firebase-auth");
+      sdks.add("firebase-messaging");
+      
+      return ResponseHandler.createJsonResponse(Status.OK, sdks);
+    } catch (Exception e) {
+      // TODO: Implement method to catch errors 
+      return e.toString();
+    }
   }
 
   /**
