@@ -67,9 +67,9 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
       String releaseManager = (String) releaseEntity.getProperty("releaseManager");
       String releaseName = (String) releaseEntity.getProperty("releaseName");
       String buganizerHotlistLink = (String) releaseEntity.getProperty("buganizerHotlistLink");
-      Instant launchDate = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchDate"));
-      Instant launchCalDeadline = Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchCalDeadline"));
-      Instant codeFreezeTime = Instant.ofEpochMilli((Long) releaseEntity.getProperty("codeFreezeTime"));
+      long launchDate = (long) releaseEntity.getProperty("launchDate");
+      long launchCalDeadline =(long) releaseEntity.getProperty("launchCalDeadline");
+      long codeFreezeTime = (long) releaseEntity.getProperty("codeFreezeTime");
 
       Release release = Release.newBuilder()
         .platform(releasePlatform)
@@ -99,9 +99,9 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
       .releaseName((String) releaseEntity.getProperty("releaseManager"))
       .releaseManager((String) releaseEntity.getProperty("releaseName"))
       .buganizerHotlistLink((String) releaseEntity.getProperty("buganizerHotlistLink"))
-      .launchDate(Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchDate")))
-      .launchCalDeadline(Instant.ofEpochMilli((Long) releaseEntity.getProperty("launchCalDeadline")))
-      .codeFreezeTime(Instant.ofEpochMilli((Long) releaseEntity.getProperty("codeFreezeTime")))
+      .launchDate((long) releaseEntity.getProperty("launchDate"))
+      .launchCalDeadline((long) releaseEntity.getProperty("launchCalDeadline"))
+      .codeFreezeTime((long) releaseEntity.getProperty("codeFreezeTime"))
       .build();
 
     return release;
@@ -116,10 +116,10 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
     releaseEntity.setProperty("platform", platform.getLabel());
     releaseEntity.setProperty("releaseName", release.releaseName());
     releaseEntity.setProperty("releaseManager", release.releaseManager());
-    releaseEntity.setProperty("launchDate", release.launchDate().toEpochMilli());
+    releaseEntity.setProperty("launchDate", release.launchDate());
     releaseEntity.setProperty("buganizerHotlistLink", release.buganizerHotlistLink());
-    releaseEntity.setProperty("launchCalDeadline", release.launchCalDeadline().toEpochMilli());
-    releaseEntity.setProperty("codeFreezeTime", release.codeFreezeTime().toEpochMilli());
+    releaseEntity.setProperty("launchCalDeadline", release.launchCalDeadline());
+    releaseEntity.setProperty("codeFreezeTime", release.codeFreezeTime());
 
     DATASTORE.put(releaseEntity);
   }

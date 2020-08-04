@@ -18,6 +18,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
+import firebase.sdk.dashboard.data.VersionMetadata;
 import firebase.sdk.dashboard.data.Release;
 import firebase.sdk.dashboard.data.Platform;
 import firebase.sdk.dashboard.dao.PlatformReleaseDao;
@@ -33,7 +34,7 @@ import firebase.sdk.dashboard.dao.SDKDaoDatastore;
 public class ReleaseResource {
 
   private Platform platform;
-  private final static ReleaseDao RELEASEDAO = new PlatformReleaseDaoDatastore();
+  private final static PlatformReleaseDao RELEASEDAO = new PlatformReleaseDaoDatastore();
   private final static SDKDao SDKDAO = new SDKDaoDatastore();
 
   public ReleaseResource(String platform) {
@@ -63,6 +64,7 @@ public class ReleaseResource {
    */
   // TODO: Check membership in Firebase core team for allowing only admin access.
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   public Response addRelease(Release release) {
     // TODO: Catch exceptions.
     RELEASEDAO.addRelease(platform, release);
@@ -112,12 +114,17 @@ public class ReleaseResource {
   @Path("{releaseName}/sdks")
   public Response enrollSDKinRelease(@PathParam("releaseName") String releaseName, SDKReleaseMetadata sdk) {
     // TODO: Catch exceptions.
-    // Get the release that it is a part of
-
-    // Create a versionmetadata object with the launch date from the release and the fields
-    // in the sdkreleasemetadata object
+    Release release = RELEASEDAO.getRelease(platform, releaseName);
+    VersionMetadata version = VersionMetadata.newBuilder()
+      .libraryName(sdk.libraryName())
+      .platform(sdk.platform())
+      .releaseName(releaseName)
+      .version(sdk.releaseVersion())
+      .launchDate(release.launchDate())
+      .build();
     
-    // Add the sdkReleaseMEtadata to the database and add the verionmetadata object to the database
+    SDKDAO.addSDKRelease(sdk);
+    SDKDAO.addSDKVersion(version);
     return ResponseHandler.createJsonResponse(Status.OK, null); 
   }
 
@@ -145,9 +152,13 @@ public class ReleaseResource {
    * @return Response object containing a status code.
    */
   @DELETE
-  @Path("{release}/sdks/{sdkName}")
-  public Response disenrollSDKinRelease(@PathParam("release") String release, @PathParam("sdkName") String sdkName) {
+  @Path("{releaseName}/sdks/{sdkName}")
+  public Response disenrollSDKinRelease(@PathParam("releaseName") String releaseName, @PathParam("sdkName") String sdkName) {
     // TODO: Catch exceptions.
+    SDKReleaseMetadata sdkRelease = SDKDAO.getSDKReleaseMetadata(platform, releaseName, sdkName);
+    VersionMetadata sdkVersion = SDKDAO.getSDKVersionMetadata(platform, sdkRelease.releaseVersion(), sdkName);
+    SDKDAO.deleteSDKRelease(sdkRelease);
+    SDKDAO.deleteSDKVersion(sdkVersion);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
