@@ -159,8 +159,8 @@ public class SDKDaoDatastore implements SDKDao {
     DATASTORE.put(createSDKEntity(sdk));
   }
 
-  public void deleteSDK(SDK sdk) {
-    Key sdkKey = KeyFactory.createKey("SDK", sdk.platform().getLabel() + "_" + sdk.libraryName());
+  public void deleteSDK(Platform platform, String sdkName) {
+    Key sdkKey = KeyFactory.createKey("SDK", platform.getLabel() + "_" + sdkName);
     DATASTORE.delete(sdkKey);
   }
 

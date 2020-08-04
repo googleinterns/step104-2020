@@ -2,6 +2,7 @@ package firebase.sdk.dashboard.data;
 
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
 
@@ -16,7 +17,7 @@ import com.google.auto.value.AutoValue;
  * launch date of the release.
  */
 @AutoValue
-@JsonDeserialize(builder = AutoValue_Versionmetadata.Builder.class)
+@JsonDeserialize(builder = AutoValue_VersionMetadata.Builder.class)
 public abstract class VersionMetadata {
 
   public static Builder newBuilder() {

@@ -3,6 +3,7 @@ package firebase.sdk.dashboard.data;
 import java.util.List;
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
 
