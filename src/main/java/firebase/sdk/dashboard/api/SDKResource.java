@@ -71,7 +71,7 @@ public class SDKResource {
         .platform(Platform.ANDROID)
         .releaseName( "M" + Integer.toString(release))
         .version(newVersion)
-        .launchDate(Instant.now())
+        .launchDate(Instant.now().toEpochMilli())
         .build();
       versionHistory.add(version);
     }

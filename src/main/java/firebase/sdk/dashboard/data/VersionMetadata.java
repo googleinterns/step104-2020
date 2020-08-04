@@ -1,6 +1,5 @@
 package firebase.sdk.dashboard.data;
 
-import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -37,7 +36,7 @@ public abstract class VersionMetadata {
   public abstract String version();
 
   @JsonProperty("launchDate")
-  public abstract Instant launchDate();
+  public abstract long launchDate();
 
   @AutoValue.Builder
   @JsonPOJOBuilder(withPrefix = "")
@@ -50,7 +49,7 @@ public abstract class VersionMetadata {
 
     Builder version(String version);
 
-    Builder launchDate(Instant launchDate);
+    Builder launchDate(long launchDate);
 
     VersionMetadata build();
   }

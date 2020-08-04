@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.time.Instant;
 import java.io.IOException;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -259,7 +258,7 @@ public class SDKDaoDatastore implements SDKDao {
     metadata.setProperty("libraryName", version.libraryName());
     metadata.setProperty("releaseName", version.releaseName());
     metadata.setProperty("version", version.version());
-    metadata.setProperty("launchDate", version.launchDate().toEpochMilli());
+    metadata.setProperty("launchDate", version.launchDate());
 
     return metadata;
   }
@@ -305,7 +304,7 @@ public class SDKDaoDatastore implements SDKDao {
         .libraryName((String) entity.getProperty("libraryName"))
         .releaseName((String) entity.getProperty("releaseName"))
         .version((String) entity.getProperty("version"))
-        .launchDate(Instant.ofEpochMilli((long) entity.getProperty("launchDate")))
+        .launchDate((long) entity.getProperty("launchDate"))
         .build();
 
       versionHistory.add(versionMetadata);
