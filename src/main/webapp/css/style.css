@@ -242,35 +242,37 @@ h1 {
 /* Add Release */
 #sdklarge {
   text-align: left;
-  background-color:rgb(122, 146, 182) !important;
-  width: 800px; 
-  height: 190px;
+  background-color:rgb(152, 176, 212)!important;
+  width: 1000px; 
+  height: 500px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: rgb(0, 0, 0);
   position: relative;
-  padding: 20px;
+  padding: 100px;
   margin-right: auto;
   margin-left: 10px;
   margin-bottom: 50px;
+  font-size: xx-large;
 }
 
 #sdkleft {
   text-align: left;
-  background-color:rgb(122, 146, 182) !important;
-  width: 800px; 
-  height: 75px;
+  background-color:rgb(152, 176, 212) !important;
+  width: 1000px; 
+  height: 250px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: black;
   position: relative;
-  padding: 20px;
+  padding: 100px;
   margin-right: 50px;
   margin-left: auto;
   margin-bottom: 45px;
+  font-size: xx-large;
 }
 
 #sdkright {
   text-align: left;
-  background-color: rgb(122, 146, 182) !important;
+  background-color: rgb(152, 176, 212) !important;
   width: 800px; 
   height: 75px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
@@ -280,6 +282,7 @@ h1 {
   margin-right: auto;
   margin-left: 10px;
   margin-bottom: 50px;
+  font-size: xx-large;
 }
 
 .buttonlaunch {
@@ -289,33 +292,34 @@ h1 {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 24px;
+  font-size: xx-large;
   border-radius: 30px;
   margin-left: 1175px;
   margin-right: auto;
-  padding: 14px 40px;
+  padding: 16px 40px;
   transition-duration: 0.4s;
 }
 
 #sdkright2 {
   text-align: left;
-  background-color: rgb(122, 146, 182) !important;
-  width: 800px; 
-  height: 160px;
+  background-color: rgb(152, 176, 212) !important;
+  width: 1000px; 
+  height: 290px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: black;
   position: relative;
-  padding: 20px;
+  padding: 60px;
   margin-right: auto;
   margin-left: 10px;
   margin-bottom: 50px;
+  font-size: xx-large;
 }
 
 #sdkleftlast {
   text-align: left;
-  background-color:rgb(122, 146, 182) !important;
-  width: 800px; 
-  height: 160px;
+  background-color:rgb(152, 176, 212) !important;
+  width: 1000px; 
+  height: 250px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: black;
   position: relative;
@@ -324,6 +328,7 @@ h1 {
   margin-left: auto;
   padding-top: 55px;
   margin-bottom: 50px;
+  font-size: xx-large;
 }
 
 .history {
@@ -351,3 +356,6 @@ h1 {
     width: 50%
 }
 
+p {
+    font-size: xx-large;
+}
