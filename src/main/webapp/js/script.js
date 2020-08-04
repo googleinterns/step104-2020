@@ -58,7 +58,6 @@ async function getReleases(platform) {
   const response = await fetch(`/v1/platforms/${platform}/releases`);
   const releases = await response.json();
 
-
   // Create text elements for each release detail
   for (i = 0; i < releases.length; i++) {
     let element = "#release-" + i;
