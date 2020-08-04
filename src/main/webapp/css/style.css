@@ -323,3 +323,9 @@ h1 {
     font-size: 100px;
 }
 
+#firebase {
+    position:absolute; 
+    top:25px; 
+    left:5px;
+}
+
