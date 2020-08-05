@@ -91,3 +91,19 @@ $(document).ready(function(){
     }
   });
 });
+
+async function getAndroidSks() {
+  const response = await fetch("/v1/platforms/android/sdks");
+  const sdks = await response.json();
+
+  console.log(sdks)
+  const select = document.querySelector('#custom-select');
+    for (var i = min; i<= sdks.length; i++){
+        var opt = document.createElement('option');
+        opt.value = sdks[i];
+        opt.innerHTML = sdks[i];
+        select.appendChild(opt);
+    }
+}
+getAndroidSks()
+
