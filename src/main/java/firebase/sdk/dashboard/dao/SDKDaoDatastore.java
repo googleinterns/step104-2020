@@ -34,7 +34,7 @@ public class SDKDaoDatastore implements SDKDao {
   private static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
   public SDK getSDK(Platform platform, String sdkName) {
-    Key sdkKey = KeyFactory.createKey("SDK", platform.toString() + "_" + sdkName);
+    Key sdkKey = KeyFactory.createKey("SDK", platform.getLabel() + "_" + sdkName);
     FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkKey);
     Query query = new Query("SDK")
       .setFilter(keyPropertyFilter);
@@ -45,7 +45,7 @@ public class SDKDaoDatastore implements SDKDao {
     }
 
     SDK sdk = SDK.newBuilder()
-      .platform(Platform.get((String) entity.getProperty("platform")))
+      .platform(Platform.get(((String) entity.getProperty("platform")).toLowerCase()))
       .libraryName((String) entity.getProperty("libraryName"))
       .libraryGroup((String) entity.getProperty("libraryGroup"))
       .externalName((String) entity.getProperty("externalName"))

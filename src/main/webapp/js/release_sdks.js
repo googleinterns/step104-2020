@@ -14,13 +14,14 @@ async function getReleaseSDKs(platform, releaseName) {
   
   for (i = 0; i < (sdks.length > 18 ? 18 : sdks.length); i++) {
     let element = "sdk" + i;
+    const sdkName = sdks[i];
     const divElement = document.getElementById(element);
-    const textNode = document.createTextNode(sdks[i]); 
+    const textNode = document.createTextNode(sdkName); 
 
     divElement.appendChild(textNode);
     divElement.addEventListener("click", () => {
       const params = new URLSearchParams(
-        `platform=${platform}&releaseName=${releaseName}&sdkName=${sdks[i]}`);
+        `platform=${platform}&releaseName=${releaseName}&sdkName=${sdkName}`);
       const page = "product_release.html";
       goToPage(page, params);
     });
