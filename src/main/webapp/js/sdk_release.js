@@ -26,4 +26,9 @@ function addTextToElement(elementId, text) {
   element.appendChild(textNode);
 }
 
-getSDKRelease("android", "M78", "firebase-common");
+const urlParams = new URLSearchParams(window.location.search);
+const platform = urlParams.get('platform');
+const releaseName = urlParams.get('releaseName');
+const libraryName = urlParamas.get('sdkName'):
+
+getSDKRelease(platform, releaseName, libraryName);
