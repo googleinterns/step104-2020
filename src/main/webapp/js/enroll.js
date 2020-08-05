@@ -92,8 +92,8 @@ $(document).ready(function(){
   });
 });
 
-async function getAndroidSdks() {
-  const response = await fetch("/v1/platforms/android/sdks");
+async function getSdks(platform) {
+  const response = await fetch(`/v1/platforms/${platform}/sdks`);
   const sdks = await response.json();
 
   console.log(sdks);
@@ -105,5 +105,5 @@ async function getAndroidSdks() {
         select.appendChild(opt);
     }
 }
-getAndroidSdks();
+getSdks("android");
 
