@@ -42,4 +42,3 @@ function createListElement(text) {
 }
 
 getPlatforms();
-
