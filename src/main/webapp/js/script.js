@@ -49,19 +49,19 @@ async function getReleases(platform) {
     divElement.appendChild(document.createElement("HR"));
 
     const deadline = release["launchDeadline"];
-    const textNode1 = document.createTextNode("Launch Deadline: " + getDate(1595424871).toDateString()); 
+    const textNode1 = document.createTextNode("Launch Deadline: " + getDate(deadline).toDateString()); 
     divElement.appendChild(textNode1);
 
     divElement.appendChild(document.createElement("HR"));
 
     const codefreeze = release["codeFreezeDate"];
-    const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(1595424871).toDateString()); 
+    const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(codefreeze).toDateString()); 
     divElement.appendChild(textNode3);
 
     divElement.appendChild(document.createElement("HR"));
 
     const launch = release["launchDate"];
-    const textNode4 = document.createTextNode("Launch Date: " + getDate(Date.now()).toDateString()); 
+    const textNode4 = document.createTextNode("Launch Date: " + getDate(launch).toDateString()); 
     divElement.appendChild(textNode4); 
   }
 }
