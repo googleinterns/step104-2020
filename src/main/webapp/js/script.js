@@ -11,29 +11,6 @@ function favouriteSDK() {
   }
 }
 
-function loadFiveEarlierVersions() {
-  console.log("Showing 5 more versions.");
-  const releaseList = document.getElementById("release-history");
-  for (let i = globalCount ; i < globalCount + 5; ++i) {
-    const listNode = document.createElement("LI");
-    const versionNum = (1926 - i).toString();
-    const textNode = document.createTextNode(versionNum.substring(0, 2) + "." + versionNum.substring(2, 3) + "." +versionNum.substring(3, 4));
-    listNode.appendChild(textNode);
-    releaseList.appendChild(listNode);
-  }
-  globalCount += 5;
-}
-
-function showOrHideNotes(version) {
-  console.log("Showing or hiding the notes of " + version);
-  const versionNotes = document.getElementById(version).firstElementChild;
-  if (versionNotes.style.display === "none") {
-    versionNotes.style.display = "block";
-  } else {
-    versionNotes.style.display = "none";
-  }
-}
-
 // Fetch data from API endpoint
 
 //fetch for landing page
@@ -61,7 +38,7 @@ async function getReleases(platform) {
   // Create text elements for each release detail
   for (i = 0; i < releases.length; i++) {
     let element = "#release-" + i;
-    let release = releases[i];
+    let release = releases[i + 8];
 
     const divElement = document.querySelector(element);
 
@@ -71,20 +48,20 @@ async function getReleases(platform) {
 
     divElement.appendChild(document.createElement("HR"));
 
-    const deadline = release["launchDeadline"];
-    const textNode1 = document.createTextNode("Launch Deadline: " + getDate(1595424871).toDateString()); 
+    const deadline = release["launchCalDeadline"];
+    const textNode1 = document.createTextNode("Launch Cal Deadline: " + getDate(deadline).toDateString()); 
     divElement.appendChild(textNode1);
 
     divElement.appendChild(document.createElement("HR"));
 
-    const codefreeze = release["codeFreezeDate"];
-    const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(1595424871).toDateString()); 
+    const codefreeze = release["codeFreezeTime"];
+    const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(codefreeze).toDateString()); 
     divElement.appendChild(textNode3);
 
     divElement.appendChild(document.createElement("HR"));
 
     const launch = release["launchDate"];
-    const textNode4 = document.createTextNode("Launch Date: " + getDate(Date.now()).toDateString()); 
+    const textNode4 = document.createTextNode("Launch Date: " + getDate(launch).toDateString()); 
     divElement.appendChild(textNode4); 
   }
 }
@@ -154,7 +131,7 @@ function createListElement(text) {
 }
 
 function getDate(time) {
-  var date = new Date(time);
+  var date = new Date(time * 1000);
   return date;
 }
 
@@ -176,6 +153,6 @@ function googleSignOut() {
 
 getPlatforms();
 getReleases("android");
-getReleaseSDKs("android", "M78");
+getReleaseSDKs("android", "M76");
 getVersionHistory("android", "firebase-common");
 
