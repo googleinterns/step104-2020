@@ -144,6 +144,6 @@ function createNode(tag, id) {
 
 getPlatforms();
 getReleases("android");
-getReleaseSDKs("android", "M78");
+getReleaseSDKs("android", "M76");
 getVersionHistory("android", "firebase-common");
 
