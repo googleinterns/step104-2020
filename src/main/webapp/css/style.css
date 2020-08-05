@@ -19,27 +19,31 @@
   text-align: center;
   background-color: #2C384A !important;
   width: 500px; 
-  height: 50px;
+  height: 100px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: white;
   position: relative;
-  padding: 20px;
+  padding: 30px;
   margin-right: auto;
   margin-left: auto;
   margin-bottom: 100px;
   padding-bottom: 50px;
 }
 
+h2 {
+    font-size: xx-large;
+}
+
 .sdk {
   text-align: center;
   background-color: #2C384A !important;
   width: 400px; 
-  height: 75px;
+  height: 85px;
   font-size: 35px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: white;
   position: relative;
-  padding: 20px;
+  padding: 30px;
   margin-right: auto;
   margin-left: auto;
 
@@ -159,11 +163,12 @@
   background: #2C384A;
   padding: 20px;
   padding-top: 110px; 
-  width: 350px;
-  height: 300px;  
+  width: 450px;
+  height: 400px;  
   text-align: center;
   margin-right: auto;
   margin-left: auto;
+  font-size:xx-large;
 }
 
 
@@ -185,28 +190,30 @@
   text-align: center;
   background-color:#2C384A !important;
   width: 500px; 
-  height: 75px;
+  height: 100px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: white;
   position: relative;
-  padding: 20px;
+  padding: 30px;
   margin-right: 100px;
   margin-left: 100px;
   margin-bottom: 50px;
+  font-size: x-large;
 }
 
 .sdkright {
   text-align: center;
   background-color:#2C384A !important;
   width: 500px; 
-  height: 75px;
+  height: 100px;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
   color: white;
   position: relative;
-  padding: 20px;
+  padding: 30px;
   margin-right: 100px;
   margin-left: 100px;
   margin-bottom: 50px;
+  font-size: x-large;
 }
 
 .button {
@@ -294,7 +301,7 @@ h1 {
   display: inline-block;
   font-size: xx-large;
   border-radius: 30px;
-  margin-left: 1175px;
+  margin-left: 1120px;
   margin-right: auto;
   padding: 16px 40px;
   transition-duration: 0.4s;
@@ -358,4 +365,10 @@ h1 {
 
 p {
     font-size: xx-large;
+}
+
+.btn btn-info btn-lg {
+    position: absolute;
+    top: 20px;
+    right:20px;
 }

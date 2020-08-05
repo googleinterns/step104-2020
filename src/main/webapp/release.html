@@ -8,10 +8,13 @@
       <link rel="stylesheet" href="css/style.css">
   </head>
 
-  <body>
+  <body onload="googleSignIn()">
     <div class="jumbotron">
         <h1>SDK Releases</h1>
         <a class="btn btn-secondary btn-lg" href="add_release.html" role="button">ADD RELEASE</a>  
+        <a href="#" class="btn btn-info btn-lg"  onclick="googleSignOut()">
+          <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
     </div>  
 
     <div class="row">
@@ -97,6 +100,47 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Initialize firebase products -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAGk_4TZiVf_TslWON5hNQDYVODuJifP7A",
+            authDomain: "com-sdk-dashboard-step-2020.firebaseapp.com",
+            databaseURL: "https://com-sdk-dashboard-step-2020.firebaseio.com",
+            projectId: "google.com:sdk-dashboard-step-2020",
+            messagingSenderId: "412575630040",
+            appId: "1:412575630040:web:824b2d31f4e1f06b100dad",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Redirect to Google Sign In
+        function googleSignIn() {
+            firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+            } else {
+                // No user is signed in.
+                var provider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithRedirect(provider);
+                firebase.auth().getRedirectResult().then(function(result) {
+                    if (result.credential) {
+                        console.info("Successful sign in")
+                    }
+                    // The signed-in user info.
+                    var user = result.user;
+                    }).catch(function(error) {
+                        console.info("Unsuccessful sign in");
+                    });
+                }
+            });
+        }
+    </script>
+    <script src="js/signout.js"></script>
     <script src="js/navigate.js"></script>
     <script src="js/release.js"></script>
   </body>
