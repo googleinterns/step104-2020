@@ -155,4 +155,3 @@ getPlatforms();
 getReleases("android");
 getReleaseSDKs("android", "M76");
 getVersionHistory("android", "firebase-common");
-
