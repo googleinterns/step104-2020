@@ -38,7 +38,7 @@ async function getReleases(platform) {
   // Create text elements for each release detail
   for (i = 0; i < releases.length; i++) {
     let element = "#release-" + i;
-    let release = releases[i + 6];
+    let release = releases[i + 8];
 
     const divElement = document.querySelector(element);
 
