@@ -15,8 +15,12 @@ public abstract class User {
     return new AutoValue_User.Builder();
   }
 
+  public abstract Builder toBuilder();
+
   @JsonProperty("uid")
   public abstract String uid();
+
+  public abstract String email();
 
   /* Example: {"Android": ["firebase-common", "firebase-common-ktx"]} */
   @JsonProperty("favoriteSDKs")
@@ -25,11 +29,13 @@ public abstract class User {
   @AutoValue.Builder
   @JsonPOJOBuilder(withPrefix = "")
   public interface Builder {
-    Builder uid(String uid);
+    Builder setUid(String uid);
+
+    Builder setEmail(String email);
 
     /* The key is the platform and the value will be a list of the names of
      * the users favorite SDKs for that platform. */ 
-    Builder favoriteSDKs(Map<Platform, List<String>> favoriteSDKs);
+    Builder setFavoriteSDKs(Map<Platform, List<String>> favoriteSDKs);
 
     User build();
   }
