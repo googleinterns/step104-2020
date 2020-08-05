@@ -6,6 +6,9 @@ async function getReleases(platform) {
   for (i = 0; i < 6; i++) {
     let element = "#release-" + i;
     let release = releases[i + 8];
+    if (!release) {
+      break;
+    }
 
     const divElement = document.querySelector(element);
 
@@ -46,6 +49,8 @@ function getDate(time) {
 
 const urlParams = new URLSearchParams(window.location.search);
 const platform = urlParams.get('platform');
-
-
-getReleases(platform)
+if (!platform) {
+  window.location.href = window.location.origin;
+} else {
+  getReleases(platform)
+}

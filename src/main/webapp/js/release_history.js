@@ -38,6 +38,9 @@ function favouriteSDK() {
 
 const urlParams = new URLSearchParams(window.location.search);
 const platform = urlParams.get('platform');
-const libraryName = urlParamas.get('sdkName'):
-
-getVersionHistory(platform, libraryName);
+const libraryName = urlParams.get('sdkName');
+if (!platform || !libraryName) {
+  window.location.href = window.location.origin;
+} else {
+  getVersionHistory(platform, libraryName);
+}

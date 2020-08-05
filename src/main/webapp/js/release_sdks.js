@@ -12,7 +12,7 @@ async function getReleaseSDKs(platform, releaseName) {
 
   // Creating elements for all sdks
   
-  for (i = 0; i < sdks.length; i++) {
+  for (i = 0; i < (sdks.length > 18 ? 18 : sdks.length); i++) {
     let element = "sdk" + i;
     const divElement = document.getElementById(element);
     const textNode = document.createTextNode(sdks[i]); 
@@ -30,5 +30,8 @@ async function getReleaseSDKs(platform, releaseName) {
 const urlParams = new URLSearchParams(window.location.search);
 const platform = urlParams.get('platform');
 const releaseName = urlParams.get('releaseName');
-
-getReleaseSDKs(platform, releaseName);
+if (!platform || !releaseName) {
+  window.location.href = window.location.origin;
+} else {
+  getReleaseSDKs(platform, releaseName);
+}
