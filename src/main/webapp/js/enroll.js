@@ -92,7 +92,7 @@ $(document).ready(function(){
   });
 });
 
-async function getAndroidSks() {
+async function getAndroidSdks() {
   const response = await fetch("/v1/platforms/android/sdks");
   const sdks = await response.json();
 
@@ -105,5 +105,5 @@ async function getAndroidSks() {
         select.appendChild(opt);
     }
 }
-getAndroidSks()
+getAndroidSdks();
 
