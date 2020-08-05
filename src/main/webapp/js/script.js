@@ -11,29 +11,6 @@ function favouriteSDK() {
   }
 }
 
-function loadFiveEarlierVersions() {
-  console.log("Showing 5 more versions.");
-  const releaseList = document.getElementById("release-history");
-  for (let i = globalCount ; i < globalCount + 5; ++i) {
-    const listNode = document.createElement("LI");
-    const versionNum = (1926 - i).toString();
-    const textNode = document.createTextNode(versionNum.substring(0, 2) + "." + versionNum.substring(2, 3) + "." +versionNum.substring(3, 4));
-    listNode.appendChild(textNode);
-    releaseList.appendChild(listNode);
-  }
-  globalCount += 5;
-}
-
-function showOrHideNotes(version) {
-  console.log("Showing or hiding the notes of " + version);
-  const versionNotes = document.getElementById(version).firstElementChild;
-  if (versionNotes.style.display === "none") {
-    versionNotes.style.display = "block";
-  } else {
-    versionNotes.style.display = "none";
-  }
-}
-
 // Fetch data from API endpoint
 
 //fetch for landing page
