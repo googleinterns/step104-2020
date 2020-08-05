@@ -56,12 +56,13 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
       new FilterPredicate("platform", FilterOperator.EQUAL, platform.getLabel());
     List<Release> releases = new ArrayList<>();
     Query query = new Query("Release")
-      .addSort("codeFreezeTime", Query.SortDirection.DESCENDING)
       .setFilter(platformFilter);
+      .addSort("codeFreezeTime", Query.SortDirection.DESCENDING)
 
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
     FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
     QueryResultList<Entity> releaseQuery = preparedQuery.asQueryResultList(fetchOptions);
+    System.out.println(releaseQuery);
 
     for (Entity releaseEntity : releaseQuery) {
       String name = (String) releaseEntity.getProperty("platform");
