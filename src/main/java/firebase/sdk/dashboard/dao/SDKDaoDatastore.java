@@ -45,7 +45,7 @@ public class SDKDaoDatastore implements SDKDao {
     }
 
     SDK sdk = SDK.newBuilder()
-      .platform(Platform.get((String) entity.getProperty("platform")))
+      .platform(Platform.get(((String) entity.getProperty("platform")).toLowerCase()))
       .libraryName((String) entity.getProperty("libraryName"))
       .libraryGroup((String) entity.getProperty("libraryGroup"))
       .externalName((String) entity.getProperty("externalName"))
@@ -58,7 +58,7 @@ public class SDKDaoDatastore implements SDKDao {
   }
 
   public List<String> getSDKs(Platform platform) {
-    FilterPredicate platformPropertyFilter = makePropertyFilter("platform", platform.getLabel());
+    FilterPredicate platformPropertyFilter = makePropertyFilter("platform", platform.toString());
     Query query = new Query("SDK")
       .addSort("libraryName", Query.SortDirection.ASCENDING)
       .setFilter(platformPropertyFilter);
