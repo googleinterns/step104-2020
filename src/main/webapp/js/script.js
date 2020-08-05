@@ -165,6 +165,15 @@ function createNode(tag, id) {
   tagElement.appendChild(tagText);
 }
 
+// Sign user out of google sign-in
+function googleSignOut() {
+    firebase.auth().signOut().then(function() {
+        Console.info("Sign out Successful");
+        }).catch(function(error) {
+            Console.info("Sign out Unsuccessful");
+        });
+}
+
 getPlatforms();
 getReleases("android");
 getReleaseSDKs("android", "M78");
