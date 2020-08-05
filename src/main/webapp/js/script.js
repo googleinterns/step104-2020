@@ -131,7 +131,7 @@ function createListElement(text) {
 }
 
 function getDate(time) {
-  var date = new Date(time);
+  var date = new Date(time * 1000);
   return date;
 }
 
