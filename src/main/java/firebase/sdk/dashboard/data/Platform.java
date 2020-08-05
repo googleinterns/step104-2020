@@ -5,10 +5,10 @@ import java.util.Map;
 
 public enum Platform {
   
-  ANDROID("Android"),
-  IOS("iOS"),
-  WEB("Web"),
-  GAMES("Games");
+  ANDROID("android"),
+  IOS("iaos"),
+  WEB("web"),
+  GAMES("games");
 
   private String label;
 
