@@ -20,7 +20,7 @@ async function getReleaseSDKs(platform, releaseName) {
     divElement.appendChild(textNode);
     divElement.addEventListener("click", () => {
       const params = new URLSearchParams(
-        `platform=${platform}&releaseName=${releaseName}&sdkName=${sdks[i]}}`);
+        `platform=${platform}&releaseName=${releaseName}&sdkName=${sdks[i]}`);
       const page = "product_release.html";
       goToPage(page, params);
     });
