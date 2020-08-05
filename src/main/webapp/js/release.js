@@ -3,7 +3,7 @@ async function getReleases(platform) {
   const releases = await response.json();
 
   // Create text elements for each release detail
-  for (i = 0; i < releases.length; i++) {
+  for (i = 0; i < 6; i++) {
     let element = "#release-" + i;
     let release = releases[i + 8];
 
@@ -46,5 +46,6 @@ function getDate(time) {
 
 const urlParams = new URLSearchParams(window.location.search);
 const platform = urlParams.get('platform');
+
 
 getReleases(platform)
