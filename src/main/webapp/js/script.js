@@ -48,13 +48,13 @@ async function getReleases(platform) {
 
     divElement.appendChild(document.createElement("HR"));
 
-    const deadline = release["launchDeadline"];
-    const textNode1 = document.createTextNode("Launch Deadline: " + getDate(deadline).toDateString()); 
+    const deadline = release["launchCalDeadline"];
+    const textNode1 = document.createTextNode("Launch Cal Deadline: " + getDate(deadline).toDateString()); 
     divElement.appendChild(textNode1);
 
     divElement.appendChild(document.createElement("HR"));
 
-    const codefreeze = release["codeFreezeDate"];
+    const codefreeze = release["codeFreezeTime"];
     const textNode3 = document.createTextNode("Code Freeze Date: " + getDate(codefreeze).toDateString()); 
     divElement.appendChild(textNode3);
 
