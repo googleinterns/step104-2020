@@ -1,0 +1,14 @@
+M69	http://b/hotlists/2137186	Release Manager: ashwinraghav@	Code Freeze April 22, 2020 12:00:00 PST(Core team will create RC from Rapid next day)
+Launch April 23, 2020 (go/firebase-m-dates   go/firebase-android-calendar)												
+Library Name	External Name	Library Group	Owner	Launching?	OldVersion	NewVersion	Ariane Entry	Release
+Note CL	JavaDocs CL	Link to CHANGELOG	Internal Hotlist	Prebuilts Drop Bug	Manual Verification Bug	Javadoc Bug	Fireescape name(if applicable)
+			Responsible for making sure this sheet is updated	Yes/No if you intend to ship in this release. Remember, if anyone in your library group is shipping, you are forced to ship as well.	Current public version	Expected new version to go live publicly
+https://cs.corp.google.com/piper///depot/google3/java/com/google/android/gmscore/dev/client/XXX/library.bzl	Launchcal for Android launch (contents may reference feature launchcal shared between iOS and Android). Required only for libraries with new features or breaking changes (enter "N/A" if this release is bug fixes only for your library).	If releasing for "internal" reasons only, use the following:
+
+Internal changes to ensure functionality alignment with other SDK releases.		Required: Text file that is customer-facing descriptions of all changes in the release 	Buganizer hotlist, Critique query, or other list depending on team's tracking and devleopment process that lists all changes in a release (different from Changelog in that this is for internal use by QA and Core team and must be complete, whereas Changelog may be sanitized/summarized)				
+							Firebase tips								
+							GMS Core								
+firebase-inappmessaging	firebase-inappmessaging	N/A	jheron		19.0.5	19.0.6							b/154757191		firebase-inappmessaging
+firebase-inappmessaging-ktx	firebase-inappmessaging-ktx	N/A	jheron		19.0.5	19.0.6							b/154756942		firebase-inappmessaging:ktx
+firebase-inappmessaging-display	firebase-inappmessaging-display	N/A	jheron	Yes - bug fixes only	19.0.5	19.0.6							b/154756976		firebase-inappmessaging-display
+firebase-inappmessaging-display-ktx	firebase-inappmessaging-display-ktx	N/A	jheron	Yes - bug fixes only	19.0.5	19.0.6							b/154756903		firebase-inappmessaging-display:ktx

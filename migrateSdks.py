@@ -5,13 +5,13 @@ project_id = "google.com:sdk-dashboard-step-2020"
 datastore_client = datastore.Client(project_id)
 
 
-with open("./release_csvs/M87.csv") as f:
-  for i in range(12):
+with open("./release_tsvs/M87.tsv") as f:
+  for i in range(11):
     print(f.readline())
 
   row = f.readline()
   while row:
-    line = row.split(',')
+    line = row.split('\t')
     name = 'android' + "_" + line[0]
     kind = "SDK"
     sdk_key = datastore_client.key(kind, name)

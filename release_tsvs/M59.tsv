@@ -1,0 +1,83 @@
+M59	http://b/hotlists/1917979	Release Manager: vkryachko@	Code Freeze October 29, 2019 (Core team will create RC from Rapid next day)
+Launchcal Deadline November 1, 2019
+Launch November 7, 2019 (go/firebase-m-dates   go/firebase-android-calendar)												
+Library Name	External Name	Library Group	Owner	Launching?	OldVersion	NewVersion	Ariane Entry	Release
+Note CL	JavaDocs CL	Link to CHANGELOG	Internal Hotlist	Prebuilts Drop Bug	Manual Verification Bug	Javadoc Bug	Fireescape name(if applicable)
+			Responsible for making sure this sheet is updated	Yes/No if you intend to ship in this release. Remember, if anyone in your library group is shipping, you are forced to ship as well.	Current public version	Expected new version to go live publicly
+https://cs.corp.google.com/piper///depot/google3/java/com/google/android/gmscore/dev/client/XXX/library.bzl	Launchcal for Android launch (contents may reference feature launchcal shared between iOS and Android). Required only for libraries with new features or breaking changes (enter "N/A" if this release is bug fixes only for your library).	If releasing for "internal" reasons only, use the following:
+
+Internal changes to ensure functionality alignment with other SDK releases.		Required: Text file that is customer-facing descriptions of all changes in the release 	Buganizer hotlist, Critique query, or other list depending on team's tracking and devleopment process that lists all changes in a release (different from Changelog in that this is for internal use by QA and Core team and must be complete, whereas Changelog may be sanitized/summarized)				
+							Firebase tips								
+							GMS Core								
+firebase-auth-interop		firebase-auth-interop	mdeck						N/A - no ref docs ever						
+firebase-auth		firebase_auth	mdeck												
+firebase-auth-api	firebase-auth	firebase_auth	leosiracusa	No											
+firebase-database	firebase-database	firebase_database	mrschmidt												firebase-database
+firebase_ml_natural_language	firebase-ml-natural-language	firebase_ml_naturallanguage	bauerb												
+firebase_ml_language_id	firebase-ml-natural-language-language-id-model	firebase_ml_naturallanguage	bauerb												
+predictondevice-api	firebase-ml-natural-language-smart-reply	firebase_ml_naturallanguage	bauerb												
+predictondevice	firebase-ml-natural-language-smart-reply-model	firebase_ml_naturallanguage	bauerb												
+firebase_ml_translate_api	firebase-ml-natural-language-translate	firebase_ml_naturallanguage_translate	bauerb												
+firebase_ml_translate	firebase-ml-natural-language-translate-model	firebase_ml_naturallanguage_translate	bauerb												
+firebase_ml_vision	firebase-ml-vision	firebase_ml	songchenxi	Yes - bug fixes only	24.0.0	24.0.1		cl/278714219					b/143954488		
+firebase_ml_model_interpreter	firebase-ml-model-interpreter	firebase_ml	songchenxi	Yes - bug fixes only	22.0.0	22.0.1							b/143955162		
+firebase_ml_common	firebase-ml-common	firebase_ml	songchenxi	Yes - but no functional changes	22.0.0	22.0.1							b/143954442		
+firebase_ml_vision_object_detection	firebase-ml-vision-object-detection	firebase_ml	songchenxi	Yes - but no functional changes	19.0.2	19.0.3							b/143954731		
+firebase-ml-vision-automl	firebase-ml-vision-automl	firebase_ml	songchenxi	Yes - but no functional changes	18.0.2	18.0.3							b/143954821		
+firebase_ml_vision_internal_vkp	firebase_ml_vision_internal_vkp	firebase_ml	songchenxi	Yes - but no functional changes	16.0.1	16.0.2						b/142011372	b/142009774		
+firebase-storage-api	firebase-storage	firebase_storage	mrschmidt												firebase-storage
+firebase_common	firebase-common	firebase_common	ashwinraghav	Yes - bug fixes only	19.2.0	19.3.0	ariane/318676	N/A - no release notes ever	N/A - no ref docs ever			b/143871432	b/143871434		firebase-common
+firebase_common_ktx	firebase-common	firebase_common	ashwinraghav	Yes - bug fixes only	19.2.0	19.3.0	ariane/318676	N/A - no release notes ever	N/A - no ref docs ever			b/143871936	b/143871698		firebase-common:ktx
+firebase_components	firebase-components	firebase_components	ashwinraghav	Yes - includes new functionality	0.0.0	16.0.0	ariane/318676	N/A - no release notes ever	N/A - no ref docs ever			b/143871872	b/143871734		firebase-components
+firebase-firestore	firebase-firestore	N/A	wuandy	Yes - includes new functionality	21.2.1	21.3.0	ariane/273372, ariane/309965	cl/277537259				b/143872009	b/143872171		firebase-firestore
+firebase-firestore-ktx	firebase-firestore	N/A	wuandy	Yes - includes new functionality	21.2.1	21.3.0		cl/277537259				b/143872306	b/143871873		firebase-firestore:ktx
+gcm	play-services-gcm	gcm	ciarandowney						N/A - no ref docs ever						
+iid	play-services-iid	gcm	ciarandowney						N/A - no ref docs ever						
+firebase-iid	firebase-iid	firebase-messaging	ciarandowney	Yes - includes new functionality	20.0.0	20.0.1						b/143871732	b/143955139		
+firebase-iid-interop	firebase-iid-interop	firebase-iid-interop	ciarandowney	Yes - includes new functionality					N/A - no ref docs ever			b/143872286	b/143955360		
+firebase-messaging	firebase-messaging	firebase-messaging	ciarandowney	Yes - includes new functionality	20.0.0	20.0.1						b/143872523	b/143955242		
+firebase-messaging-federation	firebase-messaging-federation	firebase-messaging-federation	yujiewang	Yes - includes new functionality				N/A - no release notes ever	N/A - no ref docs ever			b/143872170	b/143954033		
+appinvite	play-services-appinvite	firebase_dynamic_links	paulwroberts						N/A - no ref docs ever						
+firebase_dynamic_links	firebase-dynamic-links	firebase_dynamic_links	paulwroberts												
+analyticsservices	play-services-analytics-impl	measurement	barretta						N/A - no ref docs ever						
+analyticsservices_app_library	play-services-analytics	measurement	barretta						N/A - no ref docs ever						
+firebase_analytics	firebase-analytics	measurement	dhm												
+measurement_impl	firebase-analytics-impl	measurement	dhm												
+measurement	play-services-measurement	measurement	dhm						N/A - no ref docs ever						
+measurement_api	play-services-measurement-api	measurement	dhm						N/A - no ref docs ever						
+measurement_base	play-services-measurement-base	measurement	dhm						N/A - no ref docs ever						
+measurement_sdk_api	play-services-measurement-sdk-api	measurement	dhm						N/A - no ref docs ever						
+measurement_sdk	play-services-measurement-sdk	measurement	dhm						N/A - no ref docs ever						
+tagmanager	play-services-tagmanager	measurement	eburley						N/A - no ref docs ever						
+tagmanager-api	play-services-tagmanager-api	measurement	eburley						N/A - no ref docs ever						
+tagmanager_legacy	play-services-tagmanager-v4-impl	measurement	eburley						N/A - no ref docs ever						
+measurement_connector	measurement_connector	measurement_connector	dhm						N/A - no ref docs ever						
+firebase_ads			ashwinraghav												
+firebase_ads_lite			ashwinraghav												
+clearcut	play-services-clearcut	clearcut	eworoshow						N/A - no ref docs ever						
+firebase_abt	firebase-abt	firebase_abt	sinank					N/A - no release notes ever	N/A - no ref docs ever						firebase-abt
+firebase-database-collection	firebase-database-collection	firebase-database-collection	mrschmidt						N/A - no ref docs ever						firebase-database-collection
+crash	firebase-crash	crash	tdeshpande												
+firebase-perf	firebase-perf	firebase-perf	rkhinda	Yes - but no functional changes	19.0.1	19.0.2		cl/277790206	N/A - no ref docs ever			b/143871433	b/143955460		
+phenotype	play-services-phenotype	phenotype	eworoshow						N/A - no ref docs ever						
+firebase_remote_config	firebase-config	firebase_remote_config	clp												firebase-config
+functions		N/A	klimt												firebase-functions
+functions-ktx		N/A	klimt												firebase-functions:ktx
+firebase_core	firebase-core	firebase_core	ashwinraghav						N/A - no ref docs ever						
+firebase_invites	firebase-invites	firebase-invites	ciarandowney												
+protolite-well-known-types			ashwinraghav						N/A - no ref docs ever						protolite-well-known-types
+vision_image_label_impl	firebase-ml-vision-image-label-model	vision	songchenxi	No											
+vision_face_impl	firebase-ml-vision-face-model	vision	songchenxi	No											
+vision	play-services-vision	vision	songchenxi	No											
+vision_common	play-services-vision-common	vision	songchenxi	No											
+vision_image_label	play-services-vision-image-label	vision	songchenxi	No											
+icing	firebase-appindexing	icing	cassiewang												
+firebase-inappmessaging	firebase-inappmessaging	N/A	theresamegha	Yes - other reason (add comment)	19.0.1	19.0.2		cl/278418734				b/143871937	b/143872308		firebase-inappmessaging
+firebase-inappmessaging-display	firebase-inappmessaging-display	N/A	theresamegha	Yes - other reason (add comment)	19.0.1	19.0.2		cl/278418734				b/143871697	b/143872152		firebase-inappmessaging-display
+google-services plugin 	n/a	n/a	davidmotson	Yes - bug fixes only	4.3.2	4.3.3		cl/278449469				b/143871733	b/143954785		
+strict-version-matcher	n/a	n/a	davidmotson	Yes - bug fixes only	1.2.0	1.2.1		cl/278449469				b/143871793	b/143954732		
+firebase-datatransport	firebase-datatransport	n/a	vkryachko	Yes - other reason (add comment)	17.0.2	17.0.3		N/A - no release notes ever				b/143871516	b/143871949		firebase-datatransport
+transport-runtime	transport-runtime	n/a	vkryachko												transport:transport-runtime
+transport-backend-cct	transport-backend-cct	n/a	vkryachko												transport:transport-backend-cct
+transport-api	transport-api	n/a	vkryachko												transport:transport-api
+firebase-appdistribution-gradle	n/a	n/a	tundeagboola	Yes - but no functional changes	1.1.0	1.2.0		cl/278653654					b/143955128		

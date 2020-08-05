@@ -6,15 +6,41 @@ import sys
 from datetime import datetime as dt
 from dateutil import parser
 
-project_id = "google.com:sdk-dashboard-step-2020"
-datastore_client = datastore.Client(project_id)
+projectId = "google.com:sdk-dashboard-step-2020"
+datastoreClient = datastore.Client(projectId)
 
 def createSDKReleases(fileName):
-    pass
+    with open(fileName) as f:
+        print("############# Scraping: " + fileName + " #############")
+        tsv = csv.reader(f, delimiter='\t')
+        line = next(tsv)
+        # print(line)
+        releaseName = fileName.split('/')[-1].split('.')[0]
+        line = next(tsv)
+        if fileName != 'release_tsvs/Fiam_hotfix_04_22_20.tsv':
+            line = next(tsv)
+        launchDate = int(dt.timestamp(parser.parse(line[0].split('(')[0][len("Launch "):])))
+        for _ in range(8):
+            line = next(tsv)
+
+        # print(releaseName, launchDate)
+        for line in tsv:
+            # print(line[0])
+            # print(line)
+            if line[6] and line[4][:3] == "Yes":
+                # print(line[6])
+                sdkVersion, sdkRelease = createMetadatas(line, launchDate, releaseName)
+                # print(sdkVersion)
+                # print(sdkRelease)
+                addSDKVersion(sdkVersion)
+                # sys.exit()
+                datastoreClient.put(sdkRelease)
+                print('Saved {}: {}'.format(sdkRelease.key.name, sdkRelease['libraryName']))
+        return
 
 def createMetadatas(line, launchDate, releaseName):
-    sdkRelease_key = client.key("SDKReleaseMetadata", 'android' + '_' + line[0] + '_' + releaseName)
-    sdkRelease = datastore.Entity(key=sdkRelease_key)
+    sdkReleaseKey = datastoreClient.key("SDKReleaseMetadata", 'android' + '_' + line[0] + '_' + releaseName)
+    sdkRelease = datastore.Entity(key=sdkReleaseKey)
     sdkRelease['libraryName'] = line[0]
     sdkRelease['releaseVersion'] = line[6]
     sdkRelease['oldVersion'] = line[5]
@@ -30,15 +56,33 @@ def createMetadatas(line, launchDate, releaseName):
     sdkRelease['additionalInfo']['prebuiltsDropBug'] = line[12]
     sdkRelease['additionalInfo']['manualVerificationBug'] = line[13]
     sdkRelease['additionalInfo']['javadocBug'] = line[14]
+
+    # Create the versionMetadata embedded entity
+    sdkVersion = {}
+    sdkVersion['libraryName'] = line[0]
+    sdkVersion['version'] = line[6]
+    sdkVersion['releaseName'] = releaseName
+    sdkVersion['platform'] = 'android'
+    sdkVersion['launchDate'] = launchDate
+
+    return sdkVersion, sdkRelease
         
 def addSDKVersion(sdkVersion):
-    sdk_key = client.key("SDK", sdkVersion['platform'] + "_" + sdkVersion['libraryName'])
-    sdk_entity = datastore.Entity(sdk_key)
+    if sdkVersion['libraryName'] == 'firebase-transport-encoders':
+        sdkVersion['libraryName'] = 'firebase-encoders-json';
+    elif sdkVersion['libraryName'][-3:] == "ktx":
+        return
+    sdkKey = datastoreClient.key("SDK", sdkVersion['platform'] + "_" + sdkVersion['libraryName'])
+    sdkEntity = datastoreClient.get(sdkKey)
+    # print(sdkVersion['libraryName'])
+    # print(sdkEntity)
 
-    versionHistory = sdk_entity['versionHistory']
-    version_key = datastore_client.key("VersionMetadata", 'android' + '_' + sdkVersion['libraryName'] + '_' + sdkVersion['releaseVersion'])
+    versionHistory = sdkEntity['versionHistory']
+    versionKey = datastoreClient.key("VersionMetadata", 'android' + '_' + sdkVersion['libraryName'] + '_' + sdkVersion['version'])
     versionHistory.append(sdkVersion)
-    sdkVersion['versionHistory'] = sorted(versionHistoru, key = lambda i: i['version'])
+    sdkEntity['versionHistory'] = sorted(versionHistory, key = lambda i: i['version'])
+    # print(sdkEntity)
+    datastoreClient.put(sdkEntity)
     return
 
 def createReleases(fileName):
@@ -48,8 +92,8 @@ def createReleases(fileName):
         line = next(tsv)
         name = 'android' + "_" + fileName.split('/')[-1].split('.')[0]
         kind = "Release"
-        release_key = datastore_client.key(kind, name)
-        release = datastore.Entity(key=release_key)
+        releaseKey = datastoreClient.key(kind, name)
+        release = datastore.Entity(key=releaseKey)
         release['releaseName'] = fileName.split('/')[-1].split('.')[0]
 
         release['platform'] = 'android'
@@ -65,7 +109,7 @@ def createReleases(fileName):
 
         release['launchDate'] = int(dt.timestamp(parser.parse(line[0].split('(')[0][len("Launch "):])))
         print(release)
-        datastore_client.put(release)
+        datastoreClient.put(release)
         print('Saved {}: {}'.format(release.key.name, release['releaseName']))
         return
 
@@ -77,9 +121,13 @@ if __name__ == "__main__":
             files.append(filename)
 
     files.sort()
+    count = 0
     for f in files:
         # createReleases("release_tsvs/" + f)
-        createSDKReleases("release_tsvs" + f)
+        createSDKReleases("release_tsvs/" + f)
+        count += 1
+        # if count == 3:
+            # sys.exit()
 
 
 

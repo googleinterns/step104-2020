@@ -1,0 +1,77 @@
+M53	http://b/hotlists/1670324	Release Manager: davidmotson@	Code Freeze July 30, 2019 (Core team will create RC from Rapid next day)
+Launchcal Deadline August 2, 2019
+Launch August 8, 2019 (go/firebase-m-dates   go/firebase-android-calendar)				https://docs.google.com/a/google.com/open?id=143R5Uqv5xGcjqkgR96h98IVOyI4nlaqWbFR6fQpPa2I								
+Library Name	External Name	Library Group	Owner	Launching?	OldVersion	NewVersion	Ariane Entry	Release
+Note CL	JavaDocs CL	Link to CHANGELOG	Internal Hotlist	Prebuilts Drop Bug	Manual Verification Bug	Javadoc Bug	Fireescape name(if applicable)
+			Responsible for making sure this sheet is updated	Yes/No if you intend to ship in this release. Remember, if anyone in your library group is shipping, you are forced to ship as well.	Current public version	Expected new version to go live publicly
+https://cs.corp.google.com/piper///depot/google3/java/com/google/android/gmscore/dev/client/XXX/library.bzl	Launchcal for Android launch (contents may reference feature launchcal shared between iOS and Android). Required only for libraries with new features or breaking changes (enter "N/A" if this release is bug fixes only for your library).	If releasing for "internal" reasons only, use the following:
+
+Internal changes to ensure functionality alignment with other SDK releases.		Required: Text file that is customer-facing descriptions of all changes in the release 	Buganizer hotlist, Critique query, or other list depending on team's tracking and devleopment process that lists all changes in a release (different from Changelog in that this is for internal use by QA and Core team and must be complete, whereas Changelog may be sanitized/summarized)				
+							Firebase tips								
+							GMS Core								
+firebase-auth-interop		firebase-auth-interop	mdeck	Yes - includes new functionality	18.1.0	19.0.0	http://ariane/303421	nullability	N/A - no ref docs ever			b/138728752	b/139153283	b/139148881	
+firebase-auth		firebase_auth	mdeck	No	N/A	N/A									
+firebase-auth-api	firebase-auth	firebase_auth	mdeck	Yes - includes new functionality	18.1.1	19.0.0	http://ariane/303421	nullability				b/138727936	b/139153095	b/139150871	
+firebase-database	firebase-database	firebase_database	mrschmidt	Yes - includes new functionality	18.0.1	19.0.0	http://ariane/303421	nullability				b/138727818	b/138739049	b/139150617	firebase-database
+firebase_ml_natural_language	firebase-ml-natural-language	firebase_ml_naturallanguage	bauerb	Yes - includes new functionality	20.0.2	21.0.0	http://ariane/303421	cl/261923066				b/138729049	b/139154561	b/139148269	
+firebase_ml_language_id	firebase-ml-natural-language-language-id-model	firebase_ml_naturallanguage	bauerb	Yes - but no functional changes	20.0.2	20.0.3		cl/261923066				b/138728280	b/139151929	b/139150282	
+predictondevice-api	firebase-ml-natural-language-smart-reply	firebase_ml_naturallanguage	bauerb	Yes - but no functional changes	18.0.2	18.0.3		cl/261923066				b/138728892	b/139154165	b/139149863	
+predictondevice	firebase-ml-natural-language-smart-reply-model	firebase_ml_naturallanguage	bauerb	Yes - includes new functionality	20.0.2	20.0.3		cl/261923066				b/138726772	b/139152466	b/139150770	
+firebase_ml_translate_api	firebase-ml-natural-language-translate	firebase_ml_naturallanguage_translate	bauerb	Yes - includes new functionality	20.0.2	21.0.0		cl/261923066				b/138728519	b/139153225	b/139150133	
+firebase_ml_translate	firebase-ml-natural-language-translate-model	firebase_ml_naturallanguage_translate	bauerb	Yes - but no functional changes	20.0.2	20.0.3		cl/261923066				b/138727786	b/139154676	b/139149566	
+firebase_ml_vision	firebase-ml-vision	firebase_ml	songchenxi	Yes - includes new functionality	22.1.0	23.0.0		cl/261923317				b/138728610	b/139153704	b/139150434	
+firebase_ml_model_interpreter	firebase-ml-model-interpreter	firebase_ml	songchenxi	Yes - includes new functionality	20.0.1	21.0.0		cl/261923317				b/138728920	b/139152205	b/139150100	
+firebase_ml_common	firebase-ml-common	firebase_ml	songchenxi	Yes - includes new functionality	21.0.0	21.0.0		cl/261923317				b/138727865	b/139154262	b/139149366	
+firebase_ml_vision_object_detection	firebase-ml-vision-object-detection	firebase_ml	songchenxi	Yes - but no functional changes	19.0.0	19.0.1		cl/261923317				b/138727975	b/139152245	b/139149265	
+firebase-ml-vision-automl	firebase-ml-vision-automl	firebase_ml	songchenxi	Yes - includes new functionality	18.0.0	18.0.1		cl/261923317				b/138728481	b/139154004	b/139150126	
+firebase-storage-api	firebase-storage	firebase_storage	mrschmidt	Yes - includes new functionality	18.1.1	19.0.0		nullability				b/138727740	b/138738714	b/139150710	firebase-storage
+firebase_common	firebase-common	firebase_common	ashwinraghav	Yes - includes new functionality	18.0.0	19.0.0			N/A - no ref docs ever			b/138728943	b/138737879	b/139150618	firebase-common
+firebase-firestore	firebase-firestore	N/A	rgowman	Yes - bug fixes only	20.2.0	21.0.0		cl/261000328				b/138727937	b/138739202	b/139147847	firebase-firestore
+gcm	play-services-gcm	gcm	ciarandowney						N/A - no ref docs ever						
+iid	play-services-iid	gcm	ciarandowney						N/A - no ref docs ever						
+firebase-iid	firebase-iid	firebase-messaging	ciarandowney	Yes - includes new functionality	19.0.3	20.0.0						b/138728753	b/139154186	b/139148008	
+firebase-iid-interop	firebase-iid-interop	firebase-iid-interop	ciarandowney	No					N/A - no ref docs ever						
+firebase-messaging	firebase-messaging	firebase-messaging	ciarandowney	Yes - includes new functionality	19.1.1	20.0.0						b/138727819	b/139150745	b/139148882	
+firebase-messaging-federation	firebase-messaging-federation	firebase-messaging-federation	yujiewang						N/A - no ref docs ever						
+appinvite	play-services-appinvite	firebase_dynamic_links	paulwroberts						N/A - no ref docs ever						
+firebase_dynamic_links	firebase-dynamic-links	firebase_dynamic_links	paulwroberts	Yes - includes new functionality	18.1.0	19.0.0		nullability				b/138729050	b/139154059	b/139150872	
+analyticsservices	play-services-analytics-impl	gtm	barretta						N/A - no ref docs ever						
+analyticsservices_app_library	play-services-analytics	gtm	barretta						N/A - no ref docs ever						
+firebase_analytics	firebase-analytics	measurement	dhm	Yes - bug fixes only		17.1.0	ariane/304711	cl/259578745				b/138728893	b/139153284	b/139150283	
+measurement_impl	firebase-analytics-impl	measurement	dhm	Yes - includes new functionality		17.1.0	ariane/304711	cl/259578745				b/138728281	b/139154562	b/139149864	
+measurement	play-services-measurement	measurement	dhm	Yes - bug fixes only		17.1.0	ariane/304711	cl/259578745	N/A - no ref docs ever			b/138728611	b/139154166	b/139149567	
+measurement_api	play-services-measurement-api	measurement	dhm	Yes - bug fixes only		17.1.0	ariane/304711	cl/259578745	N/A - no ref docs ever			b/138728791	b/139154536	b/139149367	
+measurement_base	play-services-measurement-base	measurement	dhm	Yes - bug fixes only		17.1.0	ariane/304711	cl/259578745	N/A - no ref docs ever			b/138728520	b/139153705	b/139150771	
+measurement_sdk_api	play-services-measurement-sdk-api	measurement	dhm	Yes - bug fixes only		17.1.0	ariane/304711	cl/259578745	N/A - no ref docs ever			b/138727787	b/139153226	b/139150619	
+measurement_sdk	play-services-measurement-sdk	measurement	dhm	Yes - bug fixes only		17.1.0	ariane/304711	cl/259578745	N/A - no ref docs ever			b/138727866	b/139153096	b/139150134	
+tagmanager	play-services-tagmanager	gtm	eburley						N/A - no ref docs ever						
+tagmanager-api	play-services-tagmanager-api	gtm	eburley						N/A - no ref docs ever						
+tagmanager_legacy	play-services-tagmanager-v4-impl	gtm	eburley						N/A - no ref docs ever						
+measurement_connector	measurement_connector	measurement_connector	dhm						N/A - no ref docs ever						
+firebase_ads			ashwinraghav												
+firebase_ads_lite			ashwinraghav												
+clearcut	play-services-clearcut	clearcut	eworoshow						N/A - no ref docs ever						
+firebase_abt	firebase-abt	firebase_abt	sinank	Yes - includes new functionality	18.0.1	19.0.0		N/A - no release notes ever	N/A - no ref docs ever			b/138728921	b/138738135	b/139150711	firebase-abt
+firebase-database-collection	firebase-database-collection	firebase-database-collection	mrschmidt						N/A - no ref docs ever						firebase-database-collection
+crash	firebase-crash	crash	tdeshpande												
+firebase-perf	firebase-perf	firebase-perf	tdeshpande	Yes - includes new functionality	18.0.1	19.0.0		nullability				b/138728482	b/139152467	b/139150101	
+phenotype	play-services-phenotype	phenotype	eworoshow						N/A - no ref docs ever						
+firebase_remote_config	firebase-config	firebase_remote_config	miraziz	Yes - includes new functionality	18.0.0	19.0.0		nullability				b/138727976	b/138737310	b/139147848	firebase-config
+functions		N/A	klimt	Yes - includes new functionality	18.1.0	19.0.0		nullability				b/138727741	b/138739373	b/139150127	firebase-functions
+firebase_core	firebase-core	firebase_core	ashwinraghav						N/A - no ref docs ever						
+firebase_invites	firebase-invites	firebase-invites	ciarandowney												
+protolite-well-known-types			ashwinraghav						N/A - no ref docs ever						protolite-well-known-types
+vision_image_label_impl	firebase-ml-vision-image-label-model	vision	songchenxi												
+vision_face_impl	firebase-ml-vision-face-model	vision	songchenxi												
+vision	play-services-vision	vision	songchenxi												
+vision_common	play-services-vision-common	vision	songchenxi												
+vision_image_label	play-services-vision-image-label	vision	songchenxi												
+icing	firebase-appindexing	icing	cassiewang												
+firebase-inappmessaging	firebase-inappmessaging	N/A	theresamegha	Yes - includes new functionality	18.0.2	19.0.0		nullability				b/138727938	b/138737906	b/139150435	firebase-inappmessaging
+firebase-inappmessaging-display	firebase-inappmessaging-display	N/A	theresamegha	Yes - includes new functionality	18.0.2	19.0.0		nullability				b/138728944	b/138738891	b/139148883	firebase-inappmessaging-display
+google-services plugin 	n/a	n/a	davidmotson												
+strict-version-matcher	n/a	n/a	davidmotson												
+firebase-datatransport	firebase-datatransport	n/a	vkryachko	Yes - includes new functionality	17.0.1	17.1.0						b/138727820	b/138737140	b/139150873	firebase-datatransport
+transport-runtime	transport-runtime	n/a	vkryachko												transport:transport-runtime
+transport-backend-cct	transport-backend-cct	n/a	vkryachko	Yes - includes new functionality	2.0.1	2.0.2						b/138728894	b/138738450	b/139150622	transport:transport-backend-cct
+transport-api	transport-api	n/a	vkryachko												transport:transport-api
