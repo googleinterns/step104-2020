@@ -1,0 +1,23 @@
+indexes:
+
+  - kind: Release
+    ancestor: no
+    properties: 
+    - name: platform
+    - name: codeFreezeTime
+      direction: desc
+
+  - kind: SDK
+    ancestor: no
+    properties:
+      - name: platform
+      - name: libraryName
+        direction: asc
+
+  - kind: SDKReleaseMetadata
+    ancestor: no
+    properties:
+      - name: platform
+      - name: libraryName
+      - name: releaseName
+

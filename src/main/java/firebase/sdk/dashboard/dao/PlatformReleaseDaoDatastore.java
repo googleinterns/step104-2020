@@ -24,7 +24,7 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.CompositeFilter;
 import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.QueryResultIterable;
+import com.google.appengine.api.datastore.QueryResultList;
 
 /**
  * A class for implementing the platform dao.
@@ -39,7 +39,8 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
     Query query = new Query("Platform");
     PreparedQuery results = DATASTORE.prepare(query);
-    QueryResultIterable<Entity> entities = results.asQueryResultIterable();
+    FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
+    QueryResultList<Entity> entities = results.asQueryResultList(fetchOptions);
 
     for (Entity result : entities) {
       String name = (String) result.getProperty("name");
@@ -55,11 +56,13 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
       new FilterPredicate("platform", FilterOperator.EQUAL, platform.getLabel());
     List<Release> releases = new ArrayList<>();
     Query query = new Query("Release")
-      .addSort("codeFreezeTime", Query.SortDirection.DESCENDING)
-      .setFilter(platformFilter);
+      .setFilter(platformFilter)
+      .addSort("codeFreezeTime", Query.SortDirection.DESCENDING);
 
     PreparedQuery preparedQuery = DATASTORE.prepare(query);
-    QueryResultIterable<Entity> releaseQuery = preparedQuery.asQueryResultIterable();
+    FetchOptions fetchOptions = FetchOptions.Builder.withDefaults();
+    QueryResultList<Entity> releaseQuery = preparedQuery.asQueryResultList(fetchOptions);
+    System.out.println(releaseQuery);
 
     for (Entity releaseEntity : releaseQuery) {
       String name = (String) releaseEntity.getProperty("platform");
