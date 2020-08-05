@@ -28,7 +28,7 @@ import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.QueryResultIterable;
 
-/* Class to implement UserDao to manipulate data about the users */.
+/* Class to implement UserDao to manipulate data about the users */
 public class UserDaoDatastore implements UserDao {
     public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
     // Get a user from the datastore
@@ -44,9 +44,9 @@ public class UserDaoDatastore implements UserDao {
             //TODO: Throw user not found exception
         }
         User users = User.newBuilder()
-        .uid((String)user.getProperty("id"))
-        .email((String)user.getProperty("email"))
-        .favoriteSDKs((Map<Platform, List<String>>)user.getProperty("favoriteSDKs"))
+        .setUid((String)user.getProperty("id"))
+        .setEmail((String)user.getProperty("email"))
+        .setFavoriteSDKs((Map<Platform, List<String>>)user.getProperty("favoriteSDKs"))
         .build();
         return users;
     }
@@ -57,7 +57,7 @@ public class UserDaoDatastore implements UserDao {
         Entity userEntity = new Entity(userKey);
         userEntity.setProperty("id", user.uid());
         userEntity.setProperty("email", user.email());
-        userEntity.setProptery("favoriteSDKs", user.favoriteSDKs());
+        userEntity.setProperty("favoriteSDKs", user.favoriteSDKs());
         DATASTORE.put(userEntity);
     }
  
@@ -78,3 +78,4 @@ public class UserDaoDatastore implements UserDao {
         FilterPredicate propertyFilter = new FilterPredicate(property, FilterOperator.EQUAL, value);
         return propertyFilter;                                                              
 }
+}    
