@@ -3,6 +3,7 @@ package firebase.sdk.dashboard.api;
 import firebase.sdk.dashboard.dao.UserDao;
 import firebase.sdk.dashboard.dao.UserDaoDatastore;
 import java.util.Map;
+import java.util.HashMap;
 import firebase.sdk.dashboard.data.User;
 import firebase.sdk.dashboard.data.Platform;
 import java.util.List;
@@ -27,7 +28,23 @@ import javax.ws.rs.core.Response.Status;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
-    private static final UserDao USER_DAO = new UserDaoDatastore();
+  private static final UserDao USER_DAO = new UserDaoDatastore();
+
+  /**
+   * Method handling HTTP POST requests.
+   * Adds the user to the database if it does not exist.
+   *
+   * @return A Response object that contains an HTTP status code.
+   */
+  @POST
+  public Response addUser(User user) {
+    if (USER_DAO.getUser(user.uid()) == null) {
+      USER_DAO.addUser(user);
+      return ResponseHandler.createJsonResponse(Status.CREATED, null);
+    } else {
+      return ResponseHandler.createJsonResponse(Status.OK, null);
+    }
+  }
 
   /**
    * Method handling HTTP GET requests. 
@@ -40,7 +57,7 @@ public class UserResource {
   @Path("{uid}/sdks")
   public Response getUserFavorites(@PathParam("uid") String uid) {
     User user = USER_DAO.getUser(uid);
-    Map<Platform, List<String>> favourites = user.favoriteSDKs();
+    Map<String, List<String>> favourites = user.favoriteSDKs();
     return ResponseHandler.createJsonResponse(Status.OK, favourites);
   }
 
@@ -55,13 +72,13 @@ public class UserResource {
   public Response addSdkToUserFavorites(@PathParam("uid") String uid, @PathParam("platform") String platformName, @PathParam("sdkName") String sdkName) {
     User user = USER_DAO.getUser(uid);
     Platform platform = Platform.get(platformName);
-    Map<Platform, List<String>> favourites = user.favoriteSDKs();
-    List<String> platformFavourites = favourites.get(platform);
+    Map<String, List<String>> favourites = user.favoriteSDKs();
+    List<String> platformFavourites = favourites.get(platform.toString());
     platformFavourites.add(sdkName);
-    favourites.put(platform,platformFavourites);
+    favourites.put(platform.toString(), platformFavourites);
     User newUser = user.toBuilder()
-    .setFavoriteSDKs(favourites)
-    .build();
+      .setFavoriteSDKs(favourites)
+      .build();
     USER_DAO.updateUser(newUser);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
@@ -77,13 +94,13 @@ public class UserResource {
   public Response deleteSdkFromUserFavorites(@PathParam("uid") String uid, @PathParam("platform") String platformName, @PathParam("sdkName") String sdkName) {
     User user = USER_DAO.getUser(uid);
     Platform platform = Platform.get(platformName);
-    Map<Platform, List<String>> favourites = user.favoriteSDKs();
-     List<String> platformFavourites = favourites.get(platform);
+    Map<String, List<String>> favourites = user.favoriteSDKs();
+    List<String> platformFavourites = favourites.get(platform.toString());
     platformFavourites.remove(sdkName);
-    favourites.put(platform,platformFavourites);
+    favourites.put(platform.toString(), platformFavourites);
     User newUser = user.toBuilder()
-    .setFavoriteSDKs(favourites)
-    .build();
+      .setFavoriteSDKs(favourites)
+      .build();
     USER_DAO.updateUser(newUser);
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }

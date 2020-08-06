@@ -12,20 +12,49 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Redirect to Google Sign In
-function googleSignIn() {
-  firebase.auth().onAuthStateChanged(function(user) {
+async function googleSignIn() {
+  firebase.auth().onAuthStateChanged(async function(user) {
     if (user) {
       // User is signed in.
+      const userObject = {
+        uid: user.uid,
+        email: user.email,
+        favoriteSDKs: {}
+      };
+      console.log(userObject);
+      const response = await fetch('v1/users', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userObject)
+      });
+      console.log(response.json());
     } else {
       // No user is signed in.
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase.auth().signInWithRedirect(provider);
-      firebase.auth().getRedirectResult().then(function(result) {
+      firebase.auth().getRedirectResult().then(async function(result) {
         if (result.credential) {
           console.info("Successful sign in")
+          // The signed-in user info.
+          var user = result.user;
+          const userObject = {
+            uid: user.uid,
+            email: user.email,
+            favoriteSDKs: {
+              "ANDROID": []
+            }
+          };
+          const response = await fetch('v1/users', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userObject)
+          });
+          console.log(response.json());
         }
-        // The signed-in user info.
-        var user = result.user;
       }).catch(function(error) {
         console.info("Unsuccessful sign in");
       });
