@@ -3,12 +3,33 @@ package firebase.sdk.dashboard;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.internal.inject.AbstractBinder; 
+import firebase.sdk.dashboard.dao.*;
+import firebase.sdk.dashboard.api.SDKResource;
+import firebase.sdk.dashboard.api.ReleaseResource;
 
 @ApplicationPath("v1")
 public class Main extends ResourceConfig {
 
   public Main() {
-    register(JacksonFeature.class);
     packages("firebase.sdk.dashboard.api");
+    register(JacksonFeature.class);
+    register(new ApplicationBinder());
+  }
+}
+
+class ApplicationBinder extends AbstractBinder {
+  @Override
+  protected void configure() {
+    bind(SDKDaoDatastore.class)
+      .to(SDKDao.class);
+    bind(PlatformReleaseDaoDatastore.class)
+      .to(PlatformReleaseDao.class);
+    bind(UserDaoDatastore.class)
+      .to(UserDao.class);
+    bind(ReleaseResource.class)
+      .to(ReleaseResource.class);
+    bind(SDKResource.class) 
+      .to(SDKResource.class);
   }
 }

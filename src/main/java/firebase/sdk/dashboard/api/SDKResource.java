@@ -1,5 +1,6 @@
 package firebase.sdk.dashboard.api;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.time.Instant;
 import javax.ws.rs.GET;
@@ -28,11 +29,11 @@ import firebase.sdk.dashboard.data.VersionMetadata;
 public class SDKResource {
 
   private Platform platform;
-  private static final SDKDao SDKDAO = new SDKDaoDatastore();
 
-  public SDKResource(String platform) {
-    this.platform = Platform.get(platform);
-  }
+  @Inject 
+  public SDKDao SDKDAO;
+
+  public SDKResource() {}
 
   /**
    * Method handling HTTP GET requests.
@@ -93,5 +94,9 @@ public class SDKResource {
     //TODO: Catch exceptions.
     SDKDAO.deleteSDK(platform, sdkName);
     return ResponseHandler.createJsonResponse(Status.OK, null);
+  }
+
+  public void setPlatform(String platformName) {
+    this.platform = platform.get(platformName);
   }
 }

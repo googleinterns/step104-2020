@@ -33,6 +33,8 @@ public class SDKDaoDatastore implements SDKDao {
 
   private static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
+  public SDKDaoDatastore() {}
+
   public SDK getSDK(Platform platform, String sdkName) {
     Key sdkKey = KeyFactory.createKey("SDK", platform.getLabel() + "_" + sdkName);
     FilterPredicate keyPropertyFilter = makePropertyFilter("__key__", sdkKey);

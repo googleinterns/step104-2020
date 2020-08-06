@@ -1,5 +1,6 @@
 package firebase.sdk.dashboard.api;
 
+import javax.inject.Inject;
 import firebase.sdk.dashboard.dao.UserDao;
 import firebase.sdk.dashboard.dao.UserDaoDatastore;
 import java.util.Map;
@@ -28,7 +29,8 @@ import javax.ws.rs.core.Response.Status;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UserResource {
 
-  private static final UserDao USER_DAO = new UserDaoDatastore();
+  @Inject
+  public UserDao USER_DAO;
 
   /**
    * Method handling HTTP POST requests.
@@ -57,8 +59,12 @@ public class UserResource {
   @Path("{uid}/sdks")
   public Response getUserFavorites(@PathParam("uid") String uid) {
     User user = USER_DAO.getUser(uid);
-    Map<String, List<String>> favourites = user.favoriteSDKs();
-    return ResponseHandler.createJsonResponse(Status.OK, favourites);
+    if (user != null) {
+      Map<String, List<String>> favourites = user.favoriteSDKs();
+      return ResponseHandler.createJsonResponse(Status.OK, favourites);
+    } else {
+     return ResponseHandler.createJsonResponse(Status.NO_CONTENT, Arrays.asList()); 
+    }
   }
 
   /**

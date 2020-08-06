@@ -33,6 +33,8 @@ public class PlatformReleaseDaoDatastore implements PlatformReleaseDao {
 
   public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
 
+  public PlatformReleaseDaoDatastore() {}
+
   // Get a list of platforms from the datastore
   public List<Platform> getPlatforms(){
     List<Platform> platforms = new ArrayList<>();
