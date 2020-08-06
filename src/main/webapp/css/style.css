@@ -176,8 +176,8 @@ h2 {
 .attributes {
     text-align: center;
     background-color:#2C384A !important;
-    width: 500px; 
-    height: 200px;
+    width: 600px; 
+    height: 140px;
     font-size: 40px;
     box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
     color: white;
@@ -374,3 +374,28 @@ p {
     right:20px;
 }
 
+.bug {
+  text-align: center;
+  background-color: #2C384A !important;
+  width: 550px; 
+  height: 100px;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.15); 
+  color: white;
+  position: relative;
+  padding: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 100px;
+  padding-bottom: 50px;
+  font-size: 25px;
+}
+
+#firebase {
+  position:absolute; 
+  top:35px; 
+  left:5px;
+}
+
+#releaseName {
+    font-size: 100px;
+}
