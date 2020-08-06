@@ -7,6 +7,8 @@ import org.glassfish.jersey.internal.inject.AbstractBinder;
 import firebase.sdk.dashboard.dao.*;
 import firebase.sdk.dashboard.api.SDKResource;
 import firebase.sdk.dashboard.api.ReleaseResource;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
 
 @ApplicationPath("v1")
 public class Main extends ResourceConfig {
@@ -31,5 +33,7 @@ class ApplicationBinder extends AbstractBinder {
       .to(ReleaseResource.class);
     bind(SDKResource.class) 
       .to(SDKResource.class);
+    bind(DatastoreServiceFactory.getDatastoreService())
+      .to(DatastoreService.class);
   }
 }
