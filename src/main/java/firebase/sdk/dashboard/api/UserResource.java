@@ -77,6 +77,7 @@ public class UserResource {
     if (platformFavourites == null) {
       platformFavourites = new ArrayList<String>();
     }
+
     platformFavourites.add(sdkName);
     favourites.put(platform.toString(), platformFavourites);
     User newUser = user.toBuilder()
