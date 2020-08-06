@@ -12,11 +12,13 @@
 
   <body onload="googleSignIn()">
     <div class="jumbotron">
+        <div id="firebase">
+          <img src="images/firebase.png" class="img-rounded" width="130px;" alt="Firebase">
+        </div>
         <h1>
-            <span><div id="sdk-name"></div></span>
-            <span> <i id="star" class="fa fa-star-o" onclick="favouriteSDK()"></i></span> 
+            <div id="sdk-name"><i id="star" class="fa fa-star-o" onclick="favouriteSDK()"></i> </div>
         </h1>  
-         <a href="#" class="btn btn-info btn-lg"  onclick="googleSignOut()">
+         <a href="#" class="btn btn-info btn-lg"  onclick="googleSignOut()"  style="float: right">
           <span class="glyphicon glyphicon-log-out"></span> Log out
         </a>
     </div> 

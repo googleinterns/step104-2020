@@ -97,7 +97,7 @@ async function getSdks(platform) {
   const sdks = await response.json();
 
   console.log(sdks);
-  const select = document.querySelector('#custom-select');
+  const select = document.querySelector('#options');
     for (var i = 0; i<= sdks.length; i++){
         var opt = document.createElement('option');
         opt.value = sdks[i];
@@ -107,3 +107,14 @@ async function getSdks(platform) {
 }
 getSdks("android");
 
+function emailTrigger() {
+    admin.firestore().collection('mail').add({
+    to: user.email(),
+    message: {
+        subject: 'Hello from Firebase SDK Release Dashboard!',
+        text: 'This is the plaintext section of the email body.',
+        html: 'This is the <code>HTML</code> section of the email body.',
+    }
+    }).then(() => console.log('Queued email for delivery!'));
+
+} 

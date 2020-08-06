@@ -18,10 +18,10 @@
     
     <div class="jumbotron">
         <div id="firebase">
-            <img src="images/firebase.png" class="img-rounded" alt="Firebase">
+            <img src="images/firebase.png" width="130px;" class="img-rounded" alt="Firebase">
         </div>
         <h1 class="dashboard">Release Enroll</h1>   
-         <a href="#" class="btn btn-info btn-lg"  onclick="googleSignOut()">
+         <a href="#" class="btn btn-info btn-lg"  onclick="googleSignOut()" style="float: right">
           <span class="glyphicon glyphicon-log-out"></span> Log out
         </a>   
     </div> 
@@ -55,7 +55,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group input-lg" >
-                        <select name="sdks" class="custom-select mb-5" align="center">
+                        <select name="sdks" class="custom-select mb-5" align="center" id="options">
                         <option selected>SDK</option>
                         </select>
                     </div>
@@ -104,7 +104,7 @@
                         <label class="control-label">Ariane Link</label>
                         <input maxlength="200" type="text" class="form-control" placeholder="Enter the Ariane link" name="arianeLink"/>
                     </div>
-                    <button class="btn btn-success pull-right" type="submit">Enroll</button>
+                    <button class="btn btn-success pull-right" type="submit" onclick="emailTrigger()">Enroll</button>
                 </div>
             </div>
         </form>
