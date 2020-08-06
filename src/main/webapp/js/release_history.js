@@ -23,24 +23,49 @@ function createNode(tag, id) {
   tagElement.appendChild(tagText);
 }
 
-function favouriteSDK() {
+function starSDK() {
   const star = document.getElementById("star");
-  if (star.classList.contains("favourite")) {
-    star.classList.remove("favourite");
-    console.log("You unfavourited this SDK.");
-    window.alert("You removed this SDK from your favourites!");
-  } else {
-    star.classList.add("favourite");
-    console.log("You favourited this SDK.");
-    window.alert("You added this SDK to your favourites!");
-  }
+  Promise.resolve(checkSDKInFavorites(platform, libraryName)).then(function(inUserFavorites) {
+    if (inUserFavorites) {
+      const response = unfavoriteSDK(platform, libraryName);
+      console.log(response.json());
+      if (star.classList.contains("favorite")) {
+        star.classList.remove("favorite");
+        console.log("You unfavorited this SDK.");
+        window.alert("You removed this SDK from your favorites!");
+      } 
+    } else {
+      const response = favoriteSDK(platform, libraryName);
+      console.log(response);
+      if (!star.classList.contains("favorite")) {
+        star.classList.add("favorite");
+        console.log("You favorited this SDK.");
+        window.alert("You added this SDK to your favorites!");
+      }
+    }
+  });
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-const platform = urlParams.get('platform');
-const libraryName = urlParams.get('sdkName');
-if (!platform || !libraryName) {
-  window.location.href = window.location.origin;
-} else {
-  getVersionHistory(platform, libraryName);
-}
+    const urlParams = new URLSearchParams(window.location.search);
+    const platform = urlParams.get('platform');
+    const libraryName = urlParams.get('sdkName');
+    if (!platform || !libraryName) {
+      window.location.href = window.location.origin;
+    } else {
+      getVersionHistory(platform, libraryName);
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          Promise.resolve(checkSDKInFavorites(platform, libraryName)).then(function(inUserFavorites) {
+            if (inUserFavorites) {
+              if (!star.classList.contains("favorite")) {
+                star.classList.add("favorite");
+                console.log("This sdk is in the user favorites.");
+              }
+            } else {
+              star.classList.remove("favorite");
+              console.log("This sdk is not in the user favorites.");
+            } 
+          });
+        };
+      });
+    }

@@ -74,6 +74,9 @@ public class UserResource {
     Platform platform = Platform.get(platformName);
     Map<String, List<String>> favourites = user.favoriteSDKs();
     List<String> platformFavourites = favourites.get(platform.toString());
+    if (platformFavourites == null) {
+      platformFavourites = new ArrayList<String>();
+    }
     platformFavourites.add(sdkName);
     favourites.put(platform.toString(), platformFavourites);
     User newUser = user.toBuilder()
