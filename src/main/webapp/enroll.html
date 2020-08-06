@@ -120,44 +120,7 @@
     <!-- Initialize firebase products -->
     <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-
-    <script>
-    // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyAGk_4TZiVf_TslWON5hNQDYVODuJifP7A",
-            authDomain: "com-sdk-dashboard-step-2020.firebaseapp.com",
-            databaseURL: "https://com-sdk-dashboard-step-2020.firebaseio.com",
-            projectId: "google.com:sdk-dashboard-step-2020",
-            messagingSenderId: "412575630040",
-            appId: "1:412575630040:web:824b2d31f4e1f06b100dad",
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Redirect to Google Sign In
-        function googleSignIn() {
-            firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // User is signed in.
-            } else {
-                // No user is signed in.
-                var provider = new firebase.auth.GoogleAuthProvider();
-                firebase.auth().signInWithRedirect(provider);
-                firebase.auth().getRedirectResult().then(function(result) {
-                    if (result.credential) {
-                        console.info("Successful sign in")
-                    }
-                    // The signed-in user info.
-                    var user = result.user;
-                    }).catch(function(error) {
-                        console.info("Unsuccessful sign in");
-                    });
-                }
-            });
-        }
-    </script>
-    <script src="js/signout.js"></script>
+    <script src="js/authenticate.js"></script>
     <script src="js/navigate.js"></script>
     <script src="js/enroll.js"></script>
   </body>
