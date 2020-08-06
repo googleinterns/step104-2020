@@ -121,6 +121,12 @@ public class ReleaseResource {
     }
 
     Release release = RELEASEDAO.getRelease(platform, releaseName);
+    long currentTime = System.currentTimeMillis() / 1000;
+    // Check if the release is old and if so then dont allow enrollment.
+    if (currentTime > release.codeFreezeTime()) {
+      return ResponseHandler.createJsonResponse(Status.FORBIDDEN, null);
+    }
+
     VersionMetadata version = VersionMetadata.newBuilder()
       .libraryName(sdk.libraryName())
       .platform(sdk.platform())
