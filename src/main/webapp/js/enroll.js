@@ -66,6 +66,13 @@ $(document).ready(function(){
             message: 'The current version is required and cannot be empty'
           },
 
+           stringLength: {
+                required: true,
+                min: 6,
+                max: 7,
+                message: 'Not the correct version'
+            },
+
           // Regular Expression to check the format of semantic version
           regexp: {
             regexp: /^(\d+\.)?(\d+\.)?(\*|\d)$/,
