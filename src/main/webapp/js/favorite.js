@@ -1,3 +1,5 @@
+// TODO: Look into caching results to high frequency functions like getFavoriteSDKs. Relevant 
+// information // can be found here: https://developer.mozilla.org/en-US/docs/Web/API/Request/cache.
 // Fetch favorite SDKS
 async function getFavoriteSDKs(userID) {
   const response = await fetch(`v1/users/${userID}/sdks`);
