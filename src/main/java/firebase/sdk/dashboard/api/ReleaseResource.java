@@ -121,6 +121,15 @@ public class ReleaseResource {
     }
 
     Release release = RELEASEDAO.getRelease(platform, releaseName);
+    // TODO: Add a suffix to time variables across the back end to clarify the attributes units.
+    // TODO: Use https://docs.oracle.com/javase/8/docs/api/java/time/Instant.html#now-java.time.Clock-
+    // to make code testable.
+    long currentTime = System.currentTimeMillis() / 1000;
+    // Check if the release is old and if so then dont allow enrollment.
+    if (currentTime > release.codeFreezeTime()) {
+      return ResponseHandler.createJsonResponse(Status.FORBIDDEN, null);
+    }
+
     VersionMetadata version = VersionMetadata.newBuilder()
       .libraryName(sdk.libraryName())
       .platform(sdk.platform())
