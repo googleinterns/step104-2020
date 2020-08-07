@@ -1,5 +1,6 @@
 package firebase.sdk.dashboard.dao;
 
+import javax.inject.Inject;
 import firebase.sdk.dashboard.data.User;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 import java.time.Instant;
 import java.io.IOException;
 import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -30,7 +30,12 @@ import com.google.appengine.api.datastore.QueryResultIterable;
 
 /* Class to implement UserDao to manipulate data about the users */
 public class UserDaoDatastore implements UserDao {
-  public static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
+
+  @Inject
+  public DatastoreService DATASTORE;
+
+  public UserDaoDatastore() {}
+
   // Get a user from the datastore
   public User getUser(String id){
     FilterPredicate userPropertyFilter = equalPropertyFilter("id", id);
