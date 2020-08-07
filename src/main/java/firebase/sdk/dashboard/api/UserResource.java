@@ -63,7 +63,7 @@ public class UserResource {
       Map<String, List<String>> favourites = user.favoriteSDKs();
       return ResponseHandler.createJsonResponse(Status.OK, favourites);
     } else {
-     return ResponseHandler.createJsonResponse(Status.NO_CONTENT, Arrays.asList()); 
+     return ResponseHandler.createJsonResponse(Status.NOT_FOUND, Arrays.asList()); 
     }
   }
 
