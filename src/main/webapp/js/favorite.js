@@ -6,9 +6,16 @@ async function getFavoriteSDKs(userID) {
   // Build the links for favorite sdks
   const favoriteSDK = document.getElementById('favorites');
   console.log(favoriteSDK);
-  for (i = 0; i < favorites.length; i++) {
-    favoriteSDK.appendChild(createListElement(favorites[i]));
+  for (i = 0; i < favorites['ANDROID'].length; i++) {
+    const sdkName = favorites['ANDROID'][i];
+    favoriteSDK.appendChild(createListElement(favorites['ANDROID'][i]));
     favoriteSDK.appendChild(document.createElement("HR"));
+    favoriteSDK.addEventListener("click", () => {
+      const params = new URLSearchParams(`platform=android&sdkName=${sdkName}`);
+      const page = "release_history.html";
+      goToPage(page, params);
+    });
+
     console.log(favorites[i]);
   }
   return favorites;
