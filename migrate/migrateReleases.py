@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# TODO: Replace commented print statements with logging statements
 from google.cloud import datastore
 import os
 import csv
@@ -17,7 +18,9 @@ def createSDKReleases(fileName):
         # print(line)
         releaseName = fileName.split('/')[-1].split('.')[0]
         line = next(tsv)
-        if fileName != 'release_tsvs/Fiam_hotfix_04_22_20.tsv':
+        if fileName != 'release_tsvs/Fiam_hotfix_04_22_20.tsv': # This file does not contain 
+        # a LaunchCal Deadline and so the Launch date is on the second line instead of third 
+        # for others.
             line = next(tsv)
         launchDate = int(dt.timestamp(parser.parse(line[0].split('(')[0][len("Launch "):])))
         for _ in range(8):
