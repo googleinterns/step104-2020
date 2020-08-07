@@ -31,16 +31,14 @@ function starSDK() {
       console.log(response.json());
       if (star.classList.contains("favorite")) {
         star.classList.remove("favorite");
-        console.log("You unfavorited this SDK.");
-        window.alert("You removed this SDK from your favorites!");
+        console.log("Unfavorited SDK: " + libraryName);
       } 
     } else {
       const response = favoriteSDK(platform, libraryName);
       console.log(response);
       if (!star.classList.contains("favorite")) {
         star.classList.add("favorite");
-        console.log("You favorited this SDK.");
-        window.alert("You added this SDK to your favorites!");
+        console.log("Favorited SDK: " + libraryName);
       }
     }
   });
