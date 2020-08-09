@@ -18,27 +18,18 @@ async function getPlatforms() {
   }
 }
 
-// Fetch favorite SDKS
-async function getFavoriteSdks(userID) {
-  const response = await fetch(`v1/users/${userID}/sdks`);
-  const favorites = await response.json();
-  // Build the links for favorite sdks
-  const favoriteSDK = document.getElementById('favorites');
-  console.log(favoriteSDK);
-  for (i = 0; i < favorites.length; i++) {
-    favoriteSDK.appendChild(createListElement(favorites[i]));
-    favoriteSDK.appendChild(document.createElement("HR"));
-    console.log(favorites[i]);
-  }
-}
-
 // Create link for favorite sdk
 function createListElement(text) {
-  const sdkElement = document.createElement('a');
+  const sdkElement = document.createElement('div');
   sdkElement.innerText = text;
   sdkElement.setAttribute('class','user-favorite');
-  sdkElement.setAttribute('href','product_release.html');
   return sdkElement;
 }
 
 getPlatforms();
+
+firebase.auth().onAuthStateChanged(async function(user) {
+  if (user) {
+    getFavoriteSDKs(user.uid);
+  }
+});

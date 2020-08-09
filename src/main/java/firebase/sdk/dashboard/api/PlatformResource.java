@@ -1,5 +1,6 @@
 package firebase.sdk.dashboard.api;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.HashMap;
 import java.time.Instant;
@@ -17,6 +18,12 @@ import javax.ws.rs.core.MediaType;
 @Path("platforms")
 @Produces(MediaType.APPLICATION_JSON)
 public class PlatformResource {
+
+  @Inject 
+  public SDKResource sdkResource;
+
+  @Inject
+  public ReleaseResource releaseResource;
 
   /**
    * Method handling HTTP GET requests.
@@ -48,7 +55,8 @@ public class PlatformResource {
    */
   @Path("/{platform}/releases")
   public ReleaseResource getReleaseResource(@PathParam("platform") String platform) {
-    return new ReleaseResource(platform);
+    releaseResource.setPlatform(platform);
+    return releaseResource;
   }
 
   /**
@@ -62,7 +70,8 @@ public class PlatformResource {
    */
   @Path("/{platform}/sdks")
   public SDKResource getSdKResource(@PathParam("platform") String platform) {
-    return new SDKResource(platform);
+    sdkResource.setPlatform(platform);
+    return sdkResource;
   }
 }
 

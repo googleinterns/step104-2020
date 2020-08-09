@@ -1,5 +1,6 @@
 package firebase.sdk.dashboard.dao;
 
+import javax.inject.Inject;
 import firebase.sdk.dashboard.data.SDK;
 import firebase.sdk.dashboard.data.SDKReleaseMetadata;
 import firebase.sdk.dashboard.data.VersionMetadata;
@@ -12,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.io.IOException;
 import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -31,7 +31,10 @@ import com.google.appengine.api.datastore.QueryResultIterable;
  */
 public class SDKDaoDatastore implements SDKDao {
 
-  private static final DatastoreService DATASTORE = DatastoreServiceFactory.getDatastoreService();
+  @Inject
+  private DatastoreService DATASTORE;
+
+  public SDKDaoDatastore() {}
 
   public SDK getSDK(Platform platform, String sdkName) {
     Key sdkKey = KeyFactory.createKey("SDK", platform.getLabel() + "_" + sdkName);

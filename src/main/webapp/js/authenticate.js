@@ -21,7 +21,6 @@ async function googleSignIn() {
         email: user.email,
         favoriteSDKs: {}
       };
-      console.log(userObject);
       const response = await fetch('v1/users', {
         method: "POST",
         headers: {
@@ -70,3 +69,8 @@ function googleSignOut() {
     console.info("Sign out Unsuccessful");
   });
 }
+
+function getCurrentUser() {
+  return firebase.auth().currentUser;
+}
+

@@ -1,5 +1,6 @@
 package firebase.sdk.dashboard.api;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -34,12 +35,14 @@ import firebase.sdk.dashboard.dao.SDKDaoDatastore;
 public class ReleaseResource {
 
   private Platform platform;
-  private final static PlatformReleaseDao RELEASEDAO = new PlatformReleaseDaoDatastore();
-  private final static SDKDao SDKDAO = new SDKDaoDatastore();
 
-  public ReleaseResource(String platform) {
-    this.platform = Platform.get(platform);
-  }
+  @Inject
+  public PlatformReleaseDao RELEASEDAO;
+
+  @Inject
+  public SDKDao SDKDAO;
+
+  public ReleaseResource() {}
 
   /**
    * Method handling HTTP GET requests.
@@ -177,4 +180,7 @@ public class ReleaseResource {
     return ResponseHandler.createJsonResponse(Status.OK, null);
   }
 
+  public void setPlatform(String platformName) {
+    this.platform = platform.get(platformName);
+  }
 }
